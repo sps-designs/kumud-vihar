@@ -1,0 +1,6 @@
+Normal plot 10000
+80ft Main road plot 15000
+60ft corner plot 11500
+30ft corner plot 11000
+
+Commercial plot 17000

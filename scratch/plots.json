@@ -1,0 +1,2832 @@
+{
+  "plots": [
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-64",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-65",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-66",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-67",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-73",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-72",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-71",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-70",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-40",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-41",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-42",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-43",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-49",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-48",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-47",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-46",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-34",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-35",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-36",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-37",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-55",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-54",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-53",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-52",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-58",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-59",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-60",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-61",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-79",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-78",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-77",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-76",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-75",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-62",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-57",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-80",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-33",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-56",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-38",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-51",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-39",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-50",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-44",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-45",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-26",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-25",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-28",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-27",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-30",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-29",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-32",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-31",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-7",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-8",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-5",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-6",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-3",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-4",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-1",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-2",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-9",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-24",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-10",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-11",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-12",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-13",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-14",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-15",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-16",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-17",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-18",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-19",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-20",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-21",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-22",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-23",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-68",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-69",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-63",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "A-74",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "30ft corner plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-6",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-5",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-9",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-4",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-10",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-3",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-11",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-2",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-12",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-1",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-13",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-71",
+      "size": "Variable",
+      "gaj": "200.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-70",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-69",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-68",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-67",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-66",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-65",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-64",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-63",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-62",
+      "size": "Variable",
+      "gaj": "194.44",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-61",
+      "size": "Variable",
+      "gaj": "194.44",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-60",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-59",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-58",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-57",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-56",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-55",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-18",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-17",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-16",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-15",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-14",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-21",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-22",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-23",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-24",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-25",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-30",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-29",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-28",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-27",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-26",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-33",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-34",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-35",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-36",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-37",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-42",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-41",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-40",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-39",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-38",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-44",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-45",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-46",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-47",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-48",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-43",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-52",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-53",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-54",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-51",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-50",
+      "size": "Variable",
+      "gaj": "133.33",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-49",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-7",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-8",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-1",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-14",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-2",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-13",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-3",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-12",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-4",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-11",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-5",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-10",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-6",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-9",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-7",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-8",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-15",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-16",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-17",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-18",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-19",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-20",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-21",
+      "size": "Variable",
+      "gaj": "212.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-26",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-25",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-24",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-23",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-22",
+      "size": "Variable",
+      "gaj": "294.56",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-27",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-28",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-29",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-30",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-31",
+      "size": "Variable",
+      "gaj": "294.56",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-38",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-37",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-36",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-35",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-34",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-33",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-83",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-39",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-40",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-41",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-42",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-43",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-44",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-45",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-52",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-51",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-50",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-49",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-48",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-47",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-46",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-53",
+      "size": "Variable",
+      "gaj": "100.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-54",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-55",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-56",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-57",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-58",
+      "size": "Variable",
+      "gaj": "125.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-59",
+      "size": "Variable",
+      "gaj": "200.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-66",
+      "size": "Variable",
+      "gaj": "88.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-65",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-64",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-63",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-62",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-61",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-60",
+      "size": "Variable",
+      "gaj": "177.78",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-76",
+      "size": "Variable",
+      "gaj": "212.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-75",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-74",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-73",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-72",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-71",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-78",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-79",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-77",
+      "size": "Variable",
+      "gaj": "294.56",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-81",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-80",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-82",
+      "size": "Variable",
+      "gaj": "294.56",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-84",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-85",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-86",
+      "size": "Variable",
+      "gaj": "166.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-64",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-65",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-66",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-67",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-68",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-69",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-63",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-62",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-61",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-60",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-59",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-58",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-50",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-51",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-52",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-52",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-53",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-54",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-49",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-48",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-47",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-46",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-45",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-44",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-30",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-31",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-32",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-33",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-34",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-35",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-29",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-28",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-27",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-26",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-25",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-24",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-36",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-23",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-37",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-22",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-38",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-21",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-39",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-20",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-40",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-19",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-55",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-56",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-43",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-42",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-41",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-57",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-70",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-4",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-3",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-2",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-1",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-19",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-20",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-31",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "C-32",
+      "size": "Variable",
+      "gaj": "138.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-67",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-68",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-69",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-5",
+      "size": "Variable",
+      "gaj": "222.22",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-6",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "E-7",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "D-32",
+      "size": "Variable",
+      "gaj": "212.89",
+      "type": "Normal plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-8",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-9",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-6",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-7",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-4",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-5",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-3",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-2",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-11",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-10",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-13",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-12",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-14",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-1",
+      "size": "Variable",
+      "gaj": "150.00",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-15",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-16",
+      "size": "Variable",
+      "gaj": "183.33",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-17",
+      "size": "Variable",
+      "gaj": "216.67",
+      "type": "80ft Main road plot",
+      "status": "available"
+    },
+    {
+      "colonyId": "Colony_1",
+      "plotNo": "B-18",
+      "size": "Variable",
+      "gaj": "111.11",
+      "type": "80ft Main road plot",
+      "status": "available"
+    }
+  ],
+  "areas": [
+    "<area alt=\"A-64\" title=\"A-64\" href=\"#\" coords=\"516,1572,576,1572,576,1662,516,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-64')\">",
+    "<area alt=\"A-65\" title=\"A-65\" href=\"#\" coords=\"477,1572,537,1572,537,1662,477,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-65')\">",
+    "<area alt=\"A-66\" title=\"A-66\" href=\"#\" coords=\"436,1572,496,1572,496,1662,436,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-66')\">",
+    "<area alt=\"A-67\" title=\"A-67\" href=\"#\" coords=\"396,1572,456,1572,456,1662,396,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-67')\">",
+    "<area alt=\"A-73\" title=\"A-73\" href=\"#\" coords=\"516,1477,576,1477,576,1567,516,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-73')\">",
+    "<area alt=\"A-72\" title=\"A-72\" href=\"#\" coords=\"477,1477,537,1477,537,1567,477,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-72')\">",
+    "<area alt=\"A-71\" title=\"A-71\" href=\"#\" coords=\"436,1477,496,1477,496,1567,436,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-71')\">",
+    "<area alt=\"A-70\" title=\"A-70\" href=\"#\" coords=\"396,1477,456,1477,456,1567,396,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-70')\">",
+    "<area alt=\"A-40\" title=\"A-40\" href=\"#\" coords=\"516,1781,576,1781,576,1871,516,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-40')\">",
+    "<area alt=\"A-41\" title=\"A-41\" href=\"#\" coords=\"477,1781,537,1781,537,1871,477,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-41')\">",
+    "<area alt=\"A-42\" title=\"A-42\" href=\"#\" coords=\"436,1781,496,1781,496,1871,436,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-42')\">",
+    "<area alt=\"A-43\" title=\"A-43\" href=\"#\" coords=\"396,1781,456,1781,456,1871,396,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-43')\">",
+    "<area alt=\"A-49\" title=\"A-49\" href=\"#\" coords=\"516,1686,576,1686,576,1776,516,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-49')\">",
+    "<area alt=\"A-48\" title=\"A-48\" href=\"#\" coords=\"477,1686,537,1686,537,1776,477,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-48')\">",
+    "<area alt=\"A-47\" title=\"A-47\" href=\"#\" coords=\"436,1686,496,1686,496,1776,436,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-47')\">",
+    "<area alt=\"A-46\" title=\"A-46\" href=\"#\" coords=\"396,1686,456,1686,456,1776,396,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-46')\">",
+    "<area alt=\"A-34\" title=\"A-34\" href=\"#\" coords=\"822,1781,882,1781,882,1871,822,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-34')\">",
+    "<area alt=\"A-35\" title=\"A-35\" href=\"#\" coords=\"783,1781,843,1781,843,1871,783,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-35')\">",
+    "<area alt=\"A-36\" title=\"A-36\" href=\"#\" coords=\"742,1781,802,1781,802,1871,742,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-36')\">",
+    "<area alt=\"A-37\" title=\"A-37\" href=\"#\" coords=\"701,1781,761,1781,761,1871,701,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-37')\">",
+    "<area alt=\"A-55\" title=\"A-55\" href=\"#\" coords=\"822,1686,882,1686,882,1776,822,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-55')\">",
+    "<area alt=\"A-54\" title=\"A-54\" href=\"#\" coords=\"783,1686,843,1686,843,1776,783,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-54')\">",
+    "<area alt=\"A-53\" title=\"A-53\" href=\"#\" coords=\"742,1686,802,1686,802,1776,742,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-53')\">",
+    "<area alt=\"A-52\" title=\"A-52\" href=\"#\" coords=\"701,1686,761,1686,761,1776,701,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-52')\">",
+    "<area alt=\"A-58\" title=\"A-58\" href=\"#\" coords=\"822,1572,882,1572,882,1662,822,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-58')\">",
+    "<area alt=\"A-59\" title=\"A-59\" href=\"#\" coords=\"783,1572,843,1572,843,1662,783,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-59')\">",
+    "<area alt=\"A-60\" title=\"A-60\" href=\"#\" coords=\"742,1572,802,1572,802,1662,742,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-60')\">",
+    "<area alt=\"A-61\" title=\"A-61\" href=\"#\" coords=\"701,1572,761,1572,761,1662,701,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-61')\">",
+    "<area alt=\"A-79\" title=\"A-79\" href=\"#\" coords=\"822,1477,882,1477,882,1567,822,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-79')\">",
+    "<area alt=\"A-78\" title=\"A-78\" href=\"#\" coords=\"783,1477,843,1477,843,1567,783,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-78')\">",
+    "<area alt=\"A-77\" title=\"A-77\" href=\"#\" coords=\"742,1477,802,1477,802,1567,742,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-77')\">",
+    "<area alt=\"A-76\" title=\"A-76\" href=\"#\" coords=\"701,1477,761,1477,761,1567,701,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-76')\">",
+    "<area alt=\"A-75\" title=\"A-75\" href=\"#\" coords=\"662,1477,722,1477,722,1567,662,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-75')\">",
+    "<area alt=\"A-62\" title=\"A-62\" href=\"#\" coords=\"663,1572,723,1572,723,1662,663,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-62')\">",
+    "<area alt=\"A-57\" title=\"A-57\" href=\"#\" coords=\"869,1572,929,1572,929,1662,869,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-57')\">",
+    "<area alt=\"A-80\" title=\"A-80\" href=\"#\" coords=\"869,1477,929,1477,929,1567,869,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-80')\">",
+    "<area alt=\"A-33\" title=\"A-33\" href=\"#\" coords=\"871,1781,931,1781,931,1871,871,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-33')\">",
+    "<area alt=\"A-56\" title=\"A-56\" href=\"#\" coords=\"871,1686,931,1686,931,1776,871,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-56')\">",
+    "<area alt=\"A-38\" title=\"A-38\" href=\"#\" coords=\"662,1781,722,1781,722,1871,662,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-38')\">",
+    "<area alt=\"A-51\" title=\"A-51\" href=\"#\" coords=\"662,1686,722,1686,722,1776,662,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-51')\">",
+    "<area alt=\"A-39\" title=\"A-39\" href=\"#\" coords=\"557,1781,617,1781,617,1871,557,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-39')\">",
+    "<area alt=\"A-50\" title=\"A-50\" href=\"#\" coords=\"557,1686,617,1686,617,1776,557,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-50')\">",
+    "<area alt=\"A-44\" title=\"A-44\" href=\"#\" coords=\"339,1781,399,1781,399,1871,339,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-44')\">",
+    "<area alt=\"A-45\" title=\"A-45\" href=\"#\" coords=\"346,1686,406,1686,406,1776,346,1776\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-45')\">",
+    "<area alt=\"A-26\" title=\"A-26\" href=\"#\" coords=\"449,1895,509,1895,509,1985,449,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-26')\">",
+    "<area alt=\"A-25\" title=\"A-25\" href=\"#\" coords=\"400,1895,460,1895,460,1985,400,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-25')\">",
+    "<area alt=\"A-28\" title=\"A-28\" href=\"#\" coords=\"548,1895,608,1895,608,1985,548,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-28')\">",
+    "<area alt=\"A-27\" title=\"A-27\" href=\"#\" coords=\"498,1895,558,1895,558,1985,498,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-27')\">",
+    "<area alt=\"A-30\" title=\"A-30\" href=\"#\" coords=\"642,1895,702,1895,702,1985,642,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-30')\">",
+    "<area alt=\"A-29\" title=\"A-29\" href=\"#\" coords=\"592,1895,652,1895,652,1985,592,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-29')\">",
+    "<area alt=\"A-32\" title=\"A-32\" href=\"#\" coords=\"733,1895,793,1895,793,1985,733,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-32')\">",
+    "<area alt=\"A-31\" title=\"A-31\" href=\"#\" coords=\"684,1895,744,1895,744,1985,684,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-31')\">",
+    "<area alt=\"A-7\" title=\"A-7\" href=\"#\" coords=\"449,2018,509,2018,509,2108,449,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-7')\">",
+    "<area alt=\"A-8\" title=\"A-8\" href=\"#\" coords=\"400,2018,460,2018,460,2108,400,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-8')\">",
+    "<area alt=\"A-5\" title=\"A-5\" href=\"#\" coords=\"548,2018,608,2018,608,2108,548,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-5')\">",
+    "<area alt=\"A-6\" title=\"A-6\" href=\"#\" coords=\"498,2018,558,2018,558,2108,498,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-6')\">",
+    "<area alt=\"A-3\" title=\"A-3\" href=\"#\" coords=\"642,2018,702,2018,702,2108,642,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-3')\">",
+    "<area alt=\"A-4\" title=\"A-4\" href=\"#\" coords=\"592,2018,652,2018,652,2108,592,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-4')\">",
+    "<area alt=\"A-1\" title=\"A-1\" href=\"#\" coords=\"733,2018,793,2018,793,2108,733,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-1')\">",
+    "<area alt=\"A-2\" title=\"A-2\" href=\"#\" coords=\"684,2018,744,2018,744,2108,684,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-2')\">",
+    "<area alt=\"A-9\" title=\"A-9\" href=\"#\" coords=\"339,2018,399,2018,399,2108,339,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-9')\">",
+    "<area alt=\"A-24\" title=\"A-24\" href=\"#\" coords=\"340,1895,400,1895,400,1985,340,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-24')\">",
+    "<area alt=\"A-10\" title=\"A-10\" href=\"#\" coords=\"199,2018,259,2018,259,2108,199,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-10')\">",
+    "<area alt=\"A-11\" title=\"A-11\" href=\"#\" coords=\"212,1950,272,1950,272,2040,212,2040\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-11')\">",
+    "<area alt=\"A-12\" title=\"A-12\" href=\"#\" coords=\"214,1909,274,1909,274,1999,214,1999\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-12')\">",
+    "<area alt=\"A-13\" title=\"A-13\" href=\"#\" coords=\"217,1869,277,1869,277,1959,217,1959\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-13')\">",
+    "<area alt=\"A-14\" title=\"A-14\" href=\"#\" coords=\"219,1829,279,1829,279,1919,219,1919\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-14')\">",
+    "<area alt=\"A-15\" title=\"A-15\" href=\"#\" coords=\"222,1781,282,1781,282,1871,222,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-15')\">",
+    "<area alt=\"A-16\" title=\"A-16\" href=\"#\" coords=\"225,1741,285,1741,285,1831,225,1831\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-16')\">",
+    "<area alt=\"A-17\" title=\"A-17\" href=\"#\" coords=\"227,1701,287,1701,287,1791,227,1791\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-17')\">",
+    "<area alt=\"A-18\" title=\"A-18\" href=\"#\" coords=\"230,1661,290,1661,290,1751,230,1751\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-18')\">",
+    "<area alt=\"A-19\" title=\"A-19\" href=\"#\" coords=\"232,1621,292,1621,292,1711,232,1711\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-19')\">",
+    "<area alt=\"A-20\" title=\"A-20\" href=\"#\" coords=\"234,1581,294,1581,294,1671,234,1671\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-20')\">",
+    "<area alt=\"A-21\" title=\"A-21\" href=\"#\" coords=\"237,1541,297,1541,297,1631,237,1631\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-21')\">",
+    "<area alt=\"A-22\" title=\"A-22\" href=\"#\" coords=\"239,1501,299,1501,299,1591,239,1591\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-22')\">",
+    "<area alt=\"A-23\" title=\"A-23\" href=\"#\" coords=\"241,1460,301,1460,301,1550,241,1550\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-23')\">",
+    "<area alt=\"A-68\" title=\"A-68\" href=\"#\" coords=\"349,1572,409,1572,409,1662,349,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-68')\">",
+    "<area alt=\"A-69\" title=\"A-69\" href=\"#\" coords=\"354,1477,414,1477,414,1567,354,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-69')\">",
+    "<area alt=\"A-63\" title=\"A-63\" href=\"#\" coords=\"556,1572,616,1572,616,1662,556,1662\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-63')\">",
+    "<area alt=\"A-74\" title=\"A-74\" href=\"#\" coords=\"556,1477,616,1477,616,1567,556,1567\" shape=\"poly\" onclick=\"handleMapClick(event, 'A-74')\">",
+    "<area alt=\"C-6\" title=\"C-6\" href=\"#\" coords=\"360,1363,420,1363,420,1453,360,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-6')\">",
+    "<area alt=\"C-5\" title=\"C-5\" href=\"#\" coords=\"427,1363,487,1363,487,1453,427,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-5')\">",
+    "<area alt=\"C-9\" title=\"C-9\" href=\"#\" coords=\"427,1263,487,1263,487,1353,427,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-9')\">",
+    "<area alt=\"C-4\" title=\"C-4\" href=\"#\" coords=\"470,1363,530,1363,530,1453,470,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-4')\">",
+    "<area alt=\"C-10\" title=\"C-10\" href=\"#\" coords=\"470,1263,530,1263,530,1353,470,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-10')\">",
+    "<area alt=\"C-3\" title=\"C-3\" href=\"#\" coords=\"509,1363,569,1363,569,1453,509,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-3')\">",
+    "<area alt=\"C-11\" title=\"C-11\" href=\"#\" coords=\"509,1263,569,1263,569,1353,509,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-11')\">",
+    "<area alt=\"C-2\" title=\"C-2\" href=\"#\" coords=\"547,1363,607,1363,607,1453,547,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-2')\">",
+    "<area alt=\"C-12\" title=\"C-12\" href=\"#\" coords=\"547,1263,607,1263,607,1353,547,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-12')\">",
+    "<area alt=\"C-1\" title=\"C-1\" href=\"#\" coords=\"589,1363,649,1363,649,1453,589,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-1')\">",
+    "<area alt=\"C-13\" title=\"C-13\" href=\"#\" coords=\"589,1263,649,1263,649,1353,589,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-13')\">",
+    "<area alt=\"C-71\" title=\"C-71\" href=\"#\" coords=\"251,1352,311,1352,311,1442,251,1442\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-71')\">",
+    "<area alt=\"C-70\" title=\"C-70\" href=\"#\" coords=\"254,1308,314,1308,314,1398,254,1398\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-70')\">",
+    "<area alt=\"C-69\" title=\"C-69\" href=\"#\" coords=\"256,1268,316,1268,316,1358,256,1358\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-69')\">",
+    "<area alt=\"C-68\" title=\"C-68\" href=\"#\" coords=\"258,1228,318,1228,318,1318,258,1318\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-68')\">",
+    "<area alt=\"C-67\" title=\"C-67\" href=\"#\" coords=\"261,1188,321,1188,321,1278,261,1278\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-67')\">",
+    "<area alt=\"C-66\" title=\"C-66\" href=\"#\" coords=\"263,1149,323,1149,323,1239,263,1239\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-66')\">",
+    "<area alt=\"C-65\" title=\"C-65\" href=\"#\" coords=\"266,1108,326,1108,326,1198,266,1198\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-65')\">",
+    "<area alt=\"C-64\" title=\"C-64\" href=\"#\" coords=\"268,1068,328,1068,328,1158,268,1158\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-64')\">",
+    "<area alt=\"C-63\" title=\"C-63\" href=\"#\" coords=\"270,1028,330,1028,330,1118,270,1118\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-63')\">",
+    "<area alt=\"C-62\" title=\"C-62\" href=\"#\" coords=\"273,988,333,988,333,1078,273,1078\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-62')\">",
+    "<area alt=\"C-61\" title=\"C-61\" href=\"#\" coords=\"281,868,341,868,341,958,281,958\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-61')\">",
+    "<area alt=\"C-60\" title=\"C-60\" href=\"#\" coords=\"284,827,344,827,344,917,284,917\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-60')\">",
+    "<area alt=\"C-59\" title=\"C-59\" href=\"#\" coords=\"287,787,347,787,347,877,287,877\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-59')\">",
+    "<area alt=\"C-58\" title=\"C-58\" href=\"#\" coords=\"289,747,349,747,349,837,289,837\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-58')\">",
+    "<area alt=\"C-57\" title=\"C-57\" href=\"#\" coords=\"292,707,352,707,352,797,292,797\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-57')\">",
+    "<area alt=\"C-56\" title=\"C-56\" href=\"#\" coords=\"294,667,354,667,354,757,294,757\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-56')\">",
+    "<area alt=\"C-55\" title=\"C-55\" href=\"#\" coords=\"296,616,356,616,356,706,296,706\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-55')\">",
+    "<area alt=\"C-18\" title=\"C-18\" href=\"#\" coords=\"427,1154,487,1154,487,1244,427,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-18')\">",
+    "<area alt=\"C-17\" title=\"C-17\" href=\"#\" coords=\"470,1154,530,1154,530,1244,470,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-17')\">",
+    "<area alt=\"C-16\" title=\"C-16\" href=\"#\" coords=\"509,1154,569,1154,569,1244,509,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-16')\">",
+    "<area alt=\"C-15\" title=\"C-15\" href=\"#\" coords=\"547,1154,607,1154,607,1244,547,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-15')\">",
+    "<area alt=\"C-14\" title=\"C-14\" href=\"#\" coords=\"589,1154,649,1154,649,1244,589,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-14')\">",
+    "<area alt=\"C-21\" title=\"C-21\" href=\"#\" coords=\"427,1054,487,1054,487,1144,427,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-21')\">",
+    "<area alt=\"C-22\" title=\"C-22\" href=\"#\" coords=\"470,1054,530,1054,530,1144,470,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-22')\">",
+    "<area alt=\"C-23\" title=\"C-23\" href=\"#\" coords=\"509,1054,569,1054,569,1144,509,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-23')\">",
+    "<area alt=\"C-24\" title=\"C-24\" href=\"#\" coords=\"547,1054,607,1054,607,1144,547,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-24')\">",
+    "<area alt=\"C-25\" title=\"C-25\" href=\"#\" coords=\"589,1054,649,1054,649,1144,589,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-25')\">",
+    "<area alt=\"C-30\" title=\"C-30\" href=\"#\" coords=\"427,944,487,944,487,1034,427,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-30')\">",
+    "<area alt=\"C-29\" title=\"C-29\" href=\"#\" coords=\"470,944,530,944,530,1034,470,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-29')\">",
+    "<area alt=\"C-28\" title=\"C-28\" href=\"#\" coords=\"509,944,569,944,569,1034,509,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-28')\">",
+    "<area alt=\"C-27\" title=\"C-27\" href=\"#\" coords=\"547,944,607,944,607,1034,547,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-27')\">",
+    "<area alt=\"C-26\" title=\"C-26\" href=\"#\" coords=\"589,944,649,944,649,1034,589,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-26')\">",
+    "<area alt=\"C-33\" title=\"C-33\" href=\"#\" coords=\"427,847,487,847,487,937,427,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-33')\">",
+    "<area alt=\"C-34\" title=\"C-34\" href=\"#\" coords=\"470,847,530,847,530,937,470,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-34')\">",
+    "<area alt=\"C-35\" title=\"C-35\" href=\"#\" coords=\"509,847,569,847,569,937,509,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-35')\">",
+    "<area alt=\"C-36\" title=\"C-36\" href=\"#\" coords=\"547,847,607,847,607,937,547,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-36')\">",
+    "<area alt=\"C-37\" title=\"C-37\" href=\"#\" coords=\"589,847,649,847,649,937,589,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-37')\">",
+    "<area alt=\"C-42\" title=\"C-42\" href=\"#\" coords=\"398,736,458,736,458,826,398,826\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-42')\">",
+    "<area alt=\"C-41\" title=\"C-41\" href=\"#\" coords=\"470,736,530,736,530,826,470,826\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-41')\">",
+    "<area alt=\"C-40\" title=\"C-40\" href=\"#\" coords=\"509,736,569,736,569,826,509,826\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-40')\">",
+    "<area alt=\"C-39\" title=\"C-39\" href=\"#\" coords=\"547,736,607,736,607,826,547,826\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-39')\">",
+    "<area alt=\"C-38\" title=\"C-38\" href=\"#\" coords=\"589,736,649,736,649,826,589,826\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-38')\">",
+    "<area alt=\"C-44\" title=\"C-44\" href=\"#\" coords=\"401,636,461,636,461,726,401,726\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-44')\">",
+    "<area alt=\"C-45\" title=\"C-45\" href=\"#\" coords=\"470,640,530,640,530,730,470,730\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-45')\">",
+    "<area alt=\"C-46\" title=\"C-46\" href=\"#\" coords=\"509,640,569,640,569,730,509,730\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-46')\">",
+    "<area alt=\"C-47\" title=\"C-47\" href=\"#\" coords=\"547,640,607,640,607,730,547,730\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-47')\">",
+    "<area alt=\"C-48\" title=\"C-48\" href=\"#\" coords=\"589,640,649,640,649,730,589,730\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-48')\">",
+    "<area alt=\"C-43\" title=\"C-43\" href=\"#\" coords=\"398,684,458,684,458,774,398,774\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-43')\">",
+    "<area alt=\"C-52\" title=\"C-52\" href=\"#\" coords=\"482,531,542,531,542,621,482,621\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-52')\">",
+    "<area alt=\"C-53\" title=\"C-53\" href=\"#\" coords=\"444,531,504,531,504,621,444,621\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-53')\">",
+    "<area alt=\"C-54\" title=\"C-54\" href=\"#\" coords=\"400,528,460,528,460,618,400,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-54')\">",
+    "<area alt=\"C-51\" title=\"C-51\" href=\"#\" coords=\"489,463,549,463,549,553,489,553\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-51')\">",
+    "<area alt=\"C-50\" title=\"C-50\" href=\"#\" coords=\"590,454,650,454,650,544,590,544\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-50')\">",
+    "<area alt=\"C-49\" title=\"C-49\" href=\"#\" coords=\"590,529,650,529,650,619,590,619\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-49')\">",
+    "<area alt=\"C-7\" title=\"C-7\" href=\"#\" coords=\"360,1310,420,1310,420,1400,360,1400\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-7')\">",
+    "<area alt=\"C-8\" title=\"C-8\" href=\"#\" coords=\"360,1263,420,1263,420,1353,360,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-8')\">",
+    "<area alt=\"D-1\" title=\"D-1\" href=\"#\" coords=\"624,1363,684,1363,684,1453,624,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-1')\">",
+    "<area alt=\"D-14\" title=\"D-14\" href=\"#\" coords=\"624,1263,684,1263,684,1353,624,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-14')\">",
+    "<area alt=\"D-2\" title=\"D-2\" href=\"#\" coords=\"662,1363,722,1363,722,1453,662,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-2')\">",
+    "<area alt=\"D-13\" title=\"D-13\" href=\"#\" coords=\"662,1263,722,1263,722,1353,662,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-13')\">",
+    "<area alt=\"D-3\" title=\"D-3\" href=\"#\" coords=\"702,1363,762,1363,762,1453,702,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-3')\">",
+    "<area alt=\"D-12\" title=\"D-12\" href=\"#\" coords=\"702,1263,762,1263,762,1353,702,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-12')\">",
+    "<area alt=\"D-4\" title=\"D-4\" href=\"#\" coords=\"740,1363,800,1363,800,1453,740,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-4')\">",
+    "<area alt=\"D-11\" title=\"D-11\" href=\"#\" coords=\"740,1263,800,1263,800,1353,740,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-11')\">",
+    "<area alt=\"D-5\" title=\"D-5\" href=\"#\" coords=\"782,1363,842,1363,842,1453,782,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-5')\">",
+    "<area alt=\"D-10\" title=\"D-10\" href=\"#\" coords=\"782,1263,842,1263,842,1353,782,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-10')\">",
+    "<area alt=\"D-6\" title=\"D-6\" href=\"#\" coords=\"821,1363,881,1363,881,1453,821,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-6')\">",
+    "<area alt=\"D-9\" title=\"D-9\" href=\"#\" coords=\"821,1263,881,1263,881,1353,821,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-9')\">",
+    "<area alt=\"D-7\" title=\"D-7\" href=\"#\" coords=\"871,1363,931,1363,931,1453,871,1453\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-7')\">",
+    "<area alt=\"D-8\" title=\"D-8\" href=\"#\" coords=\"871,1263,931,1263,931,1353,871,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-8')\">",
+    "<area alt=\"D-15\" title=\"D-15\" href=\"#\" coords=\"624,1155,684,1155,684,1245,624,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-15')\">",
+    "<area alt=\"D-16\" title=\"D-16\" href=\"#\" coords=\"662,1155,722,1155,722,1245,662,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-16')\">",
+    "<area alt=\"D-17\" title=\"D-17\" href=\"#\" coords=\"702,1155,762,1155,762,1245,702,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-17')\">",
+    "<area alt=\"D-18\" title=\"D-18\" href=\"#\" coords=\"740,1155,800,1155,800,1245,740,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-18')\">",
+    "<area alt=\"D-19\" title=\"D-19\" href=\"#\" coords=\"782,1155,842,1155,842,1245,782,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-19')\">",
+    "<area alt=\"D-20\" title=\"D-20\" href=\"#\" coords=\"821,1155,881,1155,881,1245,821,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-20')\">",
+    "<area alt=\"D-21\" title=\"D-21\" href=\"#\" coords=\"871,1155,931,1155,931,1245,871,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-21')\">",
+    "<area alt=\"D-26\" title=\"D-26\" href=\"#\" coords=\"624,1054,684,1054,684,1144,624,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-26')\">",
+    "<area alt=\"D-25\" title=\"D-25\" href=\"#\" coords=\"662,1054,722,1054,722,1144,662,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-25')\">",
+    "<area alt=\"D-24\" title=\"D-24\" href=\"#\" coords=\"702,1054,762,1054,762,1144,702,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-24')\">",
+    "<area alt=\"D-23\" title=\"D-23\" href=\"#\" coords=\"740,1054,800,1054,800,1144,740,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-23')\">",
+    "<area alt=\"D-22\" title=\"D-22\" href=\"#\" coords=\"815,1054,875,1054,875,1144,815,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-22')\">",
+    "<area alt=\"D-27\" title=\"D-27\" href=\"#\" coords=\"624,945,684,945,684,1035,624,1035\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-27')\">",
+    "<area alt=\"D-28\" title=\"D-28\" href=\"#\" coords=\"662,945,722,945,722,1035,662,1035\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-28')\">",
+    "<area alt=\"D-29\" title=\"D-29\" href=\"#\" coords=\"702,945,762,945,762,1035,702,1035\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-29')\">",
+    "<area alt=\"D-30\" title=\"D-30\" href=\"#\" coords=\"740,945,800,945,800,1035,740,1035\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-30')\">",
+    "<area alt=\"D-31\" title=\"D-31\" href=\"#\" coords=\"791,945,851,945,851,1035,791,1035\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-31')\">",
+    "<area alt=\"D-38\" title=\"D-38\" href=\"#\" coords=\"624,848,684,848,684,938,624,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-38')\">",
+    "<area alt=\"D-37\" title=\"D-37\" href=\"#\" coords=\"662,848,722,848,722,938,662,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-37')\">",
+    "<area alt=\"D-36\" title=\"D-36\" href=\"#\" coords=\"702,848,762,848,762,938,702,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-36')\">",
+    "<area alt=\"D-35\" title=\"D-35\" href=\"#\" coords=\"740,848,800,848,800,938,740,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-35')\">",
+    "<area alt=\"D-34\" title=\"D-34\" href=\"#\" coords=\"782,848,842,848,842,938,782,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-34')\">",
+    "<area alt=\"D-33\" title=\"D-33\" href=\"#\" coords=\"821,848,881,848,881,938,821,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-33')\">",
+    "<area alt=\"B-83\" title=\"B-83\" href=\"#\" coords=\"1033,848,1093,848,1093,938,1033,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-83')\">",
+    "<area alt=\"D-39\" title=\"D-39\" href=\"#\" coords=\"624,737,684,737,684,827,624,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-39')\">",
+    "<area alt=\"D-40\" title=\"D-40\" href=\"#\" coords=\"662,737,722,737,722,827,662,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-40')\">",
+    "<area alt=\"D-41\" title=\"D-41\" href=\"#\" coords=\"702,737,762,737,762,827,702,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-41')\">",
+    "<area alt=\"D-42\" title=\"D-42\" href=\"#\" coords=\"740,737,800,737,800,827,740,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-42')\">",
+    "<area alt=\"D-43\" title=\"D-43\" href=\"#\" coords=\"782,737,842,737,842,827,782,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-43')\">",
+    "<area alt=\"D-44\" title=\"D-44\" href=\"#\" coords=\"821,737,881,737,881,827,821,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-44')\">",
+    "<area alt=\"D-45\" title=\"D-45\" href=\"#\" coords=\"871,737,931,737,931,827,871,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-45')\">",
+    "<area alt=\"D-52\" title=\"D-52\" href=\"#\" coords=\"624,641,684,641,684,731,624,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-52')\">",
+    "<area alt=\"D-51\" title=\"D-51\" href=\"#\" coords=\"662,641,722,641,722,731,662,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-51')\">",
+    "<area alt=\"D-50\" title=\"D-50\" href=\"#\" coords=\"702,641,762,641,762,731,702,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-50')\">",
+    "<area alt=\"D-49\" title=\"D-49\" href=\"#\" coords=\"740,641,800,641,800,731,740,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-49')\">",
+    "<area alt=\"D-48\" title=\"D-48\" href=\"#\" coords=\"782,641,842,641,842,731,782,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-48')\">",
+    "<area alt=\"D-47\" title=\"D-47\" href=\"#\" coords=\"821,641,881,641,881,731,821,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-47')\">",
+    "<area alt=\"D-46\" title=\"D-46\" href=\"#\" coords=\"871,641,931,641,931,731,871,731\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-46')\">",
+    "<area alt=\"D-53\" title=\"D-53\" href=\"#\" coords=\"624,528,684,528,684,618,624,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-53')\">",
+    "<area alt=\"D-54\" title=\"D-54\" href=\"#\" coords=\"662,528,722,528,722,618,662,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-54')\">",
+    "<area alt=\"D-55\" title=\"D-55\" href=\"#\" coords=\"702,528,762,528,762,618,702,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-55')\">",
+    "<area alt=\"D-56\" title=\"D-56\" href=\"#\" coords=\"740,528,800,528,800,618,740,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-56')\">",
+    "<area alt=\"D-57\" title=\"D-57\" href=\"#\" coords=\"782,528,842,528,842,618,782,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-57')\">",
+    "<area alt=\"D-58\" title=\"D-58\" href=\"#\" coords=\"821,528,881,528,881,618,821,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-58')\">",
+    "<area alt=\"D-59\" title=\"D-59\" href=\"#\" coords=\"871,528,931,528,931,618,871,618\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-59')\">",
+    "<area alt=\"D-66\" title=\"D-66\" href=\"#\" coords=\"624,453,684,453,684,543,624,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-66')\">",
+    "<area alt=\"D-65\" title=\"D-65\" href=\"#\" coords=\"662,453,722,453,722,543,662,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-65')\">",
+    "<area alt=\"D-64\" title=\"D-64\" href=\"#\" coords=\"702,453,762,453,762,543,702,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-64')\">",
+    "<area alt=\"D-63\" title=\"D-63\" href=\"#\" coords=\"740,453,800,453,800,543,740,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-63')\">",
+    "<area alt=\"D-62\" title=\"D-62\" href=\"#\" coords=\"782,453,842,453,842,543,782,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-62')\">",
+    "<area alt=\"D-61\" title=\"D-61\" href=\"#\" coords=\"821,453,881,453,881,543,821,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-61')\">",
+    "<area alt=\"D-60\" title=\"D-60\" href=\"#\" coords=\"871,453,931,453,931,543,871,543\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-60')\">",
+    "<area alt=\"B-76\" title=\"B-76\" href=\"#\" coords=\"1034,1155,1094,1155,1094,1245,1034,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-76')\">",
+    "<area alt=\"B-75\" title=\"B-75\" href=\"#\" coords=\"1086,1155,1146,1155,1146,1245,1086,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-75')\">",
+    "<area alt=\"B-74\" title=\"B-74\" href=\"#\" coords=\"1125,1155,1185,1155,1185,1245,1125,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-74')\">",
+    "<area alt=\"B-73\" title=\"B-73\" href=\"#\" coords=\"1166,1155,1226,1155,1226,1245,1166,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-73')\">",
+    "<area alt=\"B-72\" title=\"B-72\" href=\"#\" coords=\"1211,1155,1271,1155,1271,1245,1211,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-72')\">",
+    "<area alt=\"B-71\" title=\"B-71\" href=\"#\" coords=\"1248,1155,1308,1155,1308,1245,1248,1245\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-71')\">",
+    "<area alt=\"B-78\" title=\"B-78\" href=\"#\" coords=\"1166,1054,1226,1054,1226,1144,1166,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-78')\">",
+    "<area alt=\"B-79\" title=\"B-79\" href=\"#\" coords=\"1223,1054,1283,1054,1283,1144,1223,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-79')\">",
+    "<area alt=\"B-77\" title=\"B-77\" href=\"#\" coords=\"1102,1054,1162,1054,1162,1144,1102,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-77')\">",
+    "<area alt=\"B-81\" title=\"B-81\" href=\"#\" coords=\"1166,947,1226,947,1226,1037,1166,1037\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-81')\">",
+    "<area alt=\"B-80\" title=\"B-80\" href=\"#\" coords=\"1208,947,1268,947,1268,1037,1208,1037\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-80')\">",
+    "<area alt=\"B-82\" title=\"B-82\" href=\"#\" coords=\"1102,947,1162,947,1162,1037,1102,1037\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-82')\">",
+    "<area alt=\"B-84\" title=\"B-84\" href=\"#\" coords=\"1092,848,1152,848,1152,938,1092,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-84')\">",
+    "<area alt=\"B-85\" title=\"B-85\" href=\"#\" coords=\"1134,848,1194,848,1194,938,1134,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-85')\">",
+    "<area alt=\"B-86\" title=\"B-86\" href=\"#\" coords=\"1177,848,1237,848,1237,938,1177,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-86')\">",
+    "<area alt=\"B-64\" title=\"B-64\" href=\"#\" coords=\"1034,1263,1094,1263,1094,1353,1034,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-64')\">",
+    "<area alt=\"B-65\" title=\"B-65\" href=\"#\" coords=\"1086,1263,1146,1263,1146,1353,1086,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-65')\">",
+    "<area alt=\"B-66\" title=\"B-66\" href=\"#\" coords=\"1125,1263,1185,1263,1185,1353,1125,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-66')\">",
+    "<area alt=\"B-67\" title=\"B-67\" href=\"#\" coords=\"1166,1263,1226,1263,1226,1353,1166,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-67')\">",
+    "<area alt=\"B-68\" title=\"B-68\" href=\"#\" coords=\"1211,1263,1271,1263,1271,1353,1211,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-68')\">",
+    "<area alt=\"B-69\" title=\"B-69\" href=\"#\" coords=\"1248,1263,1308,1263,1308,1353,1248,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-69')\">",
+    "<area alt=\"B-63\" title=\"B-63\" href=\"#\" coords=\"1034,1365,1094,1365,1094,1455,1034,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-63')\">",
+    "<area alt=\"B-62\" title=\"B-62\" href=\"#\" coords=\"1086,1365,1146,1365,1146,1455,1086,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-62')\">",
+    "<area alt=\"B-61\" title=\"B-61\" href=\"#\" coords=\"1125,1365,1185,1365,1185,1455,1125,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-61')\">",
+    "<area alt=\"B-60\" title=\"B-60\" href=\"#\" coords=\"1166,1365,1226,1365,1226,1455,1166,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-60')\">",
+    "<area alt=\"B-59\" title=\"B-59\" href=\"#\" coords=\"1211,1365,1271,1365,1271,1455,1211,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-59')\">",
+    "<area alt=\"B-58\" title=\"B-58\" href=\"#\" coords=\"1248,1365,1308,1365,1308,1455,1248,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-58')\">",
+    "<area alt=\"B-50\" title=\"B-50\" href=\"#\" coords=\"1034,1473,1094,1473,1094,1563,1034,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-50')\">",
+    "<area alt=\"B-51\" title=\"B-51\" href=\"#\" coords=\"1086,1473,1146,1473,1146,1563,1086,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-51')\">",
+    "<area alt=\"B-52\" title=\"B-52\" href=\"#\" coords=\"1125,1473,1185,1473,1185,1563,1125,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-52')\">",
+    "<area alt=\"B-52\" title=\"B-52\" href=\"#\" coords=\"1166,1473,1226,1473,1226,1563,1166,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-52')\">",
+    "<area alt=\"B-53\" title=\"B-53\" href=\"#\" coords=\"1211,1473,1271,1473,1271,1563,1211,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-53')\">",
+    "<area alt=\"B-54\" title=\"B-54\" href=\"#\" coords=\"1248,1473,1308,1473,1308,1563,1248,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-54')\">",
+    "<area alt=\"B-49\" title=\"B-49\" href=\"#\" coords=\"1034,1573,1094,1573,1094,1663,1034,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-49')\">",
+    "<area alt=\"B-48\" title=\"B-48\" href=\"#\" coords=\"1086,1573,1146,1573,1146,1663,1086,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-48')\">",
+    "<area alt=\"B-47\" title=\"B-47\" href=\"#\" coords=\"1125,1573,1185,1573,1185,1663,1125,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-47')\">",
+    "<area alt=\"B-46\" title=\"B-46\" href=\"#\" coords=\"1166,1573,1226,1573,1226,1663,1166,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-46')\">",
+    "<area alt=\"B-45\" title=\"B-45\" href=\"#\" coords=\"1211,1573,1271,1573,1271,1663,1211,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-45')\">",
+    "<area alt=\"B-44\" title=\"B-44\" href=\"#\" coords=\"1248,1573,1308,1573,1308,1663,1248,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-44')\">",
+    "<area alt=\"B-30\" title=\"B-30\" href=\"#\" coords=\"1034,1683,1094,1683,1094,1773,1034,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-30')\">",
+    "<area alt=\"B-31\" title=\"B-31\" href=\"#\" coords=\"1086,1683,1146,1683,1146,1773,1086,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-31')\">",
+    "<area alt=\"B-32\" title=\"B-32\" href=\"#\" coords=\"1125,1683,1185,1683,1185,1773,1125,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-32')\">",
+    "<area alt=\"B-33\" title=\"B-33\" href=\"#\" coords=\"1166,1683,1226,1683,1226,1773,1166,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-33')\">",
+    "<area alt=\"B-34\" title=\"B-34\" href=\"#\" coords=\"1211,1683,1271,1683,1271,1773,1211,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-34')\">",
+    "<area alt=\"B-35\" title=\"B-35\" href=\"#\" coords=\"1248,1683,1308,1683,1308,1773,1248,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-35')\">",
+    "<area alt=\"B-29\" title=\"B-29\" href=\"#\" coords=\"1034,1781,1094,1781,1094,1871,1034,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-29')\">",
+    "<area alt=\"B-28\" title=\"B-28\" href=\"#\" coords=\"1086,1781,1146,1781,1146,1871,1086,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-28')\">",
+    "<area alt=\"B-27\" title=\"B-27\" href=\"#\" coords=\"1125,1781,1185,1781,1185,1871,1125,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-27')\">",
+    "<area alt=\"B-26\" title=\"B-26\" href=\"#\" coords=\"1166,1781,1226,1781,1226,1871,1166,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-26')\">",
+    "<area alt=\"B-25\" title=\"B-25\" href=\"#\" coords=\"1211,1781,1271,1781,1271,1871,1211,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-25')\">",
+    "<area alt=\"B-24\" title=\"B-24\" href=\"#\" coords=\"1248,1781,1308,1781,1308,1871,1248,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-24')\">",
+    "<area alt=\"B-36\" title=\"B-36\" href=\"#\" coords=\"1288,1683,1348,1683,1348,1773,1288,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-36')\">",
+    "<area alt=\"B-23\" title=\"B-23\" href=\"#\" coords=\"1288,1781,1348,1781,1348,1871,1288,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-23')\">",
+    "<area alt=\"B-37\" title=\"B-37\" href=\"#\" coords=\"1328,1683,1388,1683,1388,1773,1328,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-37')\">",
+    "<area alt=\"B-22\" title=\"B-22\" href=\"#\" coords=\"1328,1781,1388,1781,1388,1871,1328,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-22')\">",
+    "<area alt=\"B-38\" title=\"B-38\" href=\"#\" coords=\"1364,1683,1424,1683,1424,1773,1364,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-38')\">",
+    "<area alt=\"B-21\" title=\"B-21\" href=\"#\" coords=\"1368,1781,1428,1781,1428,1871,1368,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-21')\">",
+    "<area alt=\"B-39\" title=\"B-39\" href=\"#\" coords=\"1395,1683,1455,1683,1455,1773,1395,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-39')\">",
+    "<area alt=\"B-20\" title=\"B-20\" href=\"#\" coords=\"1408,1781,1468,1781,1468,1871,1408,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-20')\">",
+    "<area alt=\"B-40\" title=\"B-40\" href=\"#\" coords=\"1438,1683,1498,1683,1498,1773,1438,1773\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-40')\">",
+    "<area alt=\"B-19\" title=\"B-19\" href=\"#\" coords=\"1448,1781,1508,1781,1508,1871,1448,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-19')\">",
+    "<area alt=\"B-55\" title=\"B-55\" href=\"#\" coords=\"1289,1473,1349,1473,1349,1563,1289,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-55')\">",
+    "<area alt=\"B-56\" title=\"B-56\" href=\"#\" coords=\"1340,1473,1400,1473,1400,1563,1340,1563\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-56')\">",
+    "<area alt=\"B-43\" title=\"B-43\" href=\"#\" coords=\"1287,1573,1347,1573,1347,1663,1287,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-43')\">",
+    "<area alt=\"B-42\" title=\"B-42\" href=\"#\" coords=\"1327,1573,1387,1573,1387,1663,1327,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-42')\">",
+    "<area alt=\"B-41\" title=\"B-41\" href=\"#\" coords=\"1378,1573,1438,1573,1438,1663,1378,1663\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-41')\">",
+    "<area alt=\"B-57\" title=\"B-57\" href=\"#\" coords=\"1299,1365,1359,1365,1359,1455,1299,1455\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-57')\">",
+    "<area alt=\"B-70\" title=\"B-70\" href=\"#\" coords=\"1278,1263,1338,1263,1338,1353,1278,1353\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-70')\">",
+    "<area alt=\"E-4\" title=\"E-4\" href=\"#\" coords=\"1034,737,1094,737,1094,827,1034,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-4')\">",
+    "<area alt=\"E-3\" title=\"E-3\" href=\"#\" coords=\"1086,737,1146,737,1146,827,1086,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-3')\">",
+    "<area alt=\"E-2\" title=\"E-2\" href=\"#\" coords=\"1121,737,1181,737,1181,827,1121,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-2')\">",
+    "<area alt=\"E-1\" title=\"E-1\" href=\"#\" coords=\"1170,737,1230,737,1230,827,1170,827\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-1')\">",
+    "<area alt=\"C-19\" title=\"C-19\" href=\"#\" coords=\"382,1154,442,1154,442,1244,382,1244\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-19')\">",
+    "<area alt=\"C-20\" title=\"C-20\" href=\"#\" coords=\"384,1054,444,1054,444,1144,384,1144\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-20')\">",
+    "<area alt=\"C-31\" title=\"C-31\" href=\"#\" coords=\"391,944,451,944,451,1034,391,1034\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-31')\">",
+    "<area alt=\"C-32\" title=\"C-32\" href=\"#\" coords=\"390,847,450,847,450,937,390,937\" shape=\"poly\" onclick=\"handleMapClick(event, 'C-32')\">",
+    "<area alt=\"D-67\" title=\"D-67\" href=\"#\" coords=\"832,345,892,345,892,435,832,435\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-67')\">",
+    "<area alt=\"D-68\" title=\"D-68\" href=\"#\" coords=\"877,346,937,346,937,436,877,436\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-68')\">",
+    "<area alt=\"D-69\" title=\"D-69\" href=\"#\" coords=\"921,346,981,346,981,436,921,436\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-69')\">",
+    "<area alt=\"E-5\" title=\"E-5\" href=\"#\" coords=\"1034,656,1094,656,1094,746,1034,746\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-5')\">",
+    "<area alt=\"E-6\" title=\"E-6\" href=\"#\" coords=\"1034,594,1094,594,1094,684,1034,684\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-6')\">",
+    "<area alt=\"E-7\" title=\"E-7\" href=\"#\" coords=\"1034,526,1094,526,1094,616,1034,616\" shape=\"poly\" onclick=\"handleMapClick(event, 'E-7')\">",
+    "<area alt=\"D-32\" title=\"D-32\" href=\"#\" coords=\"875,848,935,848,935,938,875,938\" shape=\"poly\" onclick=\"handleMapClick(event, 'D-32')\">",
+    "<area alt=\"B-8\" title=\"B-8\" href=\"#\" coords=\"1238,2018,1298,2018,1298,2108,1238,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-8')\">",
+    "<area alt=\"B-9\" title=\"B-9\" href=\"#\" coords=\"1189,2018,1249,2018,1249,2108,1189,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-9')\">",
+    "<area alt=\"B-6\" title=\"B-6\" href=\"#\" coords=\"1332,2018,1392,2018,1392,2108,1332,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-6')\">",
+    "<area alt=\"B-7\" title=\"B-7\" href=\"#\" coords=\"1283,2018,1343,2018,1343,2108,1283,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-7')\">",
+    "<area alt=\"B-4\" title=\"B-4\" href=\"#\" coords=\"1424,2018,1484,2018,1484,2108,1424,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-4')\">",
+    "<area alt=\"B-5\" title=\"B-5\" href=\"#\" coords=\"1374,2018,1434,2018,1434,2108,1374,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-5')\">",
+    "<area alt=\"B-3\" title=\"B-3\" href=\"#\" coords=\"1469,2018,1529,2018,1529,2108,1469,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-3')\">",
+    "<area alt=\"B-2\" title=\"B-2\" href=\"#\" coords=\"1526,2018,1586,2018,1586,2108,1526,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-2')\">",
+    "<area alt=\"B-11\" title=\"B-11\" href=\"#\" coords=\"1238,1895,1298,1895,1298,1985,1238,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-11')\">",
+    "<area alt=\"B-10\" title=\"B-10\" href=\"#\" coords=\"1189,1895,1249,1895,1249,1985,1189,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-10')\">",
+    "<area alt=\"B-13\" title=\"B-13\" href=\"#\" coords=\"1332,1895,1392,1895,1392,1985,1332,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-13')\">",
+    "<area alt=\"B-12\" title=\"B-12\" href=\"#\" coords=\"1283,1895,1343,1895,1343,1985,1283,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-12')\">",
+    "<area alt=\"B-14\" title=\"B-14\" href=\"#\" coords=\"1380,1895,1440,1895,1440,1985,1380,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-14')\">",
+    "<area alt=\"B-1\" title=\"B-1\" href=\"#\" coords=\"1586,2018,1646,2018,1646,2108,1586,2108\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-1')\">",
+    "<area alt=\"B-15\" title=\"B-15\" href=\"#\" coords=\"1431,1895,1491,1895,1491,1985,1431,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-15')\">",
+    "<area alt=\"B-16\" title=\"B-16\" href=\"#\" coords=\"1476,1895,1536,1895,1536,1985,1476,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-16')\">",
+    "<area alt=\"B-17\" title=\"B-17\" href=\"#\" coords=\"1532,1895,1592,1895,1592,1985,1532,1985\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-17')\">",
+    "<area alt=\"B-18\" title=\"B-18\" href=\"#\" coords=\"1479,1781,1539,1781,1539,1871,1479,1871\" shape=\"poly\" onclick=\"handleMapClick(event, 'B-18')\">"
+  ]
+}

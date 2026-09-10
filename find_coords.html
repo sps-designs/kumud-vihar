@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Coords</title>
+    <style>
+        body { margin: 0; padding: 0; }
+        img { display: block; }
+    </style>
+</head>
+<body>
+    <img id="mapimg" src="scratch/Block_A.jpg" style="cursor: crosshair;">
+    <div id="out" style="position: fixed; top: 10px; left: 10px; background: white; padding: 10px; border: 1px solid black; font-size: 20px; z-index: 1000;">Click on a plot</div>
+    <script>
+        const img = document.getElementById('mapimg');
+        const out = document.getElementById('out');
+        img.addEventListener('click', function(e) {
+            const rect = img.getBoundingClientRect();
+            const x = Math.round(e.clientX - rect.left);
+            const y = Math.round(e.clientY - rect.top);
+            out.textContent = `Clicked: X=${x}, Y=${y}`;
+            console.log(`X: ${x}, Y: ${y}`);
+        });
+    </script>
+</body>
+</html>

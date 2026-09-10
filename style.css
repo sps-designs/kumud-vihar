@@ -1,0 +1,419 @@
+:root {
+    /* Premium Color Palette */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --brand-primary: #0f172a;
+    --brand-accent: #cda971; /* Gold accent for luxury feel */
+    
+    /* Status Colors */
+    --status-available: #10b981;
+    --status-booked: #f59e0b;
+    --status-sold: #ef4444;
+    
+    /* Plot Type Colors */
+    --type-normal: #94a3b8;
+    --type-main80: #3b82f6;
+    --type-corner60: #8b5cf6;
+    --type-corner30: #ec4899;
+    --type-commercial: #f59e0b;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Border Radius */
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: 'Outfit', sans-serif; 
+    background-color: var(--bg-primary); 
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header Styles */
+.app-header {
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+#colony-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--brand-primary);
+}
+
+.premium-select {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.premium-select:hover {
+    border-color: var(--brand-accent);
+}
+
+.premium-select:focus {
+    box-shadow: 0 0 0 3px rgba(205, 169, 113, 0.2);
+    border-color: var(--brand-accent);
+}
+
+/* Main Content area */
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Controls Section */
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.view-toggles {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-secondary);
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+    color: var(--text-primary);
+}
+
+.toggle-btn.active {
+    background-color: var(--brand-primary);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Legend */
+.status-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.type-normal { background-color: var(--type-normal); }
+.type-main80 { background-color: var(--type-main80); }
+.type-corner60 { background-color: var(--type-corner60); }
+.type-corner30 { background-color: var(--type-corner30); }
+.type-commercial { background-color: var(--type-commercial); }
+
+/* Grid View */
+.grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 1.5rem; 
+}
+
+.plot-card { 
+    padding: 1.5rem; 
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: transparent;
+}
+
+/* Add a top border accent based on status */
+.plot-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.plot-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.plot-card .plot-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.plot-card .plot-price {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--brand-accent);
+    margin-top: 0.5rem;
+}
+
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Type-specific card styling for the top accent border */
+.card-normal::before { background-color: var(--type-normal); }
+.card-main80::before { background-color: var(--type-main80); }
+.card-corner60::before { background-color: var(--type-corner60); }
+.card-corner30::before { background-color: var(--type-corner30); }
+.card-commercial::before { background-color: var(--type-commercial); }
+.card-ofc::before { background-color: #dc2626; }
+
+/* Availability Status Badge styling */
+.status-available { background-color: #d1fae5; color: #047857; }
+.status-booked { background-color: #fef3c7; color: #b45309; }
+.status-sold { background-color: #fee2e2; color: #b91c1c; }
+.status-OFC { background-color: #e5e7eb; color: #4b5563; text-decoration: line-through; }
+
+/* Map View */
+.map-instruction {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.map-container {
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    text-align: center;
+}
+
+.map-container img {
+    max-width: none;
+    height: auto;
+    border-radius: var(--radius-md);
+}
+
+/* Modal / Glassmorphism */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(15, 23, 42, 0.4); 
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.modal-content {
+    position: relative;
+    border-radius: var(--radius-xl);
+    width: 90%; 
+    max-width: 450px;
+    padding: 2.5rem;
+    transform: scale(0.95);
+    transition: transform 0.2s ease-out;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
+}
+
+.modal-body h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--brand-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.detail-value.price {
+    color: var(--brand-accent);
+}
+
+.modal-status-badge {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    margin-top: 2rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Modal Status Colors */
+.modal-booked { background-color: var(--status-booked); color: white; }
+.modal-sold { background-color: var(--status-sold); color: white; }
+.modal-available { background-color: var(--status-available); color: white; }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}

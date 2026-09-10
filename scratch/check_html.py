@@ -1,0 +1,6 @@
+html = open('index.html', encoding='utf-8').read()
+print('plot-modal present:', 'plot-modal' in html)
+print('OFC sticker div:', 'OFOFOFC' in html)
+print('map-blocks-wrapper:', 'map-blocks-wrapper' in html)
+print('Full_Map.jpg:', 'Full_Map.jpg' in html)
+print('handlePlotClick count:', html.count('handlePlotClick'))
