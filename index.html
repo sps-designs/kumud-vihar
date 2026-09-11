@@ -418,6 +418,58 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    
+    <!-- Booking Form Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content glass-effect" style="max-height: 90vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeBookingModal()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-body">
+                <h2 id="booking-plot-title">Book Plot</h2>
+                <form id="plot-booking-form" class="booking-form" onsubmit="submitBooking(event)">
+                    <input type="hidden" id="book-plot-id">
+
+                    <div class="form-group">
+                        <label>Applicant Name</label>
+                        <input type="text" id="book-name" required placeholder="Enter full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="book-phone" required placeholder="+91">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="book-address" required placeholder="Full residential address">
+                    </div>
+
+                    <div class="form-group">
+                        <label>ID Proof (Aadhar Number)</label>
+                        <input type="text" id="book-aadhar" required placeholder="12-digit Aadhar number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Mode</label>
+                        <select id="book-payment" required>
+                            <option value="Cash">Cash</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Online">Online / UPI</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Booking Amount (₹)</label>
+                        <input type="number" id="book-amount" required placeholder="Enter advance amount">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="app.js"></script>
 </body>
 </html>

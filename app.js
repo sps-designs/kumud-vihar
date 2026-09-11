@@ -8,7 +8,7 @@ const RATES = {
 };
 
 // Mock Data for initial testing using Kumud Vihar format (A-1, etc.)
-const globalPlots = [
+const initialPlots = [
     {
         "plotNo": "A-1",
         "colonyId": "Colony_1",
@@ -4616,6 +4616,44 @@ const globalPlots = [
     }
 ];
 
+let globalPlots = [];
+
+// Saves current data to the browser's local storage
+function saveData() {
+    localStorage.setItem('kumudViharPlots', JSON.stringify(globalPlots));
+}
+
+// Initializes data on load
+function initStorage() {
+    const storedPlots = localStorage.getItem('kumudViharPlots');
+
+    if (storedPlots) {
+        // Load from memory if it exists
+        globalPlots = JSON.parse(storedPlots);
+    } else {
+        // First-time setup: load initial data and correct the plot types
+        globalPlots = [...initialPlots];
+
+        const masterPlotTypes = {
+            "80ft Main road plot": ["A-1", "A-2", "A-3", "A-4", "A-5", "A-6", "A-7", "A-8", "A-9", "A-10", "B-1", "B-2", "B-3", "B-4", "B-5", "B-6", "B-7"],
+            "60ft corner plot": ["A-33", "A-56", "A-57", "A-80", "B-27", "B-28", "B-47", "B-48", "B-62", "B-63", "B-75", "B-76", "B-81", "B-82", "D-7", "D-8", "D-21", "D-22", "D-31", "D-32", "D-45", "D-46", "D-59", "D-60"],
+            "30ft corner plot": ["A-38", "A-39", "A-50", "A-51", "A-62", "A-63", "A-74", "A-75", "A-24", "A-44", "A-45", "A-68", "A-69", "A-23", "C-6", "C-8", "C-71", "C-62", "C-19", "C-20", "C-31", "C-32", "C-61", "C-55", "C-42", "C-44", "C-52", "C-49", "C-50"],
+            "Commercial plot": ["COM-1", "COM-2"]
+        };
+
+        globalPlots.forEach(plot => {
+            if (plot.type === "OFC") return;
+            plot.type = "Normal plot";
+            for (const [type, plots] of Object.entries(masterPlotTypes)) {
+                if (plots.includes(plot.plotNo)) {
+                    plot.type = type;
+                }
+            }
+        });
+        saveData();
+    }
+}
+
 // Auto-correct plot types based on master details
 const masterPlotTypes = {
     "80ft Main road plot": ["A-1", "A-2", "A-3", "A-4", "A-5", "A-6", "A-7", "A-8", "A-9", "A-10", "B-1", "B-2", "B-3", "B-4", "B-5", "B-6", "B-7"],
@@ -4650,6 +4688,7 @@ const formatCurrency = (amount) => {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    initStorage();
     // Render initial grid for Colony 1
     renderGrid('Colony_1');
     // Removed old getStatusClass since we use type classes now
@@ -4720,7 +4759,8 @@ function renderGrid(colonyId) {
         const rate = RATES[plot.type] || 0;
         const amount = rate * parseFloat(plot.gaj);
 
-        card.className = `plot-card ${typeClass}`;
+        const statusName = plot.status.toLowerCase().replace(' ', '-');
+        card.className = `plot-card ${typeClass} ${statusName}`;
         // Make the card clickable to open modal
         card.onclick = () => openModal(plot, rate, amount);
 
@@ -4791,6 +4831,42 @@ function openModal(plot, rate, amount) {
     const modalDetails = document.getElementById('modal-details');
     const statusClass = getModalStatusClass(plot.status);
 
+    // --- 1. Strict Workflow Logic for Buttons ---
+    let actionButtons = '';
+    const currentStatus = plot.status.toLowerCase();
+
+    if (currentStatus === 'available') {
+        // Step 1: Only allow booking
+        actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="openBookingForm('${plot.plotNo}')">Book Now</button>`;
+
+    } else if (currentStatus === 'booked') {
+        // Step 2: Allow registry completion OR booking cancellation
+        actionButtons = `
+            <button class="btn-info" style="width: 100%; margin-top: 1rem;" onclick="completeRegistry('${plot.plotNo}')">Complete Registry</button>
+            <button class="btn-cancel" style="width: 100%; margin-top: 0.5rem;" onclick="cancelBooking('${plot.plotNo}')">Cancel Booking</button>
+        `;
+
+    } else if (currentStatus === 'registered') {
+        // Step 3: Only allow final sale
+        actionButtons = `<button class="btn-danger" style="width: 100%; margin-top: 1rem;" onclick="sellPlot('${plot.plotNo}')">Finalize as Sold</button>`;
+    }
+
+    // --- 2. Extract Buyer Details if they exist ---
+    let buyerHTML = '';
+    if (plot.buyer) {
+        buyerHTML = `
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
+                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--brand-primary);">Buyer Details</h3>
+                <div class="detail-row"><span class="detail-label">Name</span><span class="detail-value">${plot.buyer.name}</span></div>
+                <div class="detail-row"><span class="detail-label">Phone</span><span class="detail-value">${plot.buyer.phone}</span></div>
+                <div class="detail-row"><span class="detail-label">Aadhar</span><span class="detail-value">${plot.buyer.aadhar}</span></div>
+                <div class="detail-row"><span class="detail-label">Booked On</span><span class="detail-value">${plot.buyer.bookingDate}</span></div>
+                <div class="detail-row"><span class="detail-label">Advance Paid</span><span class="detail-value price">${formatCurrency(plot.buyer.bookingAmount)}</span></div>
+            </div>
+        `;
+    }
+
+    // --- 3. Render Modal Content ---
     modalDetails.innerHTML = `
         <h2>Plot ${plot.plotNo}</h2>
         
@@ -4819,9 +4895,13 @@ function openModal(plot, rate, amount) {
             <span class="detail-value price" style="font-size: 1.5rem;">${formatCurrency(amount)}</span>
         </div>
 
-        <div class="modal-status-badge ${statusClass}">
+        ${buyerHTML}
+
+        <div class="modal-status-badge ${statusClass} ${plot.status.toLowerCase().replace(' ', '-')}">
             ${plot.status}
         </div>
+        
+        ${actionButtons}
     `;
 
     modal.classList.add('show');
@@ -4846,3 +4926,113 @@ document.addEventListener('keydown', function (event) {
         closeModal();
     }
 });
+
+
+// Opens the booking form for a specific plot
+function openBookingForm(plotNo) {
+    // Close the details modal
+    closeModal();
+
+    // Setup and open the booking modal
+    document.getElementById('booking-plot-title').innerText = `Book Plot ${plotNo}`;
+    document.getElementById('book-plot-id').value = plotNo;
+    document.getElementById('booking-modal').classList.add('show');
+}
+
+// Closes the booking form
+function closeBookingModal() {
+    document.getElementById('booking-modal').classList.remove('show');
+    document.getElementById('plot-booking-form').reset();
+}
+
+// Handles form submission, updates data, and refreshes UI
+function submitBooking(event) {
+    event.preventDefault();
+
+    const plotNo = document.getElementById('book-plot-id').value;
+
+    // Capture all buyer details from the form
+    const buyerDetails = {
+        name: document.getElementById('book-name').value,
+        phone: document.getElementById('book-phone').value,
+        address: document.getElementById('book-address').value,
+        aadhar: document.getElementById('book-aadhar').value,
+        paymentMode: document.getElementById('book-payment').value,
+        bookingAmount: document.getElementById('book-amount').value,
+        bookingDate: new Date().toLocaleDateString('en-IN')
+    };
+
+    const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+    if (plotIndex !== -1) {
+        globalPlots[plotIndex].status = "Booked";
+        globalPlots[plotIndex].buyer = buyerDetails; // Attach buyer to plot
+        saveData(); // Save to local storage
+    }
+
+    closeBookingModal();
+    alert(`Success! Plot ${plotNo} has been successfully booked for ${buyerDetails.name}.`);
+
+    const currentColony = document.getElementById('colony-selector').value;
+    renderGrid(currentColony);
+}
+
+
+// Handles direct sales and converts bookings to sales
+function sellPlot(plotNo) {
+    // 1. Ask for confirmation before marking as sold
+    if (confirm(`Are you sure you want to mark Plot ${plotNo} as SOLD? This action cannot be easily undone.`)) {
+
+        // 2. Find the plot and update its status
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Sold";
+        }
+
+        // 3. Close the modal and re-render the grid
+        closeModal();
+        const currentColony = document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1';
+        renderGrid(currentColony);
+    }
+}
+
+
+// Cancels a booking and reverts the plot to Available
+// Cancels a booking, wipes buyer data, reverts to Available
+function cancelBooking(plotNo) {
+    if (confirm(`Are you sure you want to cancel the booking for Plot ${plotNo}?`)) {
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Available";
+            delete globalPlots[plotIndex].buyer; // Erase buyer info
+            saveData(); // Save to local storage
+        }
+        closeModal();
+        renderGrid(document.getElementById('colony-selector').value);
+    }
+}
+
+// Mark as Registered
+function completeRegistry(plotNo) {
+    if (confirm(`Has the registry process been completed for Plot ${plotNo}?`)) {
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Registered";
+            saveData(); // Save to local storage
+        }
+        closeModal();
+        renderGrid(document.getElementById('colony-selector').value);
+    }
+}
+
+// Finalize as Sold
+function sellPlot(plotNo) {
+    if (confirm(`Are you sure you want to finalize the sale of Plot ${plotNo}?`)) {
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Sold";
+            saveData(); // Save to local storage
+        }
+        closeModal();
+        renderGrid(document.getElementById('colony-selector').value);
+    }
+}
