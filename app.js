@@ -5010,6 +5010,7 @@ window.openModal = function (plot, rate, amount) {
                 <div class="detail-row"><span class="detail-label">Aadhar</span><span class="detail-value">${plot.buyer.aadhar}</span></div>
                 <div class="detail-row"><span class="detail-label">Booked On</span><span class="detail-value">${plot.buyer.bookingDate}</span></div>
                 <div class="detail-row"><span class="detail-label">Advance Paid</span><span class="detail-value price">${formatCurrency(plot.buyer.bookingAmount)}</span></div>
+                ${plot.buyer.brokerEmail ? `<div class="detail-row"><span class="detail-label">Broker Email</span><span class="detail-value" style="font-weight: 500;">${plot.buyer.brokerEmail}</span></div>` : ''}
             </div>
         `;
     }
@@ -5107,7 +5108,8 @@ window.submitBooking = function (event) {
         aadhar: document.getElementById('book-aadhar').value,
         paymentMode: document.getElementById('book-payment').value,
         bookingAmount: document.getElementById('book-amount').value,
-        bookingDate: new Date().toLocaleDateString('en-IN')
+        bookingDate: new Date().toLocaleDateString('en-IN'),
+        brokerEmail: currentUser ? currentUser.email : 'Unknown Broker'
     };
 
     const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
