@@ -1,3 +1,109 @@
+// --- FIREBASE CLOUD SETUP & IMPORTS ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC2924sYgBCGnqUS8nBuq7JctARz3dcYwM",
+    authDomain: "kumud-vihar.firebaseapp.com",
+    projectId: "kumud-vihar",
+    storageBucket: "kumud-vihar.firebasestorage.app",
+    messagingSenderId: "652514519244",
+    appId: "1:652514519244:web:4cd90742c656b7dd027a69",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+let currentUser = null;
+
+// Process Google Login when the page redirects back
+getRedirectResult(auth).then((result) => {
+    if (result) {
+        console.log("Google Login Successful!");
+        window.closeLogin();
+    }
+}).catch((error) => {
+    console.error("Redirect Error:", error);
+    alert("Google Sign-in Error: " + error.message);
+});
+
+// Listen for login/logout state changes
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    const authBtn = document.getElementById('auth-btn');
+    const userDisplay = document.getElementById('user-display');
+
+    if (authBtn && userDisplay) {
+        if (user) {
+            authBtn.innerText = "Log Out";
+            authBtn.onclick = window.handleLogout;
+            userDisplay.innerText = user.email;
+            userDisplay.style.display = "inline";
+        } else {
+            authBtn.innerText = "Broker Login";
+            authBtn.onclick = window.showLogin;
+            userDisplay.style.display = "none";
+        }
+    }
+});
+
+// Auth UI Functions
+window.showLogin = function () {
+    document.getElementById('login-error').style.display = 'none';
+    document.getElementById('login-modal').classList.add('show');
+}
+window.closeLogin = function () {
+    document.getElementById('login-modal').classList.remove('show');
+    document.getElementById('login-form').reset();
+}
+
+// 1. Existing Email Login
+window.handleEmailLogin = async function () {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.closeLogin();
+    } catch (err) {
+        document.getElementById('login-error').innerText = "Invalid login credentials.";
+        document.getElementById('login-error').style.display = 'block';
+    }
+}
+
+// 2. New Broker Registration
+window.handleEmailRegister = async function () {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    if (password.length < 6) {
+        document.getElementById('login-error').innerText = "Password must be at least 6 characters.";
+        document.getElementById('login-error').style.display = 'block';
+        return;
+    }
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("New broker account created successfully!");
+        window.closeLogin();
+    } catch (err) {
+        document.getElementById('login-error').innerText = err.message.replace("Firebase: ", "");
+        document.getElementById('login-error').style.display = 'block';
+    }
+}
+
+// 3. Google Sign-In (Using Redirect to bypass COOP blockers)
+window.handleGoogleLogin = function () {
+    const provider = new GoogleAuthProvider();
+    // This will instantly redirect the current tab to Google
+    signInWithRedirect(auth, provider);
+}
+
+window.handleLogout = function () {
+    signOut(auth);
+    alert("You have been logged out.");
+}
+
 // Rates configuration
 const RATES = {
     "Normal plot": 10000,
@@ -61,7 +167,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "216.67",
         "size": "216.67",
-        "dims": "30'",
+        "dims": "30\' x 65\'",
         "status": "Available",
         "price": "",
         "cx": 861.99,
@@ -76,7 +182,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "216.67",
         "size": "216.67",
-        "dims": "30'",
+        "dims": "30\' x 65\'",
         "status": "Available",
         "price": "",
         "cx": 793.59,
@@ -91,7 +197,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "216.67",
         "size": "216.67",
-        "dims": "30'",
+        "dims": "30\' x 65\'",
         "status": "Available",
         "price": "",
         "cx": 718.53,
@@ -106,7 +212,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "216.67",
         "size": "216.67",
-        "dims": "30' x 55'",
+        "dims": "30' x 65'",
         "status": "Available",
         "price": "",
         "cx": 644.28,
@@ -121,7 +227,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "216.67",
         "size": "216.67",
-        "dims": "30' x 55'",
+        "dims": "30' x 65'",
         "status": "Available",
         "price": "",
         "cx": 569.31,
@@ -136,7 +242,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "382.78",
         "size": "382.78",
-        "dims": "55' x 65'",
+        "dims": "55' x 62.64'",
         "status": "Available",
         "price": "",
         "cx": 476.61,
@@ -151,7 +257,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "286.11",
         "size": "286.11",
-        "dims": "50' x 53'",
+        "dims": "50' x 51.5'",
         "status": "Available",
         "price": "",
         "cx": 267.08,
@@ -181,7 +287,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 290.84,
@@ -196,7 +302,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 294.44,
@@ -211,7 +317,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "166.67",
         "size": "166.67",
-        "dims": "30' x 25'",
+        "dims": "30' x 50'",
         "status": "Available",
         "price": "",
         "cx": 298.04,
@@ -226,7 +332,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 302.36,
@@ -241,7 +347,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 305.96,
@@ -256,7 +362,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 309.56,
@@ -316,7 +422,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 324.14,
@@ -331,7 +437,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 327.74,
@@ -361,7 +467,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "302.50",
         "size": "302.50",
-        "dims": "48' x 55'",
+        "dims": "48' x 56.72'",
         "status": "Available",
         "price": "",
         "cx": 481.1,
@@ -376,7 +482,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 48'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 572.54,
@@ -391,7 +497,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 25'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 647.51,
@@ -406,7 +512,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 25'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 721.76,
@@ -421,7 +527,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 30'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 796.82,
@@ -436,7 +542,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 30'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 865.22,
@@ -451,7 +557,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 30'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 940.28,
@@ -511,7 +617,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1213.52,
@@ -526,7 +632,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 10'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.76,
@@ -541,7 +647,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1092.02,
@@ -556,7 +662,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1030.46,
@@ -601,7 +707,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 749.84,
@@ -616,7 +722,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 690.08,
@@ -631,7 +737,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 628.16,
@@ -646,7 +752,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "166.67",
         "size": "166.67",
-        "dims": "30' x 25'",
+        "dims": "30' x 50'",
         "status": "Available",
         "price": "",
         "cx": 566.6,
@@ -661,7 +767,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "219.14",
         "size": "219.14",
-        "dims": "41' x 50'",
+        "dims": "41' x 48.1'",
         "status": "Available",
         "price": "",
         "cx": 479.66,
@@ -676,7 +782,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "230.56",
         "size": "230.56",
-        "dims": "50' x 40'",
+        "dims": "50' x 41.5'",
         "status": "Available",
         "price": "",
         "cx": 489.56,
@@ -691,7 +797,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 566.6,
@@ -706,7 +812,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 628.16,
@@ -721,7 +827,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 690.08,
@@ -736,7 +842,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 749.84,
@@ -781,7 +887,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1030.46,
@@ -796,7 +902,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1092.02,
@@ -811,7 +917,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.76,
@@ -826,7 +932,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1213.52,
@@ -871,7 +977,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1213.52,
@@ -886,7 +992,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.76,
@@ -901,7 +1007,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1092.02,
@@ -916,7 +1022,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1030.46,
@@ -961,7 +1067,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 749.84,
@@ -976,7 +1082,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 690.08,
@@ -991,7 +1097,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 628.16,
@@ -1006,7 +1112,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 38'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 566.6,
@@ -1021,7 +1127,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "202.78",
         "size": "202.78",
-        "dims": "38' x 50'",
+        "dims": "38' x 48'",
         "status": "Available",
         "price": "",
         "cx": 495.14,
@@ -1036,7 +1142,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "186.11",
         "size": "186.11",
-        "dims": "50' x 32'",
+        "dims": "50' x 33.5'",
         "status": "Available",
         "price": "",
         "cx": 502.88,
@@ -1051,7 +1157,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 32'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 566.6,
@@ -1066,7 +1172,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 32'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 628.16,
@@ -1081,7 +1187,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 690.08,
@@ -1096,7 +1202,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 749.84,
@@ -1141,7 +1247,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1030.46,
@@ -1156,7 +1262,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1092.02,
@@ -1171,7 +1277,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.76,
@@ -1186,7 +1292,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1213.52,
@@ -1216,7 +1322,7 @@ const initialPlots = [
         "type": "80ft Main road plot",
         "gaj": "397.22",
         "size": "397.22",
-        "dims": "45' x 65'",
+        "dims": "45' x 79.44'",
         "status": "Available",
         "price": "",
         "cx": 2227.29,
@@ -1351,7 +1457,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 30'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 1914.8,
@@ -1366,7 +1472,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "183.33",
         "size": "183.33",
-        "dims": "30' x 25'",
+        "dims": "30' x 55'",
         "status": "Available",
         "price": "",
         "cx": 1989.86,
@@ -1426,7 +1532,7 @@ const initialPlots = [
         "type": "OFC",
         "gaj": "213.89",
         "size": "213.89",
-        "dims": "55' x 19'",
+        "dims": "55' x 35'",
         "status": "OFC",
         "price": "",
         "cx": 2293.16,
@@ -1441,7 +1547,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "118.06",
         "size": "118.06",
-        "dims": "31' x 20'",
+        "dims": "31' x 34.28'",
         "status": "Available",
         "price": "",
         "cx": 2212.61,
@@ -1456,7 +1562,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "118.06",
         "size": "118.06",
-        "dims": "20' x 31'",
+        "dims": "20' x 53.13'",
         "status": "Available",
         "price": "",
         "cx": 2166.08,
@@ -1471,7 +1577,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 2105.06,
@@ -1486,7 +1592,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 2044.04,
@@ -1501,7 +1607,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1983.02,
@@ -1516,7 +1622,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1922.0,
@@ -1531,7 +1637,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1860.98,
@@ -1546,7 +1652,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -1561,7 +1667,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -1576,7 +1682,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -1591,7 +1697,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -1636,7 +1742,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -1651,7 +1757,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -1666,7 +1772,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 1'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -1681,7 +1787,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "1' x 25'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -1696,7 +1802,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "1' x 25'",
+        "dims": "1' x 1250'",
         "status": "Available",
         "price": "",
         "cx": 1860.98,
@@ -1711,7 +1817,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 1'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1922.0,
@@ -1726,7 +1832,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1983.02,
@@ -1741,7 +1847,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 2037.2,
@@ -1771,7 +1877,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "163.89",
         "size": "163.89",
-        "dims": "50' x 18'",
+        "dims": "50' x 29.5'",
         "status": "Available",
         "price": "",
         "cx": 2149.52,
@@ -1786,7 +1892,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "175.00",
         "size": "175.00",
-        "dims": "43' x 50'",
+        "dims": "43' x 36.63'",
         "status": "Available",
         "price": "",
         "cx": 2058.08,
@@ -1816,7 +1922,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1921.64,
@@ -1831,7 +1937,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1860.98,
@@ -1846,7 +1952,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -1861,7 +1967,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -1876,7 +1982,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -1891,7 +1997,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -1936,7 +2042,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -1951,7 +2057,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -1966,7 +2072,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -1981,7 +2087,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -1996,7 +2102,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1860.98,
@@ -2026,7 +2132,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "197.22",
         "size": "197.22",
-        "dims": "50' x 26'",
+        "dims": "50' x 35.5'",
         "status": "Available",
         "price": "",
         "cx": 2001.74,
@@ -2041,7 +2147,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "191.67",
         "size": "191.67",
-        "dims": "42' x 50'",
+        "dims": "42' x 41.07'",
         "status": "Available",
         "price": "",
         "cx": 1938.92,
@@ -2071,7 +2177,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -2086,7 +2192,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -2101,7 +2207,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -2116,7 +2222,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -2161,7 +2267,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1614.2,
@@ -2176,7 +2282,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "3' x 25'",
+        "dims": "3' x 416.67'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -2191,7 +2297,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "3' x 25'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1736.6,
@@ -2206,7 +2312,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1804.46,
@@ -2236,7 +2342,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "136.11",
         "size": "136.11",
-        "dims": "50' x 17'",
+        "dims": "50' x 24.5'",
         "status": "Available",
         "price": "",
         "cx": 1906.52,
@@ -2251,7 +2357,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "130.56",
         "size": "130.56",
-        "dims": "30' x 17'",
+        "dims": "30' x 39.17'",
         "status": "Available",
         "price": "",
         "cx": 1860.98,
@@ -2296,7 +2402,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1674.86,
@@ -2326,7 +2432,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "212.89",
         "size": "212.89",
-        "dims": "40' x 41'",
+        "dims": "40' x 47.9'",
         "status": "Available",
         "price": "",
         "cx": 1536.26,
@@ -2341,7 +2447,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "294.56",
         "size": "294.56",
-        "dims": "41' x 50'",
+        "dims": "41' x 64.66'",
         "status": "Available",
         "price": "",
         "cx": 1639.22,
@@ -2371,7 +2477,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "169.44",
         "size": "169.44",
-        "dims": "24' x 50'",
+        "dims": "24' x 63.54'",
         "status": "Available",
         "price": "",
         "cx": 1824.08,
@@ -2386,7 +2492,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "102.78",
         "size": "102.78",
-        "dims": "50' x 22'",
+        "dims": "50' x 18.5'",
         "status": "Available",
         "price": "",
         "cx": 1800.86,
@@ -2416,7 +2522,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "294.56",
         "size": "294.56",
-        "dims": "41' x 50'",
+        "dims": "41' x 64.66'",
         "status": "Available",
         "price": "",
         "cx": 1639.22,
@@ -2431,7 +2537,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "212.89",
         "size": "212.89",
-        "dims": "41' x 40'",
+        "dims": "41' x 46.73'",
         "status": "Available",
         "price": "",
         "cx": 1533.65,
@@ -2476,7 +2582,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "144.44",
         "size": "144.44",
-        "dims": "22' x 50'",
+        "dims": "22' x 59.09'",
         "status": "Available",
         "price": "",
         "cx": 1754.06,
@@ -2491,7 +2597,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 857.06,
@@ -2506,7 +2612,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 792.98,
@@ -2521,7 +2627,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 735.56,
@@ -2551,7 +2657,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "190.56",
         "size": "190.56",
-        "dims": "25' x 50'",
+        "dims": "25' x 68.6'",
         "status": "Available",
         "price": "",
         "cx": 609.74,
@@ -2566,7 +2672,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "190.56",
         "size": "190.56",
-        "dims": "35' x 50'",
+        "dims": "35' x 49'",
         "status": "Available",
         "price": "",
         "cx": 508.22,
@@ -2581,7 +2687,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "158.33",
         "size": "158.33",
-        "dims": "30' x 48'",
+        "dims": "30' x 47.5'",
         "status": "Available",
         "price": "",
         "cx": 508.22,
@@ -2596,7 +2702,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "178.89",
         "size": "178.89",
-        "dims": "35' x 47'",
+        "dims": "35' x 46'",
         "status": "Available",
         "price": "",
         "cx": 508.22,
@@ -2611,7 +2717,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "178.89",
         "size": "178.89",
-        "dims": "25' x 45'",
+        "dims": "25' x 64.4'",
         "status": "Available",
         "price": "",
         "cx": 609.74,
@@ -2626,7 +2732,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -2641,7 +2747,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 738.8,
@@ -2656,7 +2762,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -2671,7 +2777,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -2686,7 +2792,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -2701,7 +2807,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -2716,7 +2822,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 738.8,
@@ -2731,7 +2837,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -2746,7 +2852,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 43'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 612.98,
@@ -2761,7 +2867,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "230.56",
         "size": "230.56",
-        "dims": "43' x 50'",
+        "dims": "43' x 48.26'",
         "status": "Available",
         "price": "",
         "cx": 544.94,
@@ -2776,7 +2882,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "213.89",
         "size": "213.89",
-        "dims": "37' x 50'",
+        "dims": "37' x 52'",
         "status": "Available",
         "price": "",
         "cx": 547.64,
@@ -2791,7 +2897,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 37'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 612.98,
@@ -2806,7 +2912,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -2821,7 +2927,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 738.8,
@@ -2836,7 +2942,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -2851,7 +2957,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -2866,7 +2972,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -2881,7 +2987,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -2896,7 +3002,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 738.8,
@@ -2911,7 +3017,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -2926,7 +3032,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 35'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 612.98,
@@ -2941,7 +3047,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "186.11",
         "size": "186.11",
-        "dims": "50' x 35'",
+        "dims": "50' x 33.5'",
         "status": "Available",
         "price": "",
         "cx": 557.9,
@@ -2956,7 +3062,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "169.44",
         "size": "169.44",
-        "dims": "29' x 50'",
+        "dims": "29' x 52.58'",
         "status": "Available",
         "price": "",
         "cx": 557.27,
@@ -2971,7 +3077,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 29'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 612.98,
@@ -2986,7 +3092,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 29'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -3001,7 +3107,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 738.8,
@@ -3016,7 +3122,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -3031,7 +3137,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -3046,7 +3152,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -3061,7 +3167,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -3091,7 +3197,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "198.33",
         "size": "198.33",
-        "dims": "50' x 25'",
+        "dims": "50' x 35.7'",
         "status": "Available",
         "price": "",
         "cx": 678.86,
@@ -3106,7 +3212,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "198.33",
         "size": "198.33",
-        "dims": "35' x 52'",
+        "dims": "35' x 51'",
         "status": "Available",
         "price": "",
         "cx": 569.42,
@@ -3121,7 +3227,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "163.33",
         "size": "163.33",
-        "dims": "50' x 30'",
+        "dims": "50' x 29.4'",
         "status": "Available",
         "price": "",
         "cx": 569.42,
@@ -3136,7 +3242,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "182.78",
         "size": "182.78",
-        "dims": "35' x 48'",
+        "dims": "35' x 47'",
         "status": "Available",
         "price": "",
         "cx": 573.92,
@@ -3181,7 +3287,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 796.22,
@@ -3196,7 +3302,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 860.3,
@@ -3241,7 +3347,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "113.47",
         "size": "113.47",
-        "dims": "38' x 53'",
+        "dims": "38' x 26.87'",
         "status": "Available",
         "price": "",
         "cx": 707.84,
@@ -3286,7 +3392,7 @@ const initialPlots = [
         "type": "OFC",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "45' x 46'",
+        "dims": "45' x 22.22'",
         "status": "OFC",
         "price": "",
         "cx": 577.88,
@@ -3301,7 +3407,7 @@ const initialPlots = [
         "type": "30ft corner plot",
         "gaj": "169.44",
         "size": "169.44",
-        "dims": "26' x 50'",
+        "dims": "26' x 58.65'",
         "status": "Available",
         "price": "",
         "cx": 414.98,
@@ -3346,7 +3452,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 404.0,
@@ -3361,7 +3467,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 400.4,
@@ -3376,7 +3482,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 35'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 396.8,
@@ -3421,7 +3527,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 35'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 375.56,
@@ -3451,7 +3557,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 368.36,
@@ -3466,7 +3572,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 364.58,
@@ -3481,7 +3587,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 361.16,
@@ -3496,7 +3602,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 35'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 357.38,
@@ -3511,7 +3617,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 35'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 353.78,
@@ -3526,7 +3632,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 36'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 350.18,
@@ -3556,7 +3662,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 909.62,
@@ -3571,7 +3677,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 967.22,
@@ -3586,7 +3692,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1028.06,
@@ -3601,7 +3707,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1086.38,
@@ -3616,7 +3722,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1150.1,
@@ -3631,7 +3737,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1209.41,
@@ -3676,7 +3782,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1209.41,
@@ -3691,7 +3797,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -3706,7 +3812,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -3721,7 +3827,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -3736,7 +3842,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -3751,7 +3857,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -3766,7 +3872,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -3781,7 +3887,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -3796,7 +3902,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -3811,7 +3917,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -3826,7 +3932,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -3856,7 +3962,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "212.89",
         "size": "212.89",
-        "dims": "50' x 40'",
+        "dims": "50' x 38.32'",
         "status": "Available",
         "price": "",
         "cx": 1287.62,
@@ -3871,7 +3977,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "294.56",
         "size": "294.56",
-        "dims": "41' x 73'",
+        "dims": "41' x 64.66'",
         "status": "Available",
         "price": "",
         "cx": 1203.2,
@@ -3901,7 +4007,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -3916,7 +4022,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -3931,7 +4037,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -3946,7 +4052,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -3961,7 +4067,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -3976,7 +4082,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4006,7 +4112,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "294.56",
         "size": "294.56",
-        "dims": "41' x 50'",
+        "dims": "41' x 64.66'",
         "status": "Available",
         "price": "",
         "cx": 1167.2,
@@ -4021,7 +4127,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "212.89",
         "size": "212.89",
-        "dims": "40' x 41'",
+        "dims": "40' x 47.9'",
         "status": "Available",
         "price": "",
         "cx": 1294.82,
@@ -4081,7 +4187,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4096,7 +4202,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -4111,7 +4217,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -4126,7 +4232,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -4141,7 +4247,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -4156,7 +4262,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4171,7 +4277,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -4186,7 +4292,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -4201,7 +4307,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1212.65,
@@ -4246,7 +4352,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 40'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1212.65,
@@ -4261,7 +4367,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -4276,7 +4382,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 30'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -4291,7 +4397,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4306,7 +4412,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "138.89",
         "size": "138.89",
-        "dims": "25' x 20'",
+        "dims": "25' x 50'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -4321,7 +4427,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "20' x 25'",
+        "dims": "20' x 50'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -4336,7 +4442,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "100.00",
         "size": "100.00",
-        "dims": "20' x 25'",
+        "dims": "20' x 45'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -4351,7 +4457,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "125.00",
         "size": "125.00",
-        "dims": "25' x 20'",
+        "dims": "25' x 45'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -4366,7 +4472,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "125.00",
         "size": "125.00",
-        "dims": "25' x 20'",
+        "dims": "25' x 45'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4381,7 +4487,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "125.00",
         "size": "125.00",
-        "dims": "25' x 30'",
+        "dims": "25' x 45'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -4396,7 +4502,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "125.00",
         "size": "125.00",
-        "dims": "25' x 30'",
+        "dims": "25' x 45'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -4411,7 +4517,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "125.00",
         "size": "125.00",
-        "dims": "25' x 40'",
+        "dims": "25' x 45'",
         "status": "Available",
         "price": "",
         "cx": 1212.65,
@@ -4441,7 +4547,7 @@ const initialPlots = [
         "type": "60ft corner plot",
         "gaj": "177.78",
         "size": "177.78",
-        "dims": "40' x 25'",
+        "dims": "40' x 40'",
         "status": "Available",
         "price": "",
         "cx": 1287.62,
@@ -4471,7 +4577,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "25' x 30'",
+        "dims": "25' x 40'",
         "status": "Available",
         "price": "",
         "cx": 1153.34,
@@ -4486,7 +4592,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "25' x 30'",
+        "dims": "25' x 40'",
         "status": "Available",
         "price": "",
         "cx": 1089.62,
@@ -4501,7 +4607,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "25' x 20'",
+        "dims": "25' x 40'",
         "status": "Available",
         "price": "",
         "cx": 1031.3,
@@ -4516,7 +4622,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "111.11",
         "size": "111.11",
-        "dims": "25' x 20'",
+        "dims": "25' x 40'",
         "status": "Available",
         "price": "",
         "cx": 970.46,
@@ -4531,7 +4637,7 @@ const initialPlots = [
         "type": "Normal plot",
         "gaj": "88.89",
         "size": "88.89",
-        "dims": "20' x 25'",
+        "dims": "20' x 40'",
         "status": "Available",
         "price": "",
         "cx": 912.86,
@@ -4546,7 +4652,7 @@ const initialPlots = [
         "type": "OFC",
         "gaj": "177.78",
         "size": "177.78",
-        "dims": "30' x 36'",
+        "dims": "30' x 53.33'",
         "status": "OFC",
         "price": "",
         "cx": 1229.84,
@@ -4561,7 +4667,7 @@ const initialPlots = [
         "type": "OFC",
         "gaj": "97.22",
         "size": "97.22",
-        "dims": "34' x 25'",
+        "dims": "34' x 25.73'",
         "status": "OFC",
         "price": "",
         "cx": 1297.52,
@@ -4576,7 +4682,7 @@ const initialPlots = [
         "type": "OFC",
         "gaj": "99.00",
         "size": "99.00",
-        "dims": "34' x 33'",
+        "dims": "34' x 26.21'",
         "status": "OFC",
         "price": "",
         "cx": 1347.74,
@@ -4618,43 +4724,13 @@ const initialPlots = [
 
 let globalPlots = [];
 
-// Saves current data to the browser's local storage
-function saveData() {
-    localStorage.setItem('kumudViharPlots', JSON.stringify(globalPlots));
-}
 
-// Initializes data on load
-function initStorage() {
-    const storedPlots = localStorage.getItem('kumudViharPlots');
 
-    if (storedPlots) {
-        // Load from memory if it exists
-        globalPlots = JSON.parse(storedPlots);
-    } else {
-        // First-time setup: load initial data and correct the plot types
-        globalPlots = [...initialPlots];
+// 4. Connect to Cloud - This runs instantly and listens for changes 24/7
+const dbRef = doc(db, "projects", "kumud_vihar");
 
-        const masterPlotTypes = {
-            "80ft Main road plot": ["A-1", "A-2", "A-3", "A-4", "A-5", "A-6", "A-7", "A-8", "A-9", "A-10", "B-1", "B-2", "B-3", "B-4", "B-5", "B-6", "B-7"],
-            "60ft corner plot": ["A-33", "A-56", "A-57", "A-80", "B-27", "B-28", "B-47", "B-48", "B-62", "B-63", "B-75", "B-76", "B-81", "B-82", "D-7", "D-8", "D-21", "D-22", "D-31", "D-32", "D-45", "D-46", "D-59", "D-60"],
-            "30ft corner plot": ["A-38", "A-39", "A-50", "A-51", "A-62", "A-63", "A-74", "A-75", "A-24", "A-44", "A-45", "A-68", "A-69", "A-23", "C-6", "C-8", "C-71", "C-62", "C-19", "C-20", "C-31", "C-32", "C-61", "C-55", "C-42", "C-44", "C-52", "C-49", "C-50"],
-            "Commercial plot": ["COM-1", "COM-2"]
-        };
 
-        globalPlots.forEach(plot => {
-            if (plot.type === "OFC") return;
-            plot.type = "Normal plot";
-            for (const [type, plots] of Object.entries(masterPlotTypes)) {
-                if (plots.includes(plot.plotNo)) {
-                    plot.type = type;
-                }
-            }
-        });
-        saveData();
-    }
-}
-
-// Auto-correct plot types based on master details
+// --- FALLBACK INITIALIZATION ---
 const masterPlotTypes = {
     "80ft Main road plot": ["A-1", "A-2", "A-3", "A-4", "A-5", "A-6", "A-7", "A-8", "A-9", "A-10", "B-1", "B-2", "B-3", "B-4", "B-5", "B-6", "B-7"],
     "60ft corner plot": ["A-33", "A-56", "A-57", "A-80", "B-27", "B-28", "B-47", "B-48", "B-62", "B-63", "B-75", "B-76", "B-81", "B-82", "D-7", "D-8", "D-21", "D-22", "D-31", "D-32", "D-45", "D-46", "D-59", "D-60"],
@@ -4662,16 +4738,89 @@ const masterPlotTypes = {
     "Commercial plot": ["COM-1", "COM-2"]
 };
 
-globalPlots.forEach(plot => {
-    if (plot.type === "OFC") return; // Preserve OFC plots
-    plot.type = "Normal plot"; // Reset to default
+// Initialize with mock data immediately in case Firebase fails to load or has permission issues
+globalPlots = [...initialPlots];
 
+
+
+const b23 = globalPlots.find(p => p.plotNo === 'B-23');
+if (b23) { b23.dims = "25' x 50'"; b23.size = 138.89; }
+
+const b65 = globalPlots.find(p => p.plotNo === 'B-65');
+if (b65) { b65.dims = "25' x 50'"; b65.size = 138.89; }
+
+globalPlots.forEach(plot => {
+    if (plot.type === "OFC") return;
+    plot.type = "Normal plot";
     for (const [type, plots] of Object.entries(masterPlotTypes)) {
         if (plots.includes(plot.plotNo)) {
             plot.type = type;
         }
     }
+
+    // MATHEMATICAL AUTO-CORRECTOR FOR ALL DIMENSIONS
+    if (plot.dims && plot.size) {
+        let sizeYds = parseFloat(plot.size);
+        let dimsStr = plot.dims.replace(/'/g, '').replace(/"/g, '').replace(/ /g, '').toLowerCase();
+
+        let width = 0;
+        if (dimsStr.includes('x')) {
+            let parts = dimsStr.split('x');
+            width = parseFloat(parts[0]);
+            let depth = parseFloat(parts[1]);
+
+            // Allow a small rounding margin
+            let expectedSize = (width * depth) / 9.0;
+            if (Math.abs(expectedSize - sizeYds) <= 0.5) {
+                width = 0; // Skip
+            }
+        } else {
+            width = parseFloat(dimsStr);
+        }
+
+        if (width > 0 && sizeYds > 0) {
+            let depth = (sizeYds * 9.0) / width;
+            if (Math.abs(Math.round(depth) - depth) < 0.05) {
+                depth = Math.round(depth);
+            } else {
+                depth = Math.round(depth * 100) / 100;
+            }
+
+            let wStr = Number.isInteger(width) ? width.toString() : width.toFixed(2);
+            let dStr = Number.isInteger(depth) ? depth.toString() : depth.toFixed(2);
+
+            plot.dims = `${wStr}' x ${dStr}'`;
+        }
+    }
 });
+
+onSnapshot(dbRef, (docSnap) => {
+    if (docSnap.exists()) {
+        // If the database has data, download it and render the grid
+        globalPlots = docSnap.data().plots;
+        window.renderGrid(document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1');
+    } else {
+        // First Time Setup: Upload your initial raw data to the cloud
+        setDoc(dbRef, { plots: globalPlots });
+    }
+}, (error) => {
+    console.error("Firebase permissions error, falling back to local data:", error);
+    // Since we already populated globalPlots above, the grid will still work locally!
+});
+
+
+// 5. Cloud Save Function - This runs anytime a broker clicks Book/Register/Sell
+window.saveData = async function () {
+    try {
+        await setDoc(dbRef, { plots: globalPlots });
+        console.log("Saved to Cloud!");
+    } catch (e) {
+        console.error("Error saving to cloud: ", e);
+        alert("Error saving data. Please check your internet connection.");
+    }
+}
+
+
 
 
 
@@ -4688,7 +4837,7 @@ const formatCurrency = (amount) => {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    initStorage();
+
     // Render initial grid for Colony 1
     renderGrid('Colony_1');
     // Removed old getStatusClass since we use type classes now
@@ -4709,7 +4858,7 @@ function getTypeClass(type) {
     return 'card-normal';
 }
 
-function renderGrid(colonyId) {
+window.renderGrid = function (colonyId) {
     const grid = document.getElementById('plot-grid');
     const sectionFilter = document.getElementById('filter-section') ? document.getElementById('filter-section').value : 'all';
     const typeFilter = document.getElementById('filter-type') ? document.getElementById('filter-type').value : 'all';
@@ -4789,7 +4938,7 @@ function getModalStatusClass(status) {
     return 'modal-available';
 }
 
-function showView(view) {
+window.showView = function (view) {
     // Update active button state
     document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
     document.getElementById('btn-map').classList.toggle('active', view === 'map');
@@ -4817,7 +4966,7 @@ function handleMapClick(event, plotNumber) {
 
 
 // Called from <area onclick>
-function handlePlotClick(event, plotId) {
+window.handlePlotClick = function (event, plotId) {
     event.preventDefault();
     const plot = globalPlots.find(p => p.plotNo === plotId);
     if (!plot) return;
@@ -4826,7 +4975,7 @@ function handlePlotClick(event, plotId) {
     openModal(plot, rate, amount);
 }
 
-function openModal(plot, rate, amount) {
+window.openModal = function (plot, rate, amount) {
     const modal = document.getElementById('plot-modal');
     const modalDetails = document.getElementById('modal-details');
     const statusClass = getModalStatusClass(plot.status);
@@ -4835,25 +4984,28 @@ function openModal(plot, rate, amount) {
     let actionButtons = '';
     const currentStatus = plot.status.toLowerCase();
 
-    if (currentStatus === 'available') {
-        // Step 1: Only allow booking
-        actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="openBookingForm('${plot.plotNo}')">Book Now</button>`;
-
-    } else if (currentStatus === 'booked') {
-        // Step 2: Allow registry completion OR booking cancellation
-        actionButtons = `
-            <button class="btn-info" style="width: 100%; margin-top: 1rem;" onclick="completeRegistry('${plot.plotNo}')">Complete Registry</button>
-            <button class="btn-cancel" style="width: 100%; margin-top: 0.5rem;" onclick="cancelBooking('${plot.plotNo}')">Cancel Booking</button>
-        `;
-
-    } else if (currentStatus === 'registered') {
-        // Step 3: Only allow final sale
-        actionButtons = `<button class="btn-danger" style="width: 100%; margin-top: 1rem;" onclick="sellPlot('${plot.plotNo}')">Finalize as Sold</button>`;
+    if (currentUser) { // ONLY SHOW BUTTONS IF LOGGED IN
+        if (currentStatus === 'available') {
+            actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.openBookingForm('${plot.plotNo}')">Book Now</button>`;
+        } else if (currentStatus === 'booked') {
+            actionButtons = `
+                <button class="btn-info" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.completeRegistry('${plot.plotNo}')">Complete Registry</button>
+                <button class="btn-cancel" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.cancelBooking('${plot.plotNo}')">Cancel Booking</button>
+            `;
+        } else if (currentStatus === 'registered') {
+            actionButtons = `<button class="btn-danger" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.sellPlot('${plot.plotNo}')">Finalize as Sold</button>`;
+        } else if (currentStatus === 'sold' && currentUser && currentUser.email === 'admin@kumudvihar.com') {
+            // NEW: Admin override button for sold plots
+            actionButtons = `<button class="btn-cancel" style="width: 100%; margin-top: 1rem; border-color: red; color: red;" onclick="event.stopPropagation(); window.revertSoldPlot('${plot.plotNo}')">⚠️ Admin: Revert Sale</button>`;
+        }
+    } else {
+        // IF NOT LOGGED IN, SHOW A MESSAGE INSTEAD
+        actionButtons = `<div class="modal-status-badge" style="background-color: var(--border-color); color: var(--text-secondary); margin-top: 1rem;">BROKER LOGIN REQUIRED</div>`;
     }
 
     // --- 2. Extract Buyer Details if they exist ---
     let buyerHTML = '';
-    if (plot.buyer) {
+    if (plot.buyer && currentUser && currentUser.email === 'admin@kumudvihar.com') {
         buyerHTML = `
             <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
                 <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--brand-primary);">Buyer Details</h3>
@@ -4907,7 +5059,7 @@ function openModal(plot, rate, amount) {
     modal.classList.add('show');
 }
 
-function closeModal() {
+window.closeModal = function () {
     const modal = document.getElementById('plot-modal');
     modal.classList.remove('show');
 }
@@ -4929,7 +5081,7 @@ document.addEventListener('keydown', function (event) {
 
 
 // Opens the booking form for a specific plot
-function openBookingForm(plotNo) {
+window.openBookingForm = function (plotNo) {
     // Close the details modal
     closeModal();
 
@@ -4940,13 +5092,13 @@ function openBookingForm(plotNo) {
 }
 
 // Closes the booking form
-function closeBookingModal() {
+window.closeBookingModal = function () {
     document.getElementById('booking-modal').classList.remove('show');
     document.getElementById('plot-booking-form').reset();
 }
 
 // Handles form submission, updates data, and refreshes UI
-function submitBooking(event) {
+window.submitBooking = function (event) {
     event.preventDefault();
 
     const plotNo = document.getElementById('book-plot-id').value;
@@ -4978,7 +5130,7 @@ function submitBooking(event) {
 
 
 // Handles direct sales and converts bookings to sales
-function sellPlot(plotNo) {
+window.sellPlot = function (plotNo) {
     // 1. Ask for confirmation before marking as sold
     if (confirm(`Are you sure you want to mark Plot ${plotNo} as SOLD? This action cannot be easily undone.`)) {
 
@@ -4996,43 +5148,77 @@ function sellPlot(plotNo) {
 }
 
 
+
+
+
 // Cancels a booking and reverts the plot to Available
-// Cancels a booking, wipes buyer data, reverts to Available
-function cancelBooking(plotNo) {
+window.cancelBooking = function (plotNo) {
     if (confirm(`Are you sure you want to cancel the booking for Plot ${plotNo}?`)) {
         const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
         if (plotIndex !== -1) {
             globalPlots[plotIndex].status = "Available";
             delete globalPlots[plotIndex].buyer; // Erase buyer info
-            saveData(); // Save to local storage
+            if (window.saveData) window.saveData(); // Save to cloud
         }
-        closeModal();
-        renderGrid(document.getElementById('colony-selector').value);
+        if (window.closeModal) window.closeModal();
+        if (window.renderGrid) {
+            const selector = document.getElementById('colony-selector');
+            window.renderGrid(selector ? selector.value : 'Colony_1');
+        }
     }
 }
 
 // Mark as Registered
-function completeRegistry(plotNo) {
+window.completeRegistry = function (plotNo) {
     if (confirm(`Has the registry process been completed for Plot ${plotNo}?`)) {
         const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
         if (plotIndex !== -1) {
             globalPlots[plotIndex].status = "Registered";
-            saveData(); // Save to local storage
+            if (window.saveData) window.saveData(); // Save to cloud
         }
-        closeModal();
-        renderGrid(document.getElementById('colony-selector').value);
+        if (window.closeModal) window.closeModal();
+        if (window.renderGrid) {
+            const selector = document.getElementById('colony-selector');
+            window.renderGrid(selector ? selector.value : 'Colony_1');
+        }
     }
 }
 
 // Finalize as Sold
-function sellPlot(plotNo) {
+window.sellPlot = function (plotNo) {
     if (confirm(`Are you sure you want to finalize the sale of Plot ${plotNo}?`)) {
         const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
         if (plotIndex !== -1) {
             globalPlots[plotIndex].status = "Sold";
-            saveData(); // Save to local storage
+            if (window.saveData) window.saveData(); // Save to cloud
         }
-        closeModal();
-        renderGrid(document.getElementById('colony-selector').value);
+        if (window.closeModal) window.closeModal();
+        if (window.renderGrid) {
+            const selector = document.getElementById('colony-selector');
+            window.renderGrid(selector ? selector.value : 'Colony_1');
+        }
     }
 }
+
+
+// Developer Override to fix mistaken sales
+window.revertSoldPlot = function (plotNo) {
+    const pass = prompt("Admin Override: Enter developer passcode to cancel this sale.");
+    if (pass === "0000") {
+        if (confirm(`CRITICAL WARNING: Are you sure you want to completely erase the sale record for Plot ${plotNo} and make it Available?`)) {
+            const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+            if (plotIndex !== -1) {
+                globalPlots[plotIndex].status = "Available";
+                delete globalPlots[plotIndex].buyer;
+                if (window.saveData) window.saveData();
+            }
+            if (window.closeModal) window.closeModal();
+            if (window.renderGrid) {
+                const selector = document.getElementById('colony-selector');
+                window.renderGrid(selector ? selector.value : 'Colony_1');
+            }
+        }
+    } else if (pass !== null) {
+        alert("Incorrect passcode. Sale not reverted.");
+    }
+};

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
 </head>
+
 <body>
     <!-- Premium Header -->
     <header class="app-header">
@@ -20,11 +23,14 @@
                 <img id="colony-logo" src="logo.jpeg" alt="Kumud Vihar Logo" class="logo">
                 <h1 id="colony-name">Kumud Vihar</h1>
             </div>
-            
-            <div class="colony-selector-wrapper">
+
+            <div class="colony-selector-wrapper" style="display: flex; gap: 1rem; align-items: center;">
                 <select id="colony-selector" onchange="renderGrid(this.value)" class="premium-select">
                     <option value="Colony_1">Kumud Vihar</option>
                 </select>
+                <span id="user-display" style="display: none; font-weight: 500; font-size: 0.9rem;"></span>
+                <button id="auth-btn" class="btn-primary" style="padding: 0.5rem 1rem;"
+                    onclick="window.showLogin()">Broker Login</button>
             </div>
         </div>
     </header>
@@ -35,11 +41,22 @@
             <h2 class="section-title">Explore Properties</h2>
             <div class="view-toggles">
                 <button id="btn-grid" class="toggle-btn active" onclick="showView('grid')">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
                     Grid View
                 </button>
                 <button id="btn-map" class="toggle-btn" onclick="showView('map')">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                        <line x1="15" y1="3" x2="15" y2="21"></line>
+                    </svg>
                     Map View
                 </button>
             </div>
@@ -67,7 +84,7 @@
                         <option value="Commercial plot">Commercial</option>
                     </select>
                 </div>
-                
+
                 <!-- Legend -->
                 <div class="status-legend">
                     <span class="legend-item"><span class="color-dot type-normal"></span>Normal Plot</span>
@@ -77,7 +94,7 @@
                     <span class="legend-item"><span class="color-dot type-commercial"></span>Commercial</span>
                     <span class="legend-item"><span class="color-dot" style="background:#dc2626;"></span>OFC</span>
                 </div>
-                
+
                 <div id="plot-grid" class="grid-container">
                     <!-- Cards injected by JS -->
                 </div>
@@ -85,321 +102,890 @@
 
             <!-- Map View -->
             <div id="map-view" class="view-section animate-fade-in" style="display: none;">
-                <p class="map-instruction" style="text-align: center; margin-bottom: 20px;">Interactive Map: Click a highlighted plot to see details.</p>
-                <div class="map-container glass-panel" style="overflow: auto; max-height: 80vh; padding: 20px; text-align: center;">
+                <p class="map-instruction" style="text-align: center; margin-bottom: 20px;">Interactive Map: Click a
+                    highlighted plot to see details.</p>
+                <div class="map-container glass-panel"
+                    style="overflow: auto; max-height: 80vh; padding: 20px; text-align: center;">
 
-                <div style="position: relative; display: inline-block; width: fit-content; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; background: #fff;">
-                    <img src="Full_Map.jpg" usemap="#image-map-full" style="display: block; max-width: none;">
-                    <map name="image-map-full" id="image-map-coords-full">
-                    <area target="" alt="A-1" title="A-1" href="#" coords="1036,2876,1116,2876,1116,3041,1036,3041" shape="poly" onclick="handlePlotClick(event, 'A-1')">
-                    <area target="" alt="A-2" title="A-2" href="#" coords="961,2876,1041,2876,1041,3041,961,3041" shape="poly" onclick="handlePlotClick(event, 'A-2')">
-                    <area target="" alt="A-3" title="A-3" href="#" coords="897,2876,977,2876,977,3041,897,3041" shape="poly" onclick="handlePlotClick(event, 'A-3')">
-                    <area target="" alt="A-4" title="A-4" href="#" coords="822,2876,902,2876,902,3041,822,3041" shape="poly" onclick="handlePlotClick(event, 'A-4')">
-                    <area target="" alt="A-5" title="A-5" href="#" coords="754,2876,834,2876,834,3041,754,3041" shape="poly" onclick="handlePlotClick(event, 'A-5')">
-                    <area target="" alt="A-6" title="A-6" href="#" coords="679,2876,759,2876,759,3041,679,3041" shape="poly" onclick="handlePlotClick(event, 'A-6')">
-                    <area target="" alt="A-7" title="A-7" href="#" coords="604,2876,684,2876,684,3041,604,3041" shape="poly" onclick="handlePlotClick(event, 'A-7')">
-                    <area target="" alt="A-8" title="A-8" href="#" coords="529,2876,609,2876,609,3041,529,3041" shape="poly" onclick="handlePlotClick(event, 'A-8')">
-                    <area target="" alt="A-9" title="A-9" href="#" coords="437,2876,517,2876,517,3041,437,3041" shape="poly" onclick="handlePlotClick(event, 'A-9')">
-                    <area target="" alt="A-10" title="A-10" href="#" coords="227,2876,307,2876,307,3041,227,3041" shape="poly" onclick="handlePlotClick(event, 'A-10')">
-                    <area target="" alt="A-11" title="A-11" href="#" coords="247,2777,327,2777,327,2932,247,2932" shape="poly" onclick="handlePlotClick(event, 'A-11')">
-                    <area target="" alt="A-12" title="A-12" href="#" coords="251,2716,331,2716,331,2871,251,2871" shape="poly" onclick="handlePlotClick(event, 'A-12')">
-                    <area target="" alt="A-13" title="A-13" href="#" coords="254,2655,334,2655,334,2810,254,2810" shape="poly" onclick="handlePlotClick(event, 'A-13')">
-                    <area target="" alt="A-14" title="A-14" href="#" coords="258,2594,338,2594,338,2749,258,2749" shape="poly" onclick="handlePlotClick(event, 'A-14')">
-                    <area target="" alt="A-15" title="A-15" href="#" coords="262,2521,342,2521,342,2676,262,2676" shape="poly" onclick="handlePlotClick(event, 'A-15')">
-                    <area target="" alt="A-16" title="A-16" href="#" coords="266,2460,346,2460,346,2615,266,2615" shape="poly" onclick="handlePlotClick(event, 'A-16')">
-                    <area target="" alt="A-17" title="A-17" href="#" coords="270,2399,350,2399,350,2554,270,2554" shape="poly" onclick="handlePlotClick(event, 'A-17')">
-                    <area target="" alt="A-18" title="A-18" href="#" coords="273,2338,353,2338,353,2493,273,2493" shape="poly" onclick="handlePlotClick(event, 'A-18')">
-                    <area target="" alt="A-19" title="A-19" href="#" coords="277,2277,357,2277,357,2432,277,2432" shape="poly" onclick="handlePlotClick(event, 'A-19')">
-                    <area target="" alt="A-20" title="A-20" href="#" coords="281,2216,361,2216,361,2371,281,2371" shape="poly" onclick="handlePlotClick(event, 'A-20')">
-                    <area target="" alt="A-21" title="A-21" href="#" coords="284,2156,364,2156,364,2310,284,2310" shape="poly" onclick="handlePlotClick(event, 'A-21')">
-                    <area target="" alt="A-22" title="A-22" href="#" coords="288,2095,368,2095,368,2250,288,2250" shape="poly" onclick="handlePlotClick(event, 'A-22')">
-                    <area target="" alt="A-23" title="A-23" href="#" coords="291,2029,371,2029,371,2194,291,2194" shape="poly" onclick="handlePlotClick(event, 'A-23')">
-                    <area target="" alt="A-24" title="A-24" href="#" coords="441,2688,521,2688,521,2853,441,2853" shape="poly" onclick="handlePlotClick(event, 'A-24')">
-                    <area target="" alt="A-25" title="A-25" href="#" coords="533,2693,613,2693,613,2848,533,2848" shape="poly" onclick="handlePlotClick(event, 'A-25')">
-                    <area target="" alt="A-26" title="A-26" href="#" coords="608,2693,688,2693,688,2848,608,2848" shape="poly" onclick="handlePlotClick(event, 'A-26')">
-                    <area target="" alt="A-27" title="A-27" href="#" coords="682,2693,762,2693,762,2848,682,2848" shape="poly" onclick="handlePlotClick(event, 'A-27')">
-                    <area target="" alt="A-28" title="A-28" href="#" coords="757,2693,837,2693,837,2848,757,2848" shape="poly" onclick="handlePlotClick(event, 'A-28')">
-                    <area target="" alt="A-29" title="A-29" href="#" coords="825,2693,905,2693,905,2848,825,2848" shape="poly" onclick="handlePlotClick(event, 'A-29')">
-                    <area target="" alt="A-30" title="A-30" href="#" coords="900,2693,980,2693,980,2848,900,2848" shape="poly" onclick="handlePlotClick(event, 'A-30')">
-                    <area target="" alt="A-31" title="A-31" href="#" coords="964,2693,1044,2693,1044,2848,964,2848" shape="poly" onclick="handlePlotClick(event, 'A-31')">
-                    <area target="" alt="A-32" title="A-32" href="#" coords="1039,2693,1119,2693,1119,2848,1039,2848" shape="poly" onclick="handlePlotClick(event, 'A-32')">
-                    <area target="" alt="A-33" title="A-33" href="#" coords="1248,2516,1328,2516,1328,2681,1248,2681" shape="poly" onclick="handlePlotClick(event, 'A-33')">
-                    <area target="" alt="A-34" title="A-34" href="#" coords="1174,2521,1254,2521,1254,2676,1174,2676" shape="poly" onclick="handlePlotClick(event, 'A-34')">
-                    <area target="" alt="A-35" title="A-35" href="#" coords="1114,2521,1194,2521,1194,2676,1114,2676" shape="poly" onclick="handlePlotClick(event, 'A-35')">
-                    <area target="" alt="A-36" title="A-36" href="#" coords="1052,2521,1132,2521,1132,2676,1052,2676" shape="poly" onclick="handlePlotClick(event, 'A-36')">
-                    <area target="" alt="A-37" title="A-37" href="#" coords="990,2521,1070,2521,1070,2676,990,2676" shape="poly" onclick="handlePlotClick(event, 'A-37')">
-                    <area target="" alt="A-38" title="A-38" href="#" coords="930,2516,1010,2516,1010,2681,930,2681" shape="poly" onclick="handlePlotClick(event, 'A-38')">
-                    <area target="" alt="A-39" title="A-39" href="#" coords="771,2516,851,2516,851,2681,771,2681" shape="poly" onclick="handlePlotClick(event, 'A-39')">
-                    <area target="" alt="A-40" title="A-40" href="#" coords="710,2521,790,2521,790,2676,710,2676" shape="poly" onclick="handlePlotClick(event, 'A-40')">
-                    <area target="" alt="A-41" title="A-41" href="#" coords="650,2521,730,2521,730,2676,650,2676" shape="poly" onclick="handlePlotClick(event, 'A-41')">
-                    <area target="" alt="A-42" title="A-42" href="#" coords="588,2521,668,2521,668,2676,588,2676" shape="poly" onclick="handlePlotClick(event, 'A-42')">
-                    <area target="" alt="A-43" title="A-43" href="#" coords="527,2521,607,2521,607,2676,527,2676" shape="poly" onclick="handlePlotClick(event, 'A-43')">
-                    <area target="" alt="A-44" title="A-44" href="#" coords="440,2516,520,2516,520,2681,440,2681" shape="poly" onclick="handlePlotClick(event, 'A-44')">
-                    <area target="" alt="A-45" title="A-45" href="#" coords="450,2370,530,2370,530,2535,450,2535" shape="poly" onclick="handlePlotClick(event, 'A-45')">
-                    <area target="" alt="A-46" title="A-46" href="#" coords="527,2375,607,2375,607,2530,527,2530" shape="poly" onclick="handlePlotClick(event, 'A-46')">
-                    <area target="" alt="A-47" title="A-47" href="#" coords="588,2375,668,2375,668,2530,588,2530" shape="poly" onclick="handlePlotClick(event, 'A-47')">
-                    <area target="" alt="A-48" title="A-48" href="#" coords="650,2375,730,2375,730,2530,650,2530" shape="poly" onclick="handlePlotClick(event, 'A-48')">
-                    <area target="" alt="A-49" title="A-49" href="#" coords="710,2375,790,2375,790,2530,710,2530" shape="poly" onclick="handlePlotClick(event, 'A-49')">
-                    <area target="" alt="A-50" title="A-50" href="#" coords="771,2370,851,2370,851,2535,771,2535" shape="poly" onclick="handlePlotClick(event, 'A-50')">
-                    <area target="" alt="A-51" title="A-51" href="#" coords="930,2370,1010,2370,1010,2535,930,2535" shape="poly" onclick="handlePlotClick(event, 'A-51')">
-                    <area target="" alt="A-52" title="A-52" href="#" coords="990,2375,1070,2375,1070,2530,990,2530" shape="poly" onclick="handlePlotClick(event, 'A-52')">
-                    <area target="" alt="A-53" title="A-53" href="#" coords="1052,2375,1132,2375,1132,2530,1052,2530" shape="poly" onclick="handlePlotClick(event, 'A-53')">
-                    <area target="" alt="A-54" title="A-54" href="#" coords="1114,2375,1194,2375,1194,2530,1114,2530" shape="poly" onclick="handlePlotClick(event, 'A-54')">
-                    <area target="" alt="A-55" title="A-55" href="#" coords="1174,2375,1254,2375,1254,2530,1174,2530" shape="poly" onclick="handlePlotClick(event, 'A-55')">
-                    <area target="" alt="A-56" title="A-56" href="#" coords="1248,2370,1328,2370,1328,2535,1248,2535" shape="poly" onclick="handlePlotClick(event, 'A-56')">
-                    <area target="" alt="A-57" title="A-57" href="#" coords="1246,2198,1326,2198,1326,2363,1246,2363" shape="poly" onclick="handlePlotClick(event, 'A-57')">
-                    <area target="" alt="A-58" title="A-58" href="#" coords="1174,2203,1254,2203,1254,2358,1174,2358" shape="poly" onclick="handlePlotClick(event, 'A-58')">
-                    <area target="" alt="A-59" title="A-59" href="#" coords="1114,2203,1194,2203,1194,2358,1114,2358" shape="poly" onclick="handlePlotClick(event, 'A-59')">
-                    <area target="" alt="A-60" title="A-60" href="#" coords="1052,2203,1132,2203,1132,2358,1052,2358" shape="poly" onclick="handlePlotClick(event, 'A-60')">
-                    <area target="" alt="A-61" title="A-61" href="#" coords="990,2203,1070,2203,1070,2358,990,2358" shape="poly" onclick="handlePlotClick(event, 'A-61')">
-                    <area target="" alt="A-62" title="A-62" href="#" coords="932,2198,1012,2198,1012,2363,932,2363" shape="poly" onclick="handlePlotClick(event, 'A-62')">
-                    <area target="" alt="A-63" title="A-63" href="#" coords="769,2198,849,2198,849,2363,769,2363" shape="poly" onclick="handlePlotClick(event, 'A-63')">
-                    <area target="" alt="A-64" title="A-64" href="#" coords="710,2203,790,2203,790,2358,710,2358" shape="poly" onclick="handlePlotClick(event, 'A-64')">
-                    <area target="" alt="A-65" title="A-65" href="#" coords="650,2198,730,2198,730,2363,650,2363" shape="poly" onclick="handlePlotClick(event, 'A-65')">
-                    <area target="" alt="A-66" title="A-66" href="#" coords="588,2203,668,2203,668,2358,588,2358" shape="poly" onclick="handlePlotClick(event, 'A-66')">
-                    <area target="" alt="A-67" title="A-67" href="#" coords="527,2203,607,2203,607,2358,527,2358" shape="poly" onclick="handlePlotClick(event, 'A-67')">
-                    <area target="" alt="A-68" title="A-68" href="#" coords="455,2198,535,2198,535,2363,455,2363" shape="poly" onclick="handlePlotClick(event, 'A-68')">
-                    <area target="" alt="A-69" title="A-69" href="#" coords="463,2053,543,2053,543,2218,463,2218" shape="poly" onclick="handlePlotClick(event, 'A-69')">
-                    <area target="" alt="A-70" title="A-70" href="#" coords="527,2058,607,2058,607,2213,527,2213" shape="poly" onclick="handlePlotClick(event, 'A-70')">
-                    <area target="" alt="A-71" title="A-71" href="#" coords="588,2058,668,2058,668,2213,588,2213" shape="poly" onclick="handlePlotClick(event, 'A-71')">
-                    <area target="" alt="A-72" title="A-72" href="#" coords="650,2058,730,2058,730,2213,650,2213" shape="poly" onclick="handlePlotClick(event, 'A-72')">
-                    <area target="" alt="A-73" title="A-73" href="#" coords="710,2058,790,2058,790,2213,710,2213" shape="poly" onclick="handlePlotClick(event, 'A-73')">
-                    <area target="" alt="A-74" title="A-74" href="#" coords="769,2053,849,2053,849,2218,769,2218" shape="poly" onclick="handlePlotClick(event, 'A-74')">
-                    <area target="" alt="A-75" title="A-75" href="#" coords="931,2053,1011,2053,1011,2218,931,2218" shape="poly" onclick="handlePlotClick(event, 'A-75')">
-                    <area target="" alt="A-76" title="A-76" href="#" coords="990,2058,1070,2058,1070,2213,990,2213" shape="poly" onclick="handlePlotClick(event, 'A-76')">
-                    <area target="" alt="A-77" title="A-77" href="#" coords="1052,2058,1132,2058,1132,2213,1052,2213" shape="poly" onclick="handlePlotClick(event, 'A-77')">
-                    <area target="" alt="A-78" title="A-78" href="#" coords="1114,2058,1194,2058,1194,2213,1114,2213" shape="poly" onclick="handlePlotClick(event, 'A-78')">
-                    <area target="" alt="A-79" title="A-79" href="#" coords="1174,2058,1254,2058,1254,2213,1174,2213" shape="poly" onclick="handlePlotClick(event, 'A-79')">
-                    <area target="" alt="A-80" title="A-80" href="#" coords="1246,2053,1326,2053,1326,2218,1246,2218" shape="poly" onclick="handlePlotClick(event, 'A-80')">
-                    <area target="" alt="B-1" title="B-1" href="#" coords="2187,2877,2267,2877,2267,3042,2187,3042" shape="poly" onclick="handlePlotClick(event, 'B-1')">
-                    <area target="" alt="B-2" title="B-2" href="#" coords="2086,2876,2166,2876,2166,3041,2086,3041" shape="poly" onclick="handlePlotClick(event, 'B-2')">
-                    <area target="" alt="B-3" title="B-3" href="#" coords="2011,2876,2091,2876,2091,3041,2011,3041" shape="poly" onclick="handlePlotClick(event, 'B-3')">
-                    <area target="" alt="B-4" title="B-4" href="#" coords="1947,2876,2027,2876,2027,3041,1947,3041" shape="poly" onclick="handlePlotClick(event, 'B-4')">
-                    <area target="" alt="B-5" title="B-5" href="#" coords="1872,2876,1952,2876,1952,3041,1872,3041" shape="poly" onclick="handlePlotClick(event, 'B-5')">
-                    <area target="" alt="B-6" title="B-6" href="#" coords="1803,2876,1883,2876,1883,3041,1803,3041" shape="poly" onclick="handlePlotClick(event, 'B-6')">
-                    <area target="" alt="B-7" title="B-7" href="#" coords="1720,2876,1800,2876,1800,3041,1720,3041" shape="poly" onclick="handlePlotClick(event, 'B-7')">
-                    <area target="" alt="B-8" title="B-8" href="#" coords="1720,2693,1800,2693,1800,2848,1720,2848" shape="poly" onclick="handlePlotClick(event, 'B-8')">
-                    <area target="" alt="B-9" title="B-9" href="#" coords="1803,2693,1883,2693,1883,2848,1803,2848" shape="poly" onclick="handlePlotClick(event, 'B-9')">
-                    <area target="" alt="B-10" title="B-10" href="#" coords="1875,2693,1955,2693,1955,2848,1875,2848" shape="poly" onclick="handlePlotClick(event, 'B-10')">
-                    <area target="" alt="B-11" title="B-11" href="#" coords="1950,2693,2030,2693,2030,2848,1950,2848" shape="poly" onclick="handlePlotClick(event, 'B-11')">
-                    <area target="" alt="B-12" title="B-12" href="#" coords="2023,2693,2103,2693,2103,2848,2023,2848" shape="poly" onclick="handlePlotClick(event, 'B-12')">
-                    <area target="" alt="B-13" title="B-13" href="#" coords="2099,2693,2179,2693,2179,2848,2099,2848" shape="poly" onclick="handlePlotClick(event, 'B-13')">
-                    <area target="" alt="B-14" title="B-14" href="#" coords="2169,2693,2249,2693,2249,2848,2169,2848" shape="poly" onclick="handlePlotClick(event, 'B-14')">
-                    <area target="" alt="B-15" title="B-15" href="#" coords="2253,2693,2333,2693,2333,2848,2253,2848" shape="poly" onclick="handlePlotClick(event, 'B-15')">
-                    <area target="" alt="B-16" title="B-16" href="#" coords="2173,2521,2253,2521,2253,2676,2173,2676" shape="poly" onclick="handlePlotClick(event, 'B-16')">
-                    <area target="" alt="B-17" title="B-17" href="#" coords="2126,2521,2206,2521,2206,2676,2126,2676" shape="poly" onclick="handlePlotClick(event, 'B-17')">
-                    <area target="" alt="B-18" title="B-18" href="#" coords="2065,2521,2145,2521,2145,2676,2065,2676" shape="poly" onclick="handlePlotClick(event, 'B-18')">
-                    <area target="" alt="B-19" title="B-19" href="#" coords="2004,2521,2084,2521,2084,2676,2004,2676" shape="poly" onclick="handlePlotClick(event, 'B-19')">
-                    <area target="" alt="B-20" title="B-20" href="#" coords="1943,2521,2023,2521,2023,2676,1943,2676" shape="poly" onclick="handlePlotClick(event, 'B-20')">
-                    <area target="" alt="B-21" title="B-21" href="#" coords="1882,2521,1962,2521,1962,2676,1882,2676" shape="poly" onclick="handlePlotClick(event, 'B-21')">
-                    <area target="" alt="B-22" title="B-22" href="#" coords="1821,2521,1901,2521,1901,2676,1821,2676" shape="poly" onclick="handlePlotClick(event, 'B-22')">
-                    <area target="" alt="B-23" title="B-23" href="#" coords="1764,2521,1844,2521,1844,2676,1764,2676" shape="poly" onclick="handlePlotClick(event, 'B-23')">
-                    <area target="" alt="B-24" title="B-24" href="#" coords="1697,2521,1777,2521,1777,2676,1697,2676" shape="poly" onclick="handlePlotClick(event, 'B-24')">
-                    <area target="" alt="B-25" title="B-25" href="#" coords="1635,2521,1715,2521,1715,2676,1635,2676" shape="poly" onclick="handlePlotClick(event, 'B-25')">
-                    <area target="" alt="B-26" title="B-26" href="#" coords="1574,2521,1654,2521,1654,2676,1574,2676" shape="poly" onclick="handlePlotClick(event, 'B-26')">
-                    <area target="" alt="B-27" title="B-27" href="#" coords="1496,2521,1576,2521,1576,2676,1496,2676" shape="poly" onclick="handlePlotClick(event, 'B-27')">
-                    <area target="" alt="B-28" title="B-28" href="#" coords="1496,2372,1576,2372,1576,2527,1496,2527" shape="poly" onclick="handlePlotClick(event, 'B-28')">
-                    <area target="" alt="B-29" title="B-29" href="#" coords="1574,2367,1654,2367,1654,2532,1574,2532" shape="poly" onclick="handlePlotClick(event, 'B-29')">
-                    <area target="" alt="B-30" title="B-30" href="#" coords="1635,2367,1715,2367,1715,2532,1635,2532" shape="poly" onclick="handlePlotClick(event, 'B-30')">
-                    <area target="" alt="B-31" title="B-31" href="#" coords="1697,2372,1777,2372,1777,2527,1697,2527" shape="poly" onclick="handlePlotClick(event, 'B-31')">
-                    <area target="" alt="B-32" title="B-32" href="#" coords="1764,2372,1844,2372,1844,2527,1764,2527" shape="poly" onclick="handlePlotClick(event, 'B-32')">
-                    <area target="" alt="B-33" title="B-33" href="#" coords="1821,2372,1901,2372,1901,2527,1821,2527" shape="poly" onclick="handlePlotClick(event, 'B-33')">
-                    <area target="" alt="B-34" title="B-34" href="#" coords="1882,2372,1962,2372,1962,2527,1882,2527" shape="poly" onclick="handlePlotClick(event, 'B-34')">
-                    <area target="" alt="B-35" title="B-35" href="#" coords="1943,2372,2023,2372,2023,2527,1943,2527" shape="poly" onclick="handlePlotClick(event, 'B-35')">
-                    <area target="" alt="B-36" title="B-36" href="#" coords="1997,2372,2077,2372,2077,2527,1997,2527" shape="poly" onclick="handlePlotClick(event, 'B-36')">
-                    <area target="" alt="B-37" title="B-37" href="#" coords="2045,2372,2125,2372,2125,2527,2045,2527" shape="poly" onclick="handlePlotClick(event, 'B-37')">
-                    <area target="" alt="B-38" title="B-38" href="#" coords="2110,2372,2190,2372,2190,2527,2110,2527" shape="poly" onclick="handlePlotClick(event, 'B-38')">
-                    <area target="" alt="B-39" title="B-39" href="#" coords="2018,2204,2098,2204,2098,2359,2018,2359" shape="poly" onclick="handlePlotClick(event, 'B-39')">
-                    <area target="" alt="B-40" title="B-40" href="#" coords="1941,2204,2021,2204,2021,2359,1941,2359" shape="poly" onclick="handlePlotClick(event, 'B-40')">
-                    <area target="" alt="B-41" title="B-41" href="#" coords="1882,2204,1962,2204,1962,2359,1882,2359" shape="poly" onclick="handlePlotClick(event, 'B-41')">
-                    <area target="" alt="B-42" title="B-42" href="#" coords="1821,2204,1901,2204,1901,2359,1821,2359" shape="poly" onclick="handlePlotClick(event, 'B-42')">
-                    <area target="" alt="B-43" title="B-43" href="#" coords="1764,2204,1844,2204,1844,2359,1764,2359" shape="poly" onclick="handlePlotClick(event, 'B-43')">
-                    <area target="" alt="B-44" title="B-44" href="#" coords="1697,2204,1777,2204,1777,2359,1697,2359" shape="poly" onclick="handlePlotClick(event, 'B-44')">
-                    <area target="" alt="B-45" title="B-45" href="#" coords="1635,2204,1715,2204,1715,2359,1635,2359" shape="poly" onclick="handlePlotClick(event, 'B-45')">
-                    <area target="" alt="B-46" title="B-46" href="#" coords="1574,2204,1654,2204,1654,2359,1574,2359" shape="poly" onclick="handlePlotClick(event, 'B-46')">
-                    <area target="" alt="B-47" title="B-47" href="#" coords="1496,2204,1576,2204,1576,2359,1496,2359" shape="poly" onclick="handlePlotClick(event, 'B-47')">
-                    <area target="" alt="B-48" title="B-48" href="#" coords="1496,2053,1576,2053,1576,2208,1496,2208" shape="poly" onclick="handlePlotClick(event, 'B-48')">
-                    <area target="" alt="B-49" title="B-49" href="#" coords="1574,2048,1654,2048,1654,2213,1574,2213" shape="poly" onclick="handlePlotClick(event, 'B-49')">
-                    <area target="" alt="B-50" title="B-50" href="#" coords="1635,2048,1715,2048,1715,2213,1635,2213" shape="poly" onclick="handlePlotClick(event, 'B-50')">
-                    <area target="" alt="B-51" title="B-51" href="#" coords="1697,2053,1777,2053,1777,2208,1697,2208" shape="poly" onclick="handlePlotClick(event, 'B-51')">
-                    <area target="" alt="B-52" title="B-52" href="#" coords="1764,2053,1844,2053,1844,2208,1764,2208" shape="poly" onclick="handlePlotClick(event, 'B-52')">
-                    <area target="" alt="B-53" title="B-53" href="#" coords="1821,2053,1901,2053,1901,2208,1821,2208" shape="poly" onclick="handlePlotClick(event, 'B-53')">
-                    <area target="" alt="B-54" title="B-54" href="#" coords="1883,2053,1963,2053,1963,2208,1883,2208" shape="poly" onclick="handlePlotClick(event, 'B-54')">
-                    <area target="" alt="B-55" title="B-55" href="#" coords="1962,2053,2042,2053,2042,2208,1962,2208" shape="poly" onclick="handlePlotClick(event, 'B-55')">
-                    <area target="" alt="B-56" title="B-56" href="#" coords="1899,1888,1979,1888,1979,2043,1899,2043" shape="poly" onclick="handlePlotClick(event, 'B-56')">
-                    <area target="" alt="B-57" title="B-57" href="#" coords="1821,1888,1901,1888,1901,2043,1821,2043" shape="poly" onclick="handlePlotClick(event, 'B-57')">
-                    <area target="" alt="B-58" title="B-58" href="#" coords="1764,1888,1844,1888,1844,2043,1764,2043" shape="poly" onclick="handlePlotClick(event, 'B-58')">
-                    <area target="" alt="B-59" title="B-59" href="#" coords="1697,1888,1777,1888,1777,2043,1697,2043" shape="poly" onclick="handlePlotClick(event, 'B-59')">
-                    <area target="" alt="B-60" title="B-60" href="#" coords="1635,1888,1715,1888,1715,2043,1635,2043" shape="poly" onclick="handlePlotClick(event, 'B-60')">
-                    <area target="" alt="B-61" title="B-61" href="#" coords="1574,1888,1654,1888,1654,2043,1574,2043" shape="poly" onclick="handlePlotClick(event, 'B-61')">
-                    <area target="" alt="B-62" title="B-62" href="#" coords="1496,1888,1576,1888,1576,2043,1496,2043" shape="poly" onclick="handlePlotClick(event, 'B-62')">
-                    <area target="" alt="B-63" title="B-63" href="#" coords="1496,1729,1576,1729,1576,1894,1496,1894" shape="poly" onclick="handlePlotClick(event, 'B-63')">
-                    <area target="" alt="B-64" title="B-64" href="#" coords="1574,1729,1654,1729,1654,1894,1574,1894" shape="poly" onclick="handlePlotClick(event, 'B-64')">
-                    <area target="" alt="B-65" title="B-65" href="#" coords="1635,1734,1715,1734,1715,1889,1635,1889" shape="poly" onclick="handlePlotClick(event, 'B-65')">
-                    <area target="" alt="B-66" title="B-66" href="#" coords="1697,1734,1777,1734,1777,1889,1697,1889" shape="poly" onclick="handlePlotClick(event, 'B-66')">
-                    <area target="" alt="B-67" title="B-67" href="#" coords="1764,1734,1844,1734,1844,1889,1764,1889" shape="poly" onclick="handlePlotClick(event, 'B-67')">
-                    <area target="" alt="B-68" title="B-68" href="#" coords="1821,1734,1901,1734,1901,1889,1821,1889" shape="poly" onclick="handlePlotClick(event, 'B-68')">
-                    <area target="" alt="B-69" title="B-69" href="#" coords="1867,1734,1947,1734,1947,1889,1867,1889" shape="poly" onclick="handlePlotClick(event, 'B-69')">
-                    <area target="" alt="B-70" title="B-70" href="#" coords="1821,1569,1901,1569,1901,1724,1821,1724" shape="poly" onclick="handlePlotClick(event, 'B-70')">
-                    <area target="" alt="B-71" title="B-71" href="#" coords="1764,1569,1844,1569,1844,1724,1764,1724" shape="poly" onclick="handlePlotClick(event, 'B-71')">
-                    <area target="" alt="B-72" title="B-72" href="#" coords="1697,1569,1777,1569,1777,1724,1697,1724" shape="poly" onclick="handlePlotClick(event, 'B-72')">
-                    <area target="" alt="B-73" title="B-73" href="#" coords="1635,1569,1715,1569,1715,1724,1635,1724" shape="poly" onclick="handlePlotClick(event, 'B-73')">
-                    <area target="" alt="B-74" title="B-74" href="#" coords="1574,1569,1654,1569,1654,1724,1574,1724" shape="poly" onclick="handlePlotClick(event, 'B-74')">
-                    <area target="" alt="B-75" title="B-75" href="#" coords="1496,1569,1576,1569,1576,1724,1496,1724" shape="poly" onclick="handlePlotClick(event, 'B-75')">
-                    <area target="" alt="B-76" title="B-76" href="#" coords="1599,1410,1679,1410,1679,1575,1599,1575" shape="poly" onclick="handlePlotClick(event, 'B-76')">
-                    <area target="" alt="B-77" title="B-77" href="#" coords="1697,1410,1777,1410,1777,1575,1697,1575" shape="poly" onclick="handlePlotClick(event, 'B-77')">
-                    <area target="" alt="B-78" title="B-78" href="#" coords="1784,1415,1864,1415,1864,1570,1784,1570" shape="poly" onclick="handlePlotClick(event, 'B-78')">
-                    <area target="" alt="B-79" title="B-79" href="#" coords="1761,1253,1841,1253,1841,1408,1761,1408" shape="poly" onclick="handlePlotClick(event, 'B-79')">
-                    <area target="" alt="B-80" title="B-80" href="#" coords="1697,1253,1777,1253,1777,1408,1697,1408" shape="poly" onclick="handlePlotClick(event, 'B-80')">
-                    <area target="" alt="B-81" title="B-81" href="#" coords="1599,1253,1679,1253,1679,1408,1599,1408" shape="poly" onclick="handlePlotClick(event, 'B-81')">
-                    <area target="" alt="B-82" title="B-82" href="#" coords="1494,1098,1574,1098,1574,1263,1494,1263" shape="poly" onclick="handlePlotClick(event, 'B-82')">
-                    <area target="" alt="B-83" title="B-83" href="#" coords="1584,1098,1664,1098,1664,1263,1584,1263" shape="poly" onclick="handlePlotClick(event, 'B-83')">
-                    <area target="" alt="B-84" title="B-84" href="#" coords="1648,1103,1728,1103,1728,1258,1648,1258" shape="poly" onclick="handlePlotClick(event, 'B-84')">
-                    <area target="" alt="B-85" title="B-85" href="#" coords="1714,1103,1794,1103,1794,1258,1714,1258" shape="poly" onclick="handlePlotClick(event, 'B-85')">
-                    <area target="" alt="C-1" title="C-1" href="#" coords="817,1886,897,1886,897,2041,817,2041" shape="poly" onclick="handlePlotClick(event, 'C-1')">
-                    <area target="" alt="C-2" title="C-2" href="#" coords="753,1886,833,1886,833,2041,753,2041" shape="poly" onclick="handlePlotClick(event, 'C-2')">
-                    <area target="" alt="C-3" title="C-3" href="#" coords="696,1886,776,1886,776,2041,696,2041" shape="poly" onclick="handlePlotClick(event, 'C-3')">
-                    <area target="" alt="C-4" title="C-4" href="#" coords="636,1886,716,1886,716,2041,636,2041" shape="poly" onclick="handlePlotClick(event, 'C-4')">
-                    <area target="" alt="C-5" title="C-5" href="#" coords="570,1886,650,1886,650,2041,570,2041" shape="poly" onclick="handlePlotClick(event, 'C-5')">
-                    <area target="" alt="C-6" title="C-6" href="#" coords="468,1881,548,1881,548,2046,468,2046" shape="poly" onclick="handlePlotClick(event, 'C-6')">
-                    <area target="" alt="C-7" title="C-7" href="#" coords="468,1805,548,1805,548,1960,468,1960" shape="poly" onclick="handlePlotClick(event, 'C-7')">
-                    <area target="" alt="C-8" title="C-8" href="#" coords="468,1728,548,1728,548,1892,468,1892" shape="poly" onclick="handlePlotClick(event, 'C-8')">
-                    <area target="" alt="C-9" title="C-9" href="#" coords="570,1734,650,1734,650,1889,570,1889" shape="poly" onclick="handlePlotClick(event, 'C-9')">
-                    <area target="" alt="C-10" title="C-10" href="#" coords="639,1734,719,1734,719,1889,639,1889" shape="poly" onclick="handlePlotClick(event, 'C-10')">
-                    <area target="" alt="C-11" title="C-11" href="#" coords="699,1734,779,1734,779,1889,699,1889" shape="poly" onclick="handlePlotClick(event, 'C-11')">
-                    <area target="" alt="C-12" title="C-12" href="#" coords="756,1734,836,1734,836,1889,756,1889" shape="poly" onclick="handlePlotClick(event, 'C-12')">
-                    <area target="" alt="C-13" title="C-13" href="#" coords="820,1734,900,1734,900,1889,820,1889" shape="poly" onclick="handlePlotClick(event, 'C-13')">
-                    <area target="" alt="C-14" title="C-14" href="#" coords="820,1568,900,1568,900,1723,820,1723" shape="poly" onclick="handlePlotClick(event, 'C-14')">
-                    <area target="" alt="C-15" title="C-15" href="#" coords="756,1568,836,1568,836,1723,756,1723" shape="poly" onclick="handlePlotClick(event, 'C-15')">
-                    <area target="" alt="C-16" title="C-16" href="#" coords="699,1568,779,1568,779,1723,699,1723" shape="poly" onclick="handlePlotClick(event, 'C-16')">
-                    <area target="" alt="C-17" title="C-17" href="#" coords="639,1568,719,1568,719,1723,639,1723" shape="poly" onclick="handlePlotClick(event, 'C-17')">
-                    <area target="" alt="C-18" title="C-18" href="#" coords="573,1568,653,1568,653,1723,573,1723" shape="poly" onclick="handlePlotClick(event, 'C-18')">
-                    <area target="" alt="C-19" title="C-19" href="#" coords="505,1563,585,1563,585,1728,505,1728" shape="poly" onclick="handlePlotClick(event, 'C-19')">
-                    <area target="" alt="C-20" title="C-20" href="#" coords="508,1411,588,1411,588,1576,508,1576" shape="poly" onclick="handlePlotClick(event, 'C-20')">
-                    <area target="" alt="C-21" title="C-21" href="#" coords="573,1416,653,1416,653,1571,573,1571" shape="poly" onclick="handlePlotClick(event, 'C-21')">
-                    <area target="" alt="C-22" title="C-22" href="#" coords="639,1416,719,1416,719,1571,639,1571" shape="poly" onclick="handlePlotClick(event, 'C-22')">
-                    <area target="" alt="C-23" title="C-23" href="#" coords="699,1416,779,1416,779,1571,699,1571" shape="poly" onclick="handlePlotClick(event, 'C-23')">
-                    <area target="" alt="C-24" title="C-24" href="#" coords="756,1416,836,1416,836,1571,756,1571" shape="poly" onclick="handlePlotClick(event, 'C-24')">
-                    <area target="" alt="C-25" title="C-25" href="#" coords="820,1416,900,1416,900,1571,820,1571" shape="poly" onclick="handlePlotClick(event, 'C-25')">
-                    <area target="" alt="C-26" title="C-26" href="#" coords="820,1248,900,1248,900,1403,820,1403" shape="poly" onclick="handlePlotClick(event, 'C-26')">
-                    <area target="" alt="C-27" title="C-27" href="#" coords="756,1248,836,1248,836,1403,756,1403" shape="poly" onclick="handlePlotClick(event, 'C-27')">
-                    <area target="" alt="C-28" title="C-28" href="#" coords="699,1248,779,1248,779,1403,699,1403" shape="poly" onclick="handlePlotClick(event, 'C-28')">
-                    <area target="" alt="C-29" title="C-29" href="#" coords="639,1248,719,1248,719,1403,639,1403" shape="poly" onclick="handlePlotClick(event, 'C-29')">
-                    <area target="" alt="C-30" title="C-30" href="#" coords="573,1248,653,1248,653,1403,573,1403" shape="poly" onclick="handlePlotClick(event, 'C-30')">
-                    <area target="" alt="C-31" title="C-31" href="#" coords="518,1243,598,1243,598,1408,518,1408" shape="poly" onclick="handlePlotClick(event, 'C-31')">
-                    <area target="" alt="C-32" title="C-32" href="#" coords="517,1096,597,1096,597,1261,517,1261" shape="poly" onclick="handlePlotClick(event, 'C-32')">
-                    <area target="" alt="C-33" title="C-33" href="#" coords="573,1101,653,1101,653,1256,573,1256" shape="poly" onclick="handlePlotClick(event, 'C-33')">
-                    <area target="" alt="C-34" title="C-34" href="#" coords="639,1101,719,1101,719,1256,639,1256" shape="poly" onclick="handlePlotClick(event, 'C-34')">
-                    <area target="" alt="C-35" title="C-35" href="#" coords="699,1101,779,1101,779,1256,699,1256" shape="poly" onclick="handlePlotClick(event, 'C-35')">
-                    <area target="" alt="C-36" title="C-36" href="#" coords="756,1101,836,1101,836,1256,756,1256" shape="poly" onclick="handlePlotClick(event, 'C-36')">
-                    <area target="" alt="C-37" title="C-37" href="#" coords="820,1101,900,1101,900,1256,820,1256" shape="poly" onclick="handlePlotClick(event, 'C-37')">
-                    <area target="" alt="C-38" title="C-38" href="#" coords="820,932,900,932,900,1087,820,1087" shape="poly" onclick="handlePlotClick(event, 'C-38')">
-                    <area target="" alt="C-39" title="C-39" href="#" coords="756,932,836,932,836,1087,756,1087" shape="poly" onclick="handlePlotClick(event, 'C-39')">
-                    <area target="" alt="C-40" title="C-40" href="#" coords="699,932,779,932,779,1087,699,1087" shape="poly" onclick="handlePlotClick(event, 'C-40')">
-                    <area target="" alt="C-41" title="C-41" href="#" coords="639,932,719,932,719,1087,639,1087" shape="poly" onclick="handlePlotClick(event, 'C-41')">
-                    <area target="" alt="C-42" title="C-42" href="#" coords="529,927,609,927,609,1092,529,1092" shape="poly" onclick="handlePlotClick(event, 'C-42')">
-                    <area target="" alt="C-43" title="C-43" href="#" coords="529,854,609,854,609,1009,529,1009" shape="poly" onclick="handlePlotClick(event, 'C-43')">
-                    <area target="" alt="C-44" title="C-44" href="#" coords="534,775,614,775,614,940,534,940" shape="poly" onclick="handlePlotClick(event, 'C-44')">
-                    <area target="" alt="C-45" title="C-45" href="#" coords="639,785,719,785,719,940,639,940" shape="poly" onclick="handlePlotClick(event, 'C-45')">
-                    <area target="" alt="C-46" title="C-46" href="#" coords="699,785,779,785,779,940,699,940" shape="poly" onclick="handlePlotClick(event, 'C-46')">
-                    <area target="" alt="C-47" title="C-47" href="#" coords="756,785,836,785,836,940,756,940" shape="poly" onclick="handlePlotClick(event, 'C-47')">
-                    <area target="" alt="C-48" title="C-48" href="#" coords="820,785,900,785,900,940,820,940" shape="poly" onclick="handlePlotClick(event, 'C-48')">
-                    <area target="" alt="C-49" title="C-49" href="#" coords="821,613,901,613,901,778,821,778" shape="poly" onclick="handlePlotClick(event, 'C-49')">
-                    <area target="" alt="C-50" title="C-50" href="#" coords="821,498,901,498,901,663,821,663" shape="poly" onclick="handlePlotClick(event, 'C-50')">
-                    <area target="" alt="C-51" title="C-51" href="#" coords="668,512,748,512,748,677,668,677" shape="poly" onclick="handlePlotClick(event, 'C-51')">
-                    <area target="" alt="C-52" title="C-52" href="#" coords="658,615,738,615,738,780,658,780" shape="poly" onclick="handlePlotClick(event, 'C-52')">
-                    <area target="" alt="C-53" title="C-53" href="#" coords="600,620,680,620,680,775,600,775" shape="poly" onclick="handlePlotClick(event, 'C-53')">
-                    <area target="" alt="C-54" title="C-54" href="#" coords="538,616,618,616,618,771,538,771" shape="poly" onclick="handlePlotClick(event, 'C-54')">
-                    <area target="" alt="C-55" title="C-55" href="#" coords="375,746,455,746,455,911,375,911" shape="poly" onclick="handlePlotClick(event, 'C-55')">
-                    <area target="" alt="C-56" title="C-56" href="#" coords="371,827,451,827,451,982,371,982" shape="poly" onclick="handlePlotClick(event, 'C-56')">
-                    <area target="" alt="C-57" title="C-57" href="#" coords="368,888,448,888,448,1043,368,1043" shape="poly" onclick="handlePlotClick(event, 'C-57')">
-                    <area target="" alt="C-58" title="C-58" href="#" coords="364,949,444,949,444,1104,364,1104" shape="poly" onclick="handlePlotClick(event, 'C-58')">
-                    <area target="" alt="C-59" title="C-59" href="#" coords="360,1010,440,1010,440,1165,360,1165" shape="poly" onclick="handlePlotClick(event, 'C-59')">
-                    <area target="" alt="C-60" title="C-60" href="#" coords="357,1071,437,1071,437,1226,357,1226" shape="poly" onclick="handlePlotClick(event, 'C-60')">
-                    <area target="" alt="C-61" title="C-61" href="#" coords="351,1128,431,1128,431,1293,351,1293" shape="poly" onclick="handlePlotClick(event, 'C-61')">
-                    <area target="" alt="C-62" title="C-62" href="#" coords="339,1310,419,1310,419,1475,339,1475" shape="poly" onclick="handlePlotClick(event, 'C-62')">
-                    <area target="" alt="C-63" title="C-63" href="#" coords="336,1376,416,1376,416,1531,336,1531" shape="poly" onclick="handlePlotClick(event, 'C-63')">
-                    <area target="" alt="C-64" title="C-64" href="#" coords="332,1437,412,1437,412,1592,332,1592" shape="poly" onclick="handlePlotClick(event, 'C-64')">
-                    <area target="" alt="C-65" title="C-65" href="#" coords="328,1498,408,1498,408,1653,328,1653" shape="poly" onclick="handlePlotClick(event, 'C-65')">
-                    <area target="" alt="C-66" title="C-66" href="#" coords="325,1560,405,1560,405,1715,325,1715" shape="poly" onclick="handlePlotClick(event, 'C-66')">
-                    <area target="" alt="C-67" title="C-67" href="#" coords="321,1620,401,1620,401,1775,321,1775" shape="poly" onclick="handlePlotClick(event, 'C-67')">
-                    <area target="" alt="C-68" title="C-68" href="#" coords="317,1680,397,1680,397,1835,317,1835" shape="poly" onclick="handlePlotClick(event, 'C-68')">
-                    <area target="" alt="C-69" title="C-69" href="#" coords="314,1741,394,1741,394,1896,314,1896" shape="poly" onclick="handlePlotClick(event, 'C-69')">
-                    <area target="" alt="C-70" title="C-70" href="#" coords="310,1802,390,1802,390,1957,310,1957" shape="poly" onclick="handlePlotClick(event, 'C-70')">
-                    <area target="" alt="C-71" title="C-71" href="#" coords="306,1864,386,1864,386,2029,306,2029" shape="poly" onclick="handlePlotClick(event, 'C-71')">
-                    <area target="" alt="D-1" title="D-1" href="#" coords="870,1886,950,1886,950,2041,870,2041" shape="poly" onclick="handlePlotClick(event, 'D-1')">
-                    <area target="" alt="D-2" title="D-2" href="#" coords="927,1886,1007,1886,1007,2041,927,2041" shape="poly" onclick="handlePlotClick(event, 'D-2')">
-                    <area target="" alt="D-3" title="D-3" href="#" coords="988,1886,1068,1886,1068,2041,988,2041" shape="poly" onclick="handlePlotClick(event, 'D-3')">
-                    <area target="" alt="D-4" title="D-4" href="#" coords="1046,1886,1126,1886,1126,2041,1046,2041" shape="poly" onclick="handlePlotClick(event, 'D-4')">
-                    <area target="" alt="D-5" title="D-5" href="#" coords="1110,1886,1190,1886,1190,2041,1110,2041" shape="poly" onclick="handlePlotClick(event, 'D-5')">
-                    <area target="" alt="D-6" title="D-6" href="#" coords="1169,1886,1249,1886,1249,2041,1169,2041" shape="poly" onclick="handlePlotClick(event, 'D-6')">
-                    <area target="" alt="D-7" title="D-7" href="#" coords="1244,1881,1324,1881,1324,2046,1244,2046" shape="poly" onclick="handlePlotClick(event, 'D-7')">
-                    <area target="" alt="D-8" title="D-8" href="#" coords="1244,1729,1324,1729,1324,1894,1244,1894" shape="poly" onclick="handlePlotClick(event, 'D-8')">
-                    <area target="" alt="D-9" title="D-9" href="#" coords="1169,1734,1249,1734,1249,1889,1169,1889" shape="poly" onclick="handlePlotClick(event, 'D-9')">
-                    <area target="" alt="D-10" title="D-10" href="#" coords="1113,1734,1193,1734,1193,1889,1113,1889" shape="poly" onclick="handlePlotClick(event, 'D-10')">
-                    <area target="" alt="D-11" title="D-11" href="#" coords="1050,1734,1130,1734,1130,1889,1050,1889" shape="poly" onclick="handlePlotClick(event, 'D-11')">
-                    <area target="" alt="D-12" title="D-12" href="#" coords="991,1734,1071,1734,1071,1889,991,1889" shape="poly" onclick="handlePlotClick(event, 'D-12')">
-                    <area target="" alt="D-13" title="D-13" href="#" coords="930,1734,1010,1734,1010,1889,930,1889" shape="poly" onclick="handlePlotClick(event, 'D-13')">
-                    <area target="" alt="D-14" title="D-14" href="#" coords="873,1734,953,1734,953,1889,873,1889" shape="poly" onclick="handlePlotClick(event, 'D-14')">
-                    <area target="" alt="D-15" title="D-15" href="#" coords="873,1569,953,1569,953,1724,873,1724" shape="poly" onclick="handlePlotClick(event, 'D-15')">
-                    <area target="" alt="D-16" title="D-16" href="#" coords="930,1569,1010,1569,1010,1724,930,1724" shape="poly" onclick="handlePlotClick(event, 'D-16')">
-                    <area target="" alt="D-17" title="D-17" href="#" coords="991,1569,1071,1569,1071,1724,991,1724" shape="poly" onclick="handlePlotClick(event, 'D-17')">
-                    <area target="" alt="D-18" title="D-18" href="#" coords="1050,1569,1130,1569,1130,1724,1050,1724" shape="poly" onclick="handlePlotClick(event, 'D-18')">
-                    <area target="" alt="D-19" title="D-19" href="#" coords="1113,1569,1193,1569,1193,1724,1113,1724" shape="poly" onclick="handlePlotClick(event, 'D-19')">
-                    <area target="" alt="D-20" title="D-20" href="#" coords="1173,1569,1253,1569,1253,1724,1173,1724" shape="poly" onclick="handlePlotClick(event, 'D-20')">
-                    <area target="" alt="D-21" title="D-21" href="#" coords="1248,1564,1328,1564,1328,1729,1248,1729" shape="poly" onclick="handlePlotClick(event, 'D-21')">
-                    <area target="" alt="D-22" title="D-22" href="#" coords="1163,1411,1243,1411,1243,1576,1163,1576" shape="poly" onclick="handlePlotClick(event, 'D-22')">
-                    <area target="" alt="D-23" title="D-23" href="#" coords="1050,1416,1130,1416,1130,1571,1050,1571" shape="poly" onclick="handlePlotClick(event, 'D-23')">
-                    <area target="" alt="D-24" title="D-24" href="#" coords="991,1416,1071,1416,1071,1571,991,1571" shape="poly" onclick="handlePlotClick(event, 'D-24')">
-                    <area target="" alt="D-25" title="D-25" href="#" coords="930,1416,1010,1416,1010,1571,930,1571" shape="poly" onclick="handlePlotClick(event, 'D-25')">
-                    <area target="" alt="D-26" title="D-26" href="#" coords="873,1416,953,1416,953,1571,873,1571" shape="poly" onclick="handlePlotClick(event, 'D-26')">
-                    <area target="" alt="D-27" title="D-27" href="#" coords="873,1250,953,1250,953,1405,873,1405" shape="poly" onclick="handlePlotClick(event, 'D-27')">
-                    <area target="" alt="D-28" title="D-28" href="#" coords="930,1250,1010,1250,1010,1405,930,1405" shape="poly" onclick="handlePlotClick(event, 'D-28')">
-                    <area target="" alt="D-29" title="D-29" href="#" coords="991,1250,1071,1250,1071,1405,991,1405" shape="poly" onclick="handlePlotClick(event, 'D-29')">
-                    <area target="" alt="D-30" title="D-30" href="#" coords="1050,1250,1130,1250,1130,1405,1050,1405" shape="poly" onclick="handlePlotClick(event, 'D-30')">
-                    <area target="" alt="D-31" title="D-31" href="#" coords="1127,1245,1207,1245,1207,1410,1127,1410" shape="poly" onclick="handlePlotClick(event, 'D-31')">
-                    <area target="" alt="D-32" title="D-32" href="#" coords="1255,1098,1335,1098,1335,1263,1255,1263" shape="poly" onclick="handlePlotClick(event, 'D-32')">
-                    <area target="" alt="D-33" title="D-33" href="#" coords="1173,1103,1253,1103,1253,1258,1173,1258" shape="poly" onclick="handlePlotClick(event, 'D-33')">
-                    <area target="" alt="D-34" title="D-34" href="#" coords="1113,1103,1193,1103,1193,1258,1113,1258" shape="poly" onclick="handlePlotClick(event, 'D-34')">
-                    <area target="" alt="D-35" title="D-35" href="#" coords="1050,1103,1130,1103,1130,1258,1050,1258" shape="poly" onclick="handlePlotClick(event, 'D-35')">
-                    <area target="" alt="D-36" title="D-36" href="#" coords="991,1103,1071,1103,1071,1258,991,1258" shape="poly" onclick="handlePlotClick(event, 'D-36')">
-                    <area target="" alt="D-37" title="D-37" href="#" coords="930,1103,1010,1103,1010,1258,930,1258" shape="poly" onclick="handlePlotClick(event, 'D-37')">
-                    <area target="" alt="D-38" title="D-38" href="#" coords="873,1103,953,1103,953,1258,873,1258" shape="poly" onclick="handlePlotClick(event, 'D-38')">
-                    <area target="" alt="D-39" title="D-39" href="#" coords="873,933,953,933,953,1088,873,1088" shape="poly" onclick="handlePlotClick(event, 'D-39')">
-                    <area target="" alt="D-40" title="D-40" href="#" coords="930,933,1010,933,1010,1088,930,1088" shape="poly" onclick="handlePlotClick(event, 'D-40')">
-                    <area target="" alt="D-41" title="D-41" href="#" coords="991,933,1071,933,1071,1088,991,1088" shape="poly" onclick="handlePlotClick(event, 'D-41')">
-                    <area target="" alt="D-42" title="D-42" href="#" coords="1050,933,1130,933,1130,1088,1050,1088" shape="poly" onclick="handlePlotClick(event, 'D-42')">
-                    <area target="" alt="D-43" title="D-43" href="#" coords="1113,933,1193,933,1193,1088,1113,1088" shape="poly" onclick="handlePlotClick(event, 'D-43')">
-                    <area target="" alt="D-44" title="D-44" href="#" coords="1173,933,1253,933,1253,1088,1173,1088" shape="poly" onclick="handlePlotClick(event, 'D-44')">
-                    <area target="" alt="D-45" title="D-45" href="#" coords="1248,928,1328,928,1328,1093,1248,1093" shape="poly" onclick="handlePlotClick(event, 'D-45')">
-                    <area target="" alt="D-46" title="D-46" href="#" coords="1248,782,1328,782,1328,947,1248,947" shape="poly" onclick="handlePlotClick(event, 'D-46')">
-                    <area target="" alt="D-47" title="D-47" href="#" coords="1173,787,1253,787,1253,942,1173,942" shape="poly" onclick="handlePlotClick(event, 'D-47')">
-                    <area target="" alt="D-48" title="D-48" href="#" coords="1113,787,1193,787,1193,942,1113,942" shape="poly" onclick="handlePlotClick(event, 'D-48')">
-                    <area target="" alt="D-49" title="D-49" href="#" coords="1050,787,1130,787,1130,942,1050,942" shape="poly" onclick="handlePlotClick(event, 'D-49')">
-                    <area target="" alt="D-50" title="D-50" href="#" coords="991,787,1071,787,1071,942,991,942" shape="poly" onclick="handlePlotClick(event, 'D-50')">
-                    <area target="" alt="D-51" title="D-51" href="#" coords="930,787,1010,787,1010,942,930,942" shape="poly" onclick="handlePlotClick(event, 'D-51')">
-                    <area target="" alt="D-52" title="D-52" href="#" coords="873,787,953,787,953,942,873,942" shape="poly" onclick="handlePlotClick(event, 'D-52')">
-                    <area target="" alt="D-53" title="D-53" href="#" coords="873,616,953,616,953,771,873,771" shape="poly" onclick="handlePlotClick(event, 'D-53')">
-                    <area target="" alt="D-54" title="D-54" href="#" coords="930,616,1010,616,1010,771,930,771" shape="poly" onclick="handlePlotClick(event, 'D-54')">
-                    <area target="" alt="D-55" title="D-55" href="#" coords="991,616,1071,616,1071,771,991,771" shape="poly" onclick="handlePlotClick(event, 'D-55')">
-                    <area target="" alt="D-56" title="D-56" href="#" coords="1050,616,1130,616,1130,771,1050,771" shape="poly" onclick="handlePlotClick(event, 'D-56')">
-                    <area target="" alt="D-57" title="D-57" href="#" coords="1113,616,1193,616,1193,771,1113,771" shape="poly" onclick="handlePlotClick(event, 'D-57')">
-                    <area target="" alt="D-58" title="D-58" href="#" coords="1173,616,1253,616,1253,771,1173,771" shape="poly" onclick="handlePlotClick(event, 'D-58')">
-                    <area target="" alt="D-59" title="D-59" href="#" coords="1248,611,1328,611,1328,776,1248,776" shape="poly" onclick="handlePlotClick(event, 'D-59')">
-                    <area target="" alt="D-60" title="D-60" href="#" coords="1248,498,1328,498,1328,663,1248,663" shape="poly" onclick="handlePlotClick(event, 'D-60')">
-                    <area target="" alt="D-61" title="D-61" href="#" coords="1173,503,1253,503,1253,658,1173,658" shape="poly" onclick="handlePlotClick(event, 'D-61')">
-                    <area target="" alt="D-62" title="D-62" href="#" coords="1113,503,1193,503,1193,658,1113,658" shape="poly" onclick="handlePlotClick(event, 'D-62')">
-                    <area target="" alt="D-63" title="D-63" href="#" coords="1050,503,1130,503,1130,658,1050,658" shape="poly" onclick="handlePlotClick(event, 'D-63')">
-                    <area target="" alt="D-64" title="D-64" href="#" coords="991,503,1071,503,1071,658,991,658" shape="poly" onclick="handlePlotClick(event, 'D-64')">
-                    <area target="" alt="D-65" title="D-65" href="#" coords="930,503,1010,503,1010,658,930,658" shape="poly" onclick="handlePlotClick(event, 'D-65')">
-                    <area target="" alt="D-66" title="D-66" href="#" coords="873,503,953,503,953,658,873,658" shape="poly" onclick="handlePlotClick(event, 'D-66')">
-                    <area target="" alt="D-67" title="D-67" href="#" coords="1190,338,1270,338,1270,493,1190,493" shape="poly" onclick="handlePlotClick(event, 'D-67')">
-                    <area target="" alt="D-68" title="D-68" href="#" coords="1258,339,1338,339,1338,494,1258,494" shape="poly" onclick="handlePlotClick(event, 'D-68')">
-                    <area target="" alt="D-69" title="D-69" href="#" coords="1308,341,1388,341,1388,496,1308,496" shape="poly" onclick="handlePlotClick(event, 'D-69')">
-                    <area target="" alt="COM-1" title="COM-1" href="#" coords="1399,2655,1669,2655,1669,3015,1399,3015" shape="poly" onclick="handlePlotClick(event, 'COM-1')">
-                    <area target="" alt="COM-2" title="COM-2" href="#" coords="1039,2655,1279,2655,1279,3015,1039,3015" shape="poly" onclick="handlePlotClick(event, 'COM-2')">
-                    </map>
-                </div>
+                    <div
+                        style="position: relative; display: inline-block; width: fit-content; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; background: #fff;">
+                        <img src="Full_Map.jpg" usemap="#image-map-full" style="display: block; max-width: none;">
+                        <map name="image-map-full" id="image-map-coords-full">
+                            <area target="" alt="A-1" title="A-1" href="#"
+                                coords="1036,2876,1116,2876,1116,3041,1036,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'A-1')">
+                            <area target="" alt="A-2" title="A-2" href="#"
+                                coords="961,2876,1041,2876,1041,3041,961,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'A-2')">
+                            <area target="" alt="A-3" title="A-3" href="#" coords="897,2876,977,2876,977,3041,897,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-3')">
+                            <area target="" alt="A-4" title="A-4" href="#" coords="822,2876,902,2876,902,3041,822,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-4')">
+                            <area target="" alt="A-5" title="A-5" href="#" coords="754,2876,834,2876,834,3041,754,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-5')">
+                            <area target="" alt="A-6" title="A-6" href="#" coords="679,2876,759,2876,759,3041,679,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-6')">
+                            <area target="" alt="A-7" title="A-7" href="#" coords="604,2876,684,2876,684,3041,604,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-7')">
+                            <area target="" alt="A-8" title="A-8" href="#" coords="529,2876,609,2876,609,3041,529,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-8')">
+                            <area target="" alt="A-9" title="A-9" href="#" coords="437,2876,517,2876,517,3041,437,3041"
+                                shape="poly" onclick="handlePlotClick(event, 'A-9')">
+                            <area target="" alt="A-10" title="A-10" href="#"
+                                coords="227,2876,307,2876,307,3041,227,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'A-10')">
+                            <area target="" alt="A-11" title="A-11" href="#"
+                                coords="247,2777,327,2777,327,2932,247,2932" shape="poly"
+                                onclick="handlePlotClick(event, 'A-11')">
+                            <area target="" alt="A-12" title="A-12" href="#"
+                                coords="251,2716,331,2716,331,2871,251,2871" shape="poly"
+                                onclick="handlePlotClick(event, 'A-12')">
+                            <area target="" alt="A-13" title="A-13" href="#"
+                                coords="254,2655,334,2655,334,2810,254,2810" shape="poly"
+                                onclick="handlePlotClick(event, 'A-13')">
+                            <area target="" alt="A-14" title="A-14" href="#"
+                                coords="258,2594,338,2594,338,2749,258,2749" shape="poly"
+                                onclick="handlePlotClick(event, 'A-14')">
+                            <area target="" alt="A-15" title="A-15" href="#"
+                                coords="262,2521,342,2521,342,2676,262,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-15')">
+                            <area target="" alt="A-16" title="A-16" href="#"
+                                coords="266,2460,346,2460,346,2615,266,2615" shape="poly"
+                                onclick="handlePlotClick(event, 'A-16')">
+                            <area target="" alt="A-17" title="A-17" href="#"
+                                coords="270,2399,350,2399,350,2554,270,2554" shape="poly"
+                                onclick="handlePlotClick(event, 'A-17')">
+                            <area target="" alt="A-18" title="A-18" href="#"
+                                coords="273,2338,353,2338,353,2493,273,2493" shape="poly"
+                                onclick="handlePlotClick(event, 'A-18')">
+                            <area target="" alt="A-19" title="A-19" href="#"
+                                coords="277,2277,357,2277,357,2432,277,2432" shape="poly"
+                                onclick="handlePlotClick(event, 'A-19')">
+                            <area target="" alt="A-20" title="A-20" href="#"
+                                coords="281,2216,361,2216,361,2371,281,2371" shape="poly"
+                                onclick="handlePlotClick(event, 'A-20')">
+                            <area target="" alt="A-21" title="A-21" href="#"
+                                coords="284,2156,364,2156,364,2310,284,2310" shape="poly"
+                                onclick="handlePlotClick(event, 'A-21')">
+                            <area target="" alt="A-22" title="A-22" href="#"
+                                coords="288,2095,368,2095,368,2250,288,2250" shape="poly"
+                                onclick="handlePlotClick(event, 'A-22')">
+                            <area target="" alt="A-23" title="A-23" href="#"
+                                coords="291,2029,371,2029,371,2194,291,2194" shape="poly"
+                                onclick="handlePlotClick(event, 'A-23')">
+                            <area target="" alt="A-24" title="A-24" href="#"
+                                coords="441,2688,521,2688,521,2853,441,2853" shape="poly"
+                                onclick="handlePlotClick(event, 'A-24')">
+                            <area target="" alt="A-25" title="A-25" href="#"
+                                coords="533,2693,613,2693,613,2848,533,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-25')">
+                            <area target="" alt="A-26" title="A-26" href="#"
+                                coords="608,2693,688,2693,688,2848,608,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-26')">
+                            <area target="" alt="A-27" title="A-27" href="#"
+                                coords="682,2693,762,2693,762,2848,682,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-27')">
+                            <area target="" alt="A-28" title="A-28" href="#"
+                                coords="757,2693,837,2693,837,2848,757,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-28')">
+                            <area target="" alt="A-29" title="A-29" href="#"
+                                coords="825,2693,905,2693,905,2848,825,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-29')">
+                            <area target="" alt="A-30" title="A-30" href="#"
+                                coords="900,2693,980,2693,980,2848,900,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-30')">
+                            <area target="" alt="A-31" title="A-31" href="#"
+                                coords="964,2693,1044,2693,1044,2848,964,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-31')">
+                            <area target="" alt="A-32" title="A-32" href="#"
+                                coords="1039,2693,1119,2693,1119,2848,1039,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'A-32')">
+                            <area target="" alt="A-33" title="A-33" href="#"
+                                coords="1248,2516,1328,2516,1328,2681,1248,2681" shape="poly"
+                                onclick="handlePlotClick(event, 'A-33')">
+                            <area target="" alt="A-34" title="A-34" href="#"
+                                coords="1174,2521,1254,2521,1254,2676,1174,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-34')">
+                            <area target="" alt="A-35" title="A-35" href="#"
+                                coords="1114,2521,1194,2521,1194,2676,1114,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-35')">
+                            <area target="" alt="A-36" title="A-36" href="#"
+                                coords="1052,2521,1132,2521,1132,2676,1052,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-36')">
+                            <area target="" alt="A-37" title="A-37" href="#"
+                                coords="990,2521,1070,2521,1070,2676,990,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-37')">
+                            <area target="" alt="A-38" title="A-38" href="#"
+                                coords="930,2516,1010,2516,1010,2681,930,2681" shape="poly"
+                                onclick="handlePlotClick(event, 'A-38')">
+                            <area target="" alt="A-39" title="A-39" href="#"
+                                coords="771,2516,851,2516,851,2681,771,2681" shape="poly"
+                                onclick="handlePlotClick(event, 'A-39')">
+                            <area target="" alt="A-40" title="A-40" href="#"
+                                coords="710,2521,790,2521,790,2676,710,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-40')">
+                            <area target="" alt="A-41" title="A-41" href="#"
+                                coords="650,2521,730,2521,730,2676,650,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-41')">
+                            <area target="" alt="A-42" title="A-42" href="#"
+                                coords="588,2521,668,2521,668,2676,588,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-42')">
+                            <area target="" alt="A-43" title="A-43" href="#"
+                                coords="527,2521,607,2521,607,2676,527,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'A-43')">
+                            <area target="" alt="A-44" title="A-44" href="#"
+                                coords="440,2516,520,2516,520,2681,440,2681" shape="poly"
+                                onclick="handlePlotClick(event, 'A-44')">
+                            <area target="" alt="A-45" title="A-45" href="#"
+                                coords="450,2370,530,2370,530,2535,450,2535" shape="poly"
+                                onclick="handlePlotClick(event, 'A-45')">
+                            <area target="" alt="A-46" title="A-46" href="#"
+                                coords="527,2375,607,2375,607,2530,527,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-46')">
+                            <area target="" alt="A-47" title="A-47" href="#"
+                                coords="588,2375,668,2375,668,2530,588,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-47')">
+                            <area target="" alt="A-48" title="A-48" href="#"
+                                coords="650,2375,730,2375,730,2530,650,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-48')">
+                            <area target="" alt="A-49" title="A-49" href="#"
+                                coords="710,2375,790,2375,790,2530,710,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-49')">
+                            <area target="" alt="A-50" title="A-50" href="#"
+                                coords="771,2370,851,2370,851,2535,771,2535" shape="poly"
+                                onclick="handlePlotClick(event, 'A-50')">
+                            <area target="" alt="A-51" title="A-51" href="#"
+                                coords="930,2370,1010,2370,1010,2535,930,2535" shape="poly"
+                                onclick="handlePlotClick(event, 'A-51')">
+                            <area target="" alt="A-52" title="A-52" href="#"
+                                coords="990,2375,1070,2375,1070,2530,990,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-52')">
+                            <area target="" alt="A-53" title="A-53" href="#"
+                                coords="1052,2375,1132,2375,1132,2530,1052,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-53')">
+                            <area target="" alt="A-54" title="A-54" href="#"
+                                coords="1114,2375,1194,2375,1194,2530,1114,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-54')">
+                            <area target="" alt="A-55" title="A-55" href="#"
+                                coords="1174,2375,1254,2375,1254,2530,1174,2530" shape="poly"
+                                onclick="handlePlotClick(event, 'A-55')">
+                            <area target="" alt="A-56" title="A-56" href="#"
+                                coords="1248,2370,1328,2370,1328,2535,1248,2535" shape="poly"
+                                onclick="handlePlotClick(event, 'A-56')">
+                            <area target="" alt="A-57" title="A-57" href="#"
+                                coords="1246,2198,1326,2198,1326,2363,1246,2363" shape="poly"
+                                onclick="handlePlotClick(event, 'A-57')">
+                            <area target="" alt="A-58" title="A-58" href="#"
+                                coords="1174,2203,1254,2203,1254,2358,1174,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-58')">
+                            <area target="" alt="A-59" title="A-59" href="#"
+                                coords="1114,2203,1194,2203,1194,2358,1114,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-59')">
+                            <area target="" alt="A-60" title="A-60" href="#"
+                                coords="1052,2203,1132,2203,1132,2358,1052,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-60')">
+                            <area target="" alt="A-61" title="A-61" href="#"
+                                coords="990,2203,1070,2203,1070,2358,990,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-61')">
+                            <area target="" alt="A-62" title="A-62" href="#"
+                                coords="932,2198,1012,2198,1012,2363,932,2363" shape="poly"
+                                onclick="handlePlotClick(event, 'A-62')">
+                            <area target="" alt="A-63" title="A-63" href="#"
+                                coords="769,2198,849,2198,849,2363,769,2363" shape="poly"
+                                onclick="handlePlotClick(event, 'A-63')">
+                            <area target="" alt="A-64" title="A-64" href="#"
+                                coords="710,2203,790,2203,790,2358,710,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-64')">
+                            <area target="" alt="A-65" title="A-65" href="#"
+                                coords="650,2198,730,2198,730,2363,650,2363" shape="poly"
+                                onclick="handlePlotClick(event, 'A-65')">
+                            <area target="" alt="A-66" title="A-66" href="#"
+                                coords="588,2203,668,2203,668,2358,588,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-66')">
+                            <area target="" alt="A-67" title="A-67" href="#"
+                                coords="527,2203,607,2203,607,2358,527,2358" shape="poly"
+                                onclick="handlePlotClick(event, 'A-67')">
+                            <area target="" alt="A-68" title="A-68" href="#"
+                                coords="455,2198,535,2198,535,2363,455,2363" shape="poly"
+                                onclick="handlePlotClick(event, 'A-68')">
+                            <area target="" alt="A-69" title="A-69" href="#"
+                                coords="463,2053,543,2053,543,2218,463,2218" shape="poly"
+                                onclick="handlePlotClick(event, 'A-69')">
+                            <area target="" alt="A-70" title="A-70" href="#"
+                                coords="527,2058,607,2058,607,2213,527,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-70')">
+                            <area target="" alt="A-71" title="A-71" href="#"
+                                coords="588,2058,668,2058,668,2213,588,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-71')">
+                            <area target="" alt="A-72" title="A-72" href="#"
+                                coords="650,2058,730,2058,730,2213,650,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-72')">
+                            <area target="" alt="A-73" title="A-73" href="#"
+                                coords="710,2058,790,2058,790,2213,710,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-73')">
+                            <area target="" alt="A-74" title="A-74" href="#"
+                                coords="769,2053,849,2053,849,2218,769,2218" shape="poly"
+                                onclick="handlePlotClick(event, 'A-74')">
+                            <area target="" alt="A-75" title="A-75" href="#"
+                                coords="931,2053,1011,2053,1011,2218,931,2218" shape="poly"
+                                onclick="handlePlotClick(event, 'A-75')">
+                            <area target="" alt="A-76" title="A-76" href="#"
+                                coords="990,2058,1070,2058,1070,2213,990,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-76')">
+                            <area target="" alt="A-77" title="A-77" href="#"
+                                coords="1052,2058,1132,2058,1132,2213,1052,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-77')">
+                            <area target="" alt="A-78" title="A-78" href="#"
+                                coords="1114,2058,1194,2058,1194,2213,1114,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-78')">
+                            <area target="" alt="A-79" title="A-79" href="#"
+                                coords="1174,2058,1254,2058,1254,2213,1174,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'A-79')">
+                            <area target="" alt="A-80" title="A-80" href="#"
+                                coords="1246,2053,1326,2053,1326,2218,1246,2218" shape="poly"
+                                onclick="handlePlotClick(event, 'A-80')">
+                            <area target="" alt="B-1" title="B-1" href="#"
+                                coords="2187,2877,2267,2877,2267,3042,2187,3042" shape="poly"
+                                onclick="handlePlotClick(event, 'B-1')">
+                            <area target="" alt="B-2" title="B-2" href="#"
+                                coords="2086,2876,2166,2876,2166,3041,2086,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-2')">
+                            <area target="" alt="B-3" title="B-3" href="#"
+                                coords="2011,2876,2091,2876,2091,3041,2011,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-3')">
+                            <area target="" alt="B-4" title="B-4" href="#"
+                                coords="1947,2876,2027,2876,2027,3041,1947,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-4')">
+                            <area target="" alt="B-5" title="B-5" href="#"
+                                coords="1872,2876,1952,2876,1952,3041,1872,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-5')">
+                            <area target="" alt="B-6" title="B-6" href="#"
+                                coords="1803,2876,1883,2876,1883,3041,1803,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-6')">
+                            <area target="" alt="B-7" title="B-7" href="#"
+                                coords="1720,2876,1800,2876,1800,3041,1720,3041" shape="poly"
+                                onclick="handlePlotClick(event, 'B-7')">
+                            <area target="" alt="B-8" title="B-8" href="#"
+                                coords="1720,2693,1800,2693,1800,2848,1720,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-8')">
+                            <area target="" alt="B-9" title="B-9" href="#"
+                                coords="1803,2693,1883,2693,1883,2848,1803,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-9')">
+                            <area target="" alt="B-10" title="B-10" href="#"
+                                coords="1875,2693,1955,2693,1955,2848,1875,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-10')">
+                            <area target="" alt="B-11" title="B-11" href="#"
+                                coords="1950,2693,2030,2693,2030,2848,1950,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-11')">
+                            <area target="" alt="B-12" title="B-12" href="#"
+                                coords="2023,2693,2103,2693,2103,2848,2023,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-12')">
+                            <area target="" alt="B-13" title="B-13" href="#"
+                                coords="2099,2693,2179,2693,2179,2848,2099,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-13')">
+                            <area target="" alt="B-14" title="B-14" href="#"
+                                coords="2169,2693,2249,2693,2249,2848,2169,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-14')">
+                            <area target="" alt="B-15" title="B-15" href="#"
+                                coords="2253,2693,2333,2693,2333,2848,2253,2848" shape="poly"
+                                onclick="handlePlotClick(event, 'B-15')">
+                            <area target="" alt="B-16" title="B-16" href="#"
+                                coords="2173,2521,2253,2521,2253,2676,2173,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-16')">
+                            <area target="" alt="B-17" title="B-17" href="#"
+                                coords="2126,2521,2206,2521,2206,2676,2126,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-17')">
+                            <area target="" alt="B-18" title="B-18" href="#"
+                                coords="2065,2521,2145,2521,2145,2676,2065,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-18')">
+                            <area target="" alt="B-19" title="B-19" href="#"
+                                coords="2004,2521,2084,2521,2084,2676,2004,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-19')">
+                            <area target="" alt="B-20" title="B-20" href="#"
+                                coords="1943,2521,2023,2521,2023,2676,1943,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-20')">
+                            <area target="" alt="B-21" title="B-21" href="#"
+                                coords="1882,2521,1962,2521,1962,2676,1882,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-21')">
+                            <area target="" alt="B-22" title="B-22" href="#"
+                                coords="1821,2521,1901,2521,1901,2676,1821,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-22')">
+                            <area target="" alt="B-23" title="B-23" href="#"
+                                coords="1764,2521,1844,2521,1844,2676,1764,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-23')">
+                            <area target="" alt="B-24" title="B-24" href="#"
+                                coords="1697,2521,1777,2521,1777,2676,1697,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-24')">
+                            <area target="" alt="B-25" title="B-25" href="#"
+                                coords="1635,2521,1715,2521,1715,2676,1635,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-25')">
+                            <area target="" alt="B-26" title="B-26" href="#"
+                                coords="1574,2521,1654,2521,1654,2676,1574,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-26')">
+                            <area target="" alt="B-27" title="B-27" href="#"
+                                coords="1496,2521,1576,2521,1576,2676,1496,2676" shape="poly"
+                                onclick="handlePlotClick(event, 'B-27')">
+                            <area target="" alt="B-28" title="B-28" href="#"
+                                coords="1496,2372,1576,2372,1576,2527,1496,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-28')">
+                            <area target="" alt="B-29" title="B-29" href="#"
+                                coords="1574,2367,1654,2367,1654,2532,1574,2532" shape="poly"
+                                onclick="handlePlotClick(event, 'B-29')">
+                            <area target="" alt="B-30" title="B-30" href="#"
+                                coords="1635,2367,1715,2367,1715,2532,1635,2532" shape="poly"
+                                onclick="handlePlotClick(event, 'B-30')">
+                            <area target="" alt="B-31" title="B-31" href="#"
+                                coords="1697,2372,1777,2372,1777,2527,1697,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-31')">
+                            <area target="" alt="B-32" title="B-32" href="#"
+                                coords="1764,2372,1844,2372,1844,2527,1764,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-32')">
+                            <area target="" alt="B-33" title="B-33" href="#"
+                                coords="1821,2372,1901,2372,1901,2527,1821,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-33')">
+                            <area target="" alt="B-34" title="B-34" href="#"
+                                coords="1882,2372,1962,2372,1962,2527,1882,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-34')">
+                            <area target="" alt="B-35" title="B-35" href="#"
+                                coords="1943,2372,2023,2372,2023,2527,1943,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-35')">
+                            <area target="" alt="B-36" title="B-36" href="#"
+                                coords="1997,2372,2077,2372,2077,2527,1997,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-36')">
+                            <area target="" alt="B-37" title="B-37" href="#"
+                                coords="2045,2372,2125,2372,2125,2527,2045,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-37')">
+                            <area target="" alt="B-38" title="B-38" href="#"
+                                coords="2110,2372,2190,2372,2190,2527,2110,2527" shape="poly"
+                                onclick="handlePlotClick(event, 'B-38')">
+                            <area target="" alt="B-39" title="B-39" href="#"
+                                coords="2018,2204,2098,2204,2098,2359,2018,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-39')">
+                            <area target="" alt="B-40" title="B-40" href="#"
+                                coords="1941,2204,2021,2204,2021,2359,1941,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-40')">
+                            <area target="" alt="B-41" title="B-41" href="#"
+                                coords="1882,2204,1962,2204,1962,2359,1882,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-41')">
+                            <area target="" alt="B-42" title="B-42" href="#"
+                                coords="1821,2204,1901,2204,1901,2359,1821,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-42')">
+                            <area target="" alt="B-43" title="B-43" href="#"
+                                coords="1764,2204,1844,2204,1844,2359,1764,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-43')">
+                            <area target="" alt="B-44" title="B-44" href="#"
+                                coords="1697,2204,1777,2204,1777,2359,1697,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-44')">
+                            <area target="" alt="B-45" title="B-45" href="#"
+                                coords="1635,2204,1715,2204,1715,2359,1635,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-45')">
+                            <area target="" alt="B-46" title="B-46" href="#"
+                                coords="1574,2204,1654,2204,1654,2359,1574,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-46')">
+                            <area target="" alt="B-47" title="B-47" href="#"
+                                coords="1496,2204,1576,2204,1576,2359,1496,2359" shape="poly"
+                                onclick="handlePlotClick(event, 'B-47')">
+                            <area target="" alt="B-48" title="B-48" href="#"
+                                coords="1496,2053,1576,2053,1576,2208,1496,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-48')">
+                            <area target="" alt="B-49" title="B-49" href="#"
+                                coords="1574,2048,1654,2048,1654,2213,1574,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'B-49')">
+                            <area target="" alt="B-50" title="B-50" href="#"
+                                coords="1635,2048,1715,2048,1715,2213,1635,2213" shape="poly"
+                                onclick="handlePlotClick(event, 'B-50')">
+                            <area target="" alt="B-51" title="B-51" href="#"
+                                coords="1697,2053,1777,2053,1777,2208,1697,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-51')">
+                            <area target="" alt="B-52" title="B-52" href="#"
+                                coords="1764,2053,1844,2053,1844,2208,1764,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-52')">
+                            <area target="" alt="B-53" title="B-53" href="#"
+                                coords="1821,2053,1901,2053,1901,2208,1821,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-53')">
+                            <area target="" alt="B-54" title="B-54" href="#"
+                                coords="1883,2053,1963,2053,1963,2208,1883,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-54')">
+                            <area target="" alt="B-55" title="B-55" href="#"
+                                coords="1962,2053,2042,2053,2042,2208,1962,2208" shape="poly"
+                                onclick="handlePlotClick(event, 'B-55')">
+                            <area target="" alt="B-56" title="B-56" href="#"
+                                coords="1899,1888,1979,1888,1979,2043,1899,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-56')">
+                            <area target="" alt="B-57" title="B-57" href="#"
+                                coords="1821,1888,1901,1888,1901,2043,1821,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-57')">
+                            <area target="" alt="B-58" title="B-58" href="#"
+                                coords="1764,1888,1844,1888,1844,2043,1764,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-58')">
+                            <area target="" alt="B-59" title="B-59" href="#"
+                                coords="1697,1888,1777,1888,1777,2043,1697,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-59')">
+                            <area target="" alt="B-60" title="B-60" href="#"
+                                coords="1635,1888,1715,1888,1715,2043,1635,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-60')">
+                            <area target="" alt="B-61" title="B-61" href="#"
+                                coords="1574,1888,1654,1888,1654,2043,1574,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-61')">
+                            <area target="" alt="B-62" title="B-62" href="#"
+                                coords="1496,1888,1576,1888,1576,2043,1496,2043" shape="poly"
+                                onclick="handlePlotClick(event, 'B-62')">
+                            <area target="" alt="B-63" title="B-63" href="#"
+                                coords="1496,1729,1576,1729,1576,1894,1496,1894" shape="poly"
+                                onclick="handlePlotClick(event, 'B-63')">
+                            <area target="" alt="B-64" title="B-64" href="#"
+                                coords="1574,1729,1654,1729,1654,1894,1574,1894" shape="poly"
+                                onclick="handlePlotClick(event, 'B-64')">
+                            <area target="" alt="B-65" title="B-65" href="#"
+                                coords="1635,1734,1715,1734,1715,1889,1635,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'B-65')">
+                            <area target="" alt="B-66" title="B-66" href="#"
+                                coords="1697,1734,1777,1734,1777,1889,1697,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'B-66')">
+                            <area target="" alt="B-67" title="B-67" href="#"
+                                coords="1764,1734,1844,1734,1844,1889,1764,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'B-67')">
+                            <area target="" alt="B-68" title="B-68" href="#"
+                                coords="1821,1734,1901,1734,1901,1889,1821,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'B-68')">
+                            <area target="" alt="B-69" title="B-69" href="#"
+                                coords="1867,1734,1947,1734,1947,1889,1867,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'B-69')">
+                            <area target="" alt="B-70" title="B-70" href="#"
+                                coords="1821,1569,1901,1569,1901,1724,1821,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-70')">
+                            <area target="" alt="B-71" title="B-71" href="#"
+                                coords="1764,1569,1844,1569,1844,1724,1764,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-71')">
+                            <area target="" alt="B-72" title="B-72" href="#"
+                                coords="1697,1569,1777,1569,1777,1724,1697,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-72')">
+                            <area target="" alt="B-73" title="B-73" href="#"
+                                coords="1635,1569,1715,1569,1715,1724,1635,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-73')">
+                            <area target="" alt="B-74" title="B-74" href="#"
+                                coords="1574,1569,1654,1569,1654,1724,1574,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-74')">
+                            <area target="" alt="B-75" title="B-75" href="#"
+                                coords="1496,1569,1576,1569,1576,1724,1496,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'B-75')">
+                            <area target="" alt="B-76" title="B-76" href="#"
+                                coords="1599,1410,1679,1410,1679,1575,1599,1575" shape="poly"
+                                onclick="handlePlotClick(event, 'B-76')">
+                            <area target="" alt="B-77" title="B-77" href="#"
+                                coords="1697,1410,1777,1410,1777,1575,1697,1575" shape="poly"
+                                onclick="handlePlotClick(event, 'B-77')">
+                            <area target="" alt="B-78" title="B-78" href="#"
+                                coords="1784,1415,1864,1415,1864,1570,1784,1570" shape="poly"
+                                onclick="handlePlotClick(event, 'B-78')">
+                            <area target="" alt="B-79" title="B-79" href="#"
+                                coords="1761,1253,1841,1253,1841,1408,1761,1408" shape="poly"
+                                onclick="handlePlotClick(event, 'B-79')">
+                            <area target="" alt="B-80" title="B-80" href="#"
+                                coords="1697,1253,1777,1253,1777,1408,1697,1408" shape="poly"
+                                onclick="handlePlotClick(event, 'B-80')">
+                            <area target="" alt="B-81" title="B-81" href="#"
+                                coords="1599,1253,1679,1253,1679,1408,1599,1408" shape="poly"
+                                onclick="handlePlotClick(event, 'B-81')">
+                            <area target="" alt="B-82" title="B-82" href="#"
+                                coords="1494,1098,1574,1098,1574,1263,1494,1263" shape="poly"
+                                onclick="handlePlotClick(event, 'B-82')">
+                            <area target="" alt="B-83" title="B-83" href="#"
+                                coords="1584,1098,1664,1098,1664,1263,1584,1263" shape="poly"
+                                onclick="handlePlotClick(event, 'B-83')">
+                            <area target="" alt="B-84" title="B-84" href="#"
+                                coords="1648,1103,1728,1103,1728,1258,1648,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'B-84')">
+                            <area target="" alt="B-85" title="B-85" href="#"
+                                coords="1714,1103,1794,1103,1794,1258,1714,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'B-85')">
+                            <area target="" alt="C-1" title="C-1" href="#" coords="817,1886,897,1886,897,2041,817,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'C-1')">
+                            <area target="" alt="C-2" title="C-2" href="#" coords="753,1886,833,1886,833,2041,753,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'C-2')">
+                            <area target="" alt="C-3" title="C-3" href="#" coords="696,1886,776,1886,776,2041,696,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'C-3')">
+                            <area target="" alt="C-4" title="C-4" href="#" coords="636,1886,716,1886,716,2041,636,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'C-4')">
+                            <area target="" alt="C-5" title="C-5" href="#" coords="570,1886,650,1886,650,2041,570,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'C-5')">
+                            <area target="" alt="C-6" title="C-6" href="#" coords="468,1881,548,1881,548,2046,468,2046"
+                                shape="poly" onclick="handlePlotClick(event, 'C-6')">
+                            <area target="" alt="C-7" title="C-7" href="#" coords="468,1805,548,1805,548,1960,468,1960"
+                                shape="poly" onclick="handlePlotClick(event, 'C-7')">
+                            <area target="" alt="C-8" title="C-8" href="#" coords="468,1728,548,1728,548,1892,468,1892"
+                                shape="poly" onclick="handlePlotClick(event, 'C-8')">
+                            <area target="" alt="C-9" title="C-9" href="#" coords="570,1734,650,1734,650,1889,570,1889"
+                                shape="poly" onclick="handlePlotClick(event, 'C-9')">
+                            <area target="" alt="C-10" title="C-10" href="#"
+                                coords="639,1734,719,1734,719,1889,639,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'C-10')">
+                            <area target="" alt="C-11" title="C-11" href="#"
+                                coords="699,1734,779,1734,779,1889,699,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'C-11')">
+                            <area target="" alt="C-12" title="C-12" href="#"
+                                coords="756,1734,836,1734,836,1889,756,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'C-12')">
+                            <area target="" alt="C-13" title="C-13" href="#"
+                                coords="820,1734,900,1734,900,1889,820,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'C-13')">
+                            <area target="" alt="C-14" title="C-14" href="#"
+                                coords="820,1568,900,1568,900,1723,820,1723" shape="poly"
+                                onclick="handlePlotClick(event, 'C-14')">
+                            <area target="" alt="C-15" title="C-15" href="#"
+                                coords="756,1568,836,1568,836,1723,756,1723" shape="poly"
+                                onclick="handlePlotClick(event, 'C-15')">
+                            <area target="" alt="C-16" title="C-16" href="#"
+                                coords="699,1568,779,1568,779,1723,699,1723" shape="poly"
+                                onclick="handlePlotClick(event, 'C-16')">
+                            <area target="" alt="C-17" title="C-17" href="#"
+                                coords="639,1568,719,1568,719,1723,639,1723" shape="poly"
+                                onclick="handlePlotClick(event, 'C-17')">
+                            <area target="" alt="C-18" title="C-18" href="#"
+                                coords="573,1568,653,1568,653,1723,573,1723" shape="poly"
+                                onclick="handlePlotClick(event, 'C-18')">
+                            <area target="" alt="C-19" title="C-19" href="#"
+                                coords="505,1563,585,1563,585,1728,505,1728" shape="poly"
+                                onclick="handlePlotClick(event, 'C-19')">
+                            <area target="" alt="C-20" title="C-20" href="#"
+                                coords="508,1411,588,1411,588,1576,508,1576" shape="poly"
+                                onclick="handlePlotClick(event, 'C-20')">
+                            <area target="" alt="C-21" title="C-21" href="#"
+                                coords="573,1416,653,1416,653,1571,573,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'C-21')">
+                            <area target="" alt="C-22" title="C-22" href="#"
+                                coords="639,1416,719,1416,719,1571,639,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'C-22')">
+                            <area target="" alt="C-23" title="C-23" href="#"
+                                coords="699,1416,779,1416,779,1571,699,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'C-23')">
+                            <area target="" alt="C-24" title="C-24" href="#"
+                                coords="756,1416,836,1416,836,1571,756,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'C-24')">
+                            <area target="" alt="C-25" title="C-25" href="#"
+                                coords="820,1416,900,1416,900,1571,820,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'C-25')">
+                            <area target="" alt="C-26" title="C-26" href="#"
+                                coords="820,1248,900,1248,900,1403,820,1403" shape="poly"
+                                onclick="handlePlotClick(event, 'C-26')">
+                            <area target="" alt="C-27" title="C-27" href="#"
+                                coords="756,1248,836,1248,836,1403,756,1403" shape="poly"
+                                onclick="handlePlotClick(event, 'C-27')">
+                            <area target="" alt="C-28" title="C-28" href="#"
+                                coords="699,1248,779,1248,779,1403,699,1403" shape="poly"
+                                onclick="handlePlotClick(event, 'C-28')">
+                            <area target="" alt="C-29" title="C-29" href="#"
+                                coords="639,1248,719,1248,719,1403,639,1403" shape="poly"
+                                onclick="handlePlotClick(event, 'C-29')">
+                            <area target="" alt="C-30" title="C-30" href="#"
+                                coords="573,1248,653,1248,653,1403,573,1403" shape="poly"
+                                onclick="handlePlotClick(event, 'C-30')">
+                            <area target="" alt="C-31" title="C-31" href="#"
+                                coords="518,1243,598,1243,598,1408,518,1408" shape="poly"
+                                onclick="handlePlotClick(event, 'C-31')">
+                            <area target="" alt="C-32" title="C-32" href="#"
+                                coords="517,1096,597,1096,597,1261,517,1261" shape="poly"
+                                onclick="handlePlotClick(event, 'C-32')">
+                            <area target="" alt="C-33" title="C-33" href="#"
+                                coords="573,1101,653,1101,653,1256,573,1256" shape="poly"
+                                onclick="handlePlotClick(event, 'C-33')">
+                            <area target="" alt="C-34" title="C-34" href="#"
+                                coords="639,1101,719,1101,719,1256,639,1256" shape="poly"
+                                onclick="handlePlotClick(event, 'C-34')">
+                            <area target="" alt="C-35" title="C-35" href="#"
+                                coords="699,1101,779,1101,779,1256,699,1256" shape="poly"
+                                onclick="handlePlotClick(event, 'C-35')">
+                            <area target="" alt="C-36" title="C-36" href="#"
+                                coords="756,1101,836,1101,836,1256,756,1256" shape="poly"
+                                onclick="handlePlotClick(event, 'C-36')">
+                            <area target="" alt="C-37" title="C-37" href="#"
+                                coords="820,1101,900,1101,900,1256,820,1256" shape="poly"
+                                onclick="handlePlotClick(event, 'C-37')">
+                            <area target="" alt="C-38" title="C-38" href="#" coords="820,932,900,932,900,1087,820,1087"
+                                shape="poly" onclick="handlePlotClick(event, 'C-38')">
+                            <area target="" alt="C-39" title="C-39" href="#" coords="756,932,836,932,836,1087,756,1087"
+                                shape="poly" onclick="handlePlotClick(event, 'C-39')">
+                            <area target="" alt="C-40" title="C-40" href="#" coords="699,932,779,932,779,1087,699,1087"
+                                shape="poly" onclick="handlePlotClick(event, 'C-40')">
+                            <area target="" alt="C-41" title="C-41" href="#" coords="639,932,719,932,719,1087,639,1087"
+                                shape="poly" onclick="handlePlotClick(event, 'C-41')">
+                            <area target="" alt="C-42" title="C-42" href="#" coords="529,927,609,927,609,1092,529,1092"
+                                shape="poly" onclick="handlePlotClick(event, 'C-42')">
+                            <area target="" alt="C-43" title="C-43" href="#" coords="529,854,609,854,609,1009,529,1009"
+                                shape="poly" onclick="handlePlotClick(event, 'C-43')">
+                            <area target="" alt="C-44" title="C-44" href="#" coords="534,775,614,775,614,940,534,940"
+                                shape="poly" onclick="handlePlotClick(event, 'C-44')">
+                            <area target="" alt="C-45" title="C-45" href="#" coords="639,785,719,785,719,940,639,940"
+                                shape="poly" onclick="handlePlotClick(event, 'C-45')">
+                            <area target="" alt="C-46" title="C-46" href="#" coords="699,785,779,785,779,940,699,940"
+                                shape="poly" onclick="handlePlotClick(event, 'C-46')">
+                            <area target="" alt="C-47" title="C-47" href="#" coords="756,785,836,785,836,940,756,940"
+                                shape="poly" onclick="handlePlotClick(event, 'C-47')">
+                            <area target="" alt="C-48" title="C-48" href="#" coords="820,785,900,785,900,940,820,940"
+                                shape="poly" onclick="handlePlotClick(event, 'C-48')">
+                            <area target="" alt="C-49" title="C-49" href="#" coords="821,613,901,613,901,778,821,778"
+                                shape="poly" onclick="handlePlotClick(event, 'C-49')">
+                            <area target="" alt="C-50" title="C-50" href="#" coords="821,498,901,498,901,663,821,663"
+                                shape="poly" onclick="handlePlotClick(event, 'C-50')">
+                            <area target="" alt="C-51" title="C-51" href="#" coords="668,512,748,512,748,677,668,677"
+                                shape="poly" onclick="handlePlotClick(event, 'C-51')">
+                            <area target="" alt="C-52" title="C-52" href="#" coords="658,615,738,615,738,780,658,780"
+                                shape="poly" onclick="handlePlotClick(event, 'C-52')">
+                            <area target="" alt="C-53" title="C-53" href="#" coords="600,620,680,620,680,775,600,775"
+                                shape="poly" onclick="handlePlotClick(event, 'C-53')">
+                            <area target="" alt="C-54" title="C-54" href="#" coords="538,616,618,616,618,771,538,771"
+                                shape="poly" onclick="handlePlotClick(event, 'C-54')">
+                            <area target="" alt="C-55" title="C-55" href="#" coords="375,746,455,746,455,911,375,911"
+                                shape="poly" onclick="handlePlotClick(event, 'C-55')">
+                            <area target="" alt="C-56" title="C-56" href="#" coords="371,827,451,827,451,982,371,982"
+                                shape="poly" onclick="handlePlotClick(event, 'C-56')">
+                            <area target="" alt="C-57" title="C-57" href="#" coords="368,888,448,888,448,1043,368,1043"
+                                shape="poly" onclick="handlePlotClick(event, 'C-57')">
+                            <area target="" alt="C-58" title="C-58" href="#" coords="364,949,444,949,444,1104,364,1104"
+                                shape="poly" onclick="handlePlotClick(event, 'C-58')">
+                            <area target="" alt="C-59" title="C-59" href="#"
+                                coords="360,1010,440,1010,440,1165,360,1165" shape="poly"
+                                onclick="handlePlotClick(event, 'C-59')">
+                            <area target="" alt="C-60" title="C-60" href="#"
+                                coords="357,1071,437,1071,437,1226,357,1226" shape="poly"
+                                onclick="handlePlotClick(event, 'C-60')">
+                            <area target="" alt="C-61" title="C-61" href="#"
+                                coords="351,1128,431,1128,431,1293,351,1293" shape="poly"
+                                onclick="handlePlotClick(event, 'C-61')">
+                            <area target="" alt="C-62" title="C-62" href="#"
+                                coords="339,1310,419,1310,419,1475,339,1475" shape="poly"
+                                onclick="handlePlotClick(event, 'C-62')">
+                            <area target="" alt="C-63" title="C-63" href="#"
+                                coords="336,1376,416,1376,416,1531,336,1531" shape="poly"
+                                onclick="handlePlotClick(event, 'C-63')">
+                            <area target="" alt="C-64" title="C-64" href="#"
+                                coords="332,1437,412,1437,412,1592,332,1592" shape="poly"
+                                onclick="handlePlotClick(event, 'C-64')">
+                            <area target="" alt="C-65" title="C-65" href="#"
+                                coords="328,1498,408,1498,408,1653,328,1653" shape="poly"
+                                onclick="handlePlotClick(event, 'C-65')">
+                            <area target="" alt="C-66" title="C-66" href="#"
+                                coords="325,1560,405,1560,405,1715,325,1715" shape="poly"
+                                onclick="handlePlotClick(event, 'C-66')">
+                            <area target="" alt="C-67" title="C-67" href="#"
+                                coords="321,1620,401,1620,401,1775,321,1775" shape="poly"
+                                onclick="handlePlotClick(event, 'C-67')">
+                            <area target="" alt="C-68" title="C-68" href="#"
+                                coords="317,1680,397,1680,397,1835,317,1835" shape="poly"
+                                onclick="handlePlotClick(event, 'C-68')">
+                            <area target="" alt="C-69" title="C-69" href="#"
+                                coords="314,1741,394,1741,394,1896,314,1896" shape="poly"
+                                onclick="handlePlotClick(event, 'C-69')">
+                            <area target="" alt="C-70" title="C-70" href="#"
+                                coords="310,1802,390,1802,390,1957,310,1957" shape="poly"
+                                onclick="handlePlotClick(event, 'C-70')">
+                            <area target="" alt="C-71" title="C-71" href="#"
+                                coords="306,1864,386,1864,386,2029,306,2029" shape="poly"
+                                onclick="handlePlotClick(event, 'C-71')">
+                            <area target="" alt="D-1" title="D-1" href="#" coords="870,1886,950,1886,950,2041,870,2041"
+                                shape="poly" onclick="handlePlotClick(event, 'D-1')">
+                            <area target="" alt="D-2" title="D-2" href="#"
+                                coords="927,1886,1007,1886,1007,2041,927,2041" shape="poly"
+                                onclick="handlePlotClick(event, 'D-2')">
+                            <area target="" alt="D-3" title="D-3" href="#"
+                                coords="988,1886,1068,1886,1068,2041,988,2041" shape="poly"
+                                onclick="handlePlotClick(event, 'D-3')">
+                            <area target="" alt="D-4" title="D-4" href="#"
+                                coords="1046,1886,1126,1886,1126,2041,1046,2041" shape="poly"
+                                onclick="handlePlotClick(event, 'D-4')">
+                            <area target="" alt="D-5" title="D-5" href="#"
+                                coords="1110,1886,1190,1886,1190,2041,1110,2041" shape="poly"
+                                onclick="handlePlotClick(event, 'D-5')">
+                            <area target="" alt="D-6" title="D-6" href="#"
+                                coords="1169,1886,1249,1886,1249,2041,1169,2041" shape="poly"
+                                onclick="handlePlotClick(event, 'D-6')">
+                            <area target="" alt="D-7" title="D-7" href="#"
+                                coords="1244,1881,1324,1881,1324,2046,1244,2046" shape="poly"
+                                onclick="handlePlotClick(event, 'D-7')">
+                            <area target="" alt="D-8" title="D-8" href="#"
+                                coords="1244,1729,1324,1729,1324,1894,1244,1894" shape="poly"
+                                onclick="handlePlotClick(event, 'D-8')">
+                            <area target="" alt="D-9" title="D-9" href="#"
+                                coords="1169,1734,1249,1734,1249,1889,1169,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-9')">
+                            <area target="" alt="D-10" title="D-10" href="#"
+                                coords="1113,1734,1193,1734,1193,1889,1113,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-10')">
+                            <area target="" alt="D-11" title="D-11" href="#"
+                                coords="1050,1734,1130,1734,1130,1889,1050,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-11')">
+                            <area target="" alt="D-12" title="D-12" href="#"
+                                coords="991,1734,1071,1734,1071,1889,991,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-12')">
+                            <area target="" alt="D-13" title="D-13" href="#"
+                                coords="930,1734,1010,1734,1010,1889,930,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-13')">
+                            <area target="" alt="D-14" title="D-14" href="#"
+                                coords="873,1734,953,1734,953,1889,873,1889" shape="poly"
+                                onclick="handlePlotClick(event, 'D-14')">
+                            <area target="" alt="D-15" title="D-15" href="#"
+                                coords="873,1569,953,1569,953,1724,873,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-15')">
+                            <area target="" alt="D-16" title="D-16" href="#"
+                                coords="930,1569,1010,1569,1010,1724,930,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-16')">
+                            <area target="" alt="D-17" title="D-17" href="#"
+                                coords="991,1569,1071,1569,1071,1724,991,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-17')">
+                            <area target="" alt="D-18" title="D-18" href="#"
+                                coords="1050,1569,1130,1569,1130,1724,1050,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-18')">
+                            <area target="" alt="D-19" title="D-19" href="#"
+                                coords="1113,1569,1193,1569,1193,1724,1113,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-19')">
+                            <area target="" alt="D-20" title="D-20" href="#"
+                                coords="1173,1569,1253,1569,1253,1724,1173,1724" shape="poly"
+                                onclick="handlePlotClick(event, 'D-20')">
+                            <area target="" alt="D-21" title="D-21" href="#"
+                                coords="1248,1564,1328,1564,1328,1729,1248,1729" shape="poly"
+                                onclick="handlePlotClick(event, 'D-21')">
+                            <area target="" alt="D-22" title="D-22" href="#"
+                                coords="1163,1411,1243,1411,1243,1576,1163,1576" shape="poly"
+                                onclick="handlePlotClick(event, 'D-22')">
+                            <area target="" alt="D-23" title="D-23" href="#"
+                                coords="1050,1416,1130,1416,1130,1571,1050,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'D-23')">
+                            <area target="" alt="D-24" title="D-24" href="#"
+                                coords="991,1416,1071,1416,1071,1571,991,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'D-24')">
+                            <area target="" alt="D-25" title="D-25" href="#"
+                                coords="930,1416,1010,1416,1010,1571,930,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'D-25')">
+                            <area target="" alt="D-26" title="D-26" href="#"
+                                coords="873,1416,953,1416,953,1571,873,1571" shape="poly"
+                                onclick="handlePlotClick(event, 'D-26')">
+                            <area target="" alt="D-27" title="D-27" href="#"
+                                coords="873,1250,953,1250,953,1405,873,1405" shape="poly"
+                                onclick="handlePlotClick(event, 'D-27')">
+                            <area target="" alt="D-28" title="D-28" href="#"
+                                coords="930,1250,1010,1250,1010,1405,930,1405" shape="poly"
+                                onclick="handlePlotClick(event, 'D-28')">
+                            <area target="" alt="D-29" title="D-29" href="#"
+                                coords="991,1250,1071,1250,1071,1405,991,1405" shape="poly"
+                                onclick="handlePlotClick(event, 'D-29')">
+                            <area target="" alt="D-30" title="D-30" href="#"
+                                coords="1050,1250,1130,1250,1130,1405,1050,1405" shape="poly"
+                                onclick="handlePlotClick(event, 'D-30')">
+                            <area target="" alt="D-31" title="D-31" href="#"
+                                coords="1127,1245,1207,1245,1207,1410,1127,1410" shape="poly"
+                                onclick="handlePlotClick(event, 'D-31')">
+                            <area target="" alt="D-32" title="D-32" href="#"
+                                coords="1255,1098,1335,1098,1335,1263,1255,1263" shape="poly"
+                                onclick="handlePlotClick(event, 'D-32')">
+                            <area target="" alt="D-33" title="D-33" href="#"
+                                coords="1173,1103,1253,1103,1253,1258,1173,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-33')">
+                            <area target="" alt="D-34" title="D-34" href="#"
+                                coords="1113,1103,1193,1103,1193,1258,1113,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-34')">
+                            <area target="" alt="D-35" title="D-35" href="#"
+                                coords="1050,1103,1130,1103,1130,1258,1050,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-35')">
+                            <area target="" alt="D-36" title="D-36" href="#"
+                                coords="991,1103,1071,1103,1071,1258,991,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-36')">
+                            <area target="" alt="D-37" title="D-37" href="#"
+                                coords="930,1103,1010,1103,1010,1258,930,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-37')">
+                            <area target="" alt="D-38" title="D-38" href="#"
+                                coords="873,1103,953,1103,953,1258,873,1258" shape="poly"
+                                onclick="handlePlotClick(event, 'D-38')">
+                            <area target="" alt="D-39" title="D-39" href="#" coords="873,933,953,933,953,1088,873,1088"
+                                shape="poly" onclick="handlePlotClick(event, 'D-39')">
+                            <area target="" alt="D-40" title="D-40" href="#"
+                                coords="930,933,1010,933,1010,1088,930,1088" shape="poly"
+                                onclick="handlePlotClick(event, 'D-40')">
+                            <area target="" alt="D-41" title="D-41" href="#"
+                                coords="991,933,1071,933,1071,1088,991,1088" shape="poly"
+                                onclick="handlePlotClick(event, 'D-41')">
+                            <area target="" alt="D-42" title="D-42" href="#"
+                                coords="1050,933,1130,933,1130,1088,1050,1088" shape="poly"
+                                onclick="handlePlotClick(event, 'D-42')">
+                            <area target="" alt="D-43" title="D-43" href="#"
+                                coords="1113,933,1193,933,1193,1088,1113,1088" shape="poly"
+                                onclick="handlePlotClick(event, 'D-43')">
+                            <area target="" alt="D-44" title="D-44" href="#"
+                                coords="1173,933,1253,933,1253,1088,1173,1088" shape="poly"
+                                onclick="handlePlotClick(event, 'D-44')">
+                            <area target="" alt="D-45" title="D-45" href="#"
+                                coords="1248,928,1328,928,1328,1093,1248,1093" shape="poly"
+                                onclick="handlePlotClick(event, 'D-45')">
+                            <area target="" alt="D-46" title="D-46" href="#"
+                                coords="1248,782,1328,782,1328,947,1248,947" shape="poly"
+                                onclick="handlePlotClick(event, 'D-46')">
+                            <area target="" alt="D-47" title="D-47" href="#"
+                                coords="1173,787,1253,787,1253,942,1173,942" shape="poly"
+                                onclick="handlePlotClick(event, 'D-47')">
+                            <area target="" alt="D-48" title="D-48" href="#"
+                                coords="1113,787,1193,787,1193,942,1113,942" shape="poly"
+                                onclick="handlePlotClick(event, 'D-48')">
+                            <area target="" alt="D-49" title="D-49" href="#"
+                                coords="1050,787,1130,787,1130,942,1050,942" shape="poly"
+                                onclick="handlePlotClick(event, 'D-49')">
+                            <area target="" alt="D-50" title="D-50" href="#" coords="991,787,1071,787,1071,942,991,942"
+                                shape="poly" onclick="handlePlotClick(event, 'D-50')">
+                            <area target="" alt="D-51" title="D-51" href="#" coords="930,787,1010,787,1010,942,930,942"
+                                shape="poly" onclick="handlePlotClick(event, 'D-51')">
+                            <area target="" alt="D-52" title="D-52" href="#" coords="873,787,953,787,953,942,873,942"
+                                shape="poly" onclick="handlePlotClick(event, 'D-52')">
+                            <area target="" alt="D-53" title="D-53" href="#" coords="873,616,953,616,953,771,873,771"
+                                shape="poly" onclick="handlePlotClick(event, 'D-53')">
+                            <area target="" alt="D-54" title="D-54" href="#" coords="930,616,1010,616,1010,771,930,771"
+                                shape="poly" onclick="handlePlotClick(event, 'D-54')">
+                            <area target="" alt="D-55" title="D-55" href="#" coords="991,616,1071,616,1071,771,991,771"
+                                shape="poly" onclick="handlePlotClick(event, 'D-55')">
+                            <area target="" alt="D-56" title="D-56" href="#"
+                                coords="1050,616,1130,616,1130,771,1050,771" shape="poly"
+                                onclick="handlePlotClick(event, 'D-56')">
+                            <area target="" alt="D-57" title="D-57" href="#"
+                                coords="1113,616,1193,616,1193,771,1113,771" shape="poly"
+                                onclick="handlePlotClick(event, 'D-57')">
+                            <area target="" alt="D-58" title="D-58" href="#"
+                                coords="1173,616,1253,616,1253,771,1173,771" shape="poly"
+                                onclick="handlePlotClick(event, 'D-58')">
+                            <area target="" alt="D-59" title="D-59" href="#"
+                                coords="1248,611,1328,611,1328,776,1248,776" shape="poly"
+                                onclick="handlePlotClick(event, 'D-59')">
+                            <area target="" alt="D-60" title="D-60" href="#"
+                                coords="1248,498,1328,498,1328,663,1248,663" shape="poly"
+                                onclick="handlePlotClick(event, 'D-60')">
+                            <area target="" alt="D-61" title="D-61" href="#"
+                                coords="1173,503,1253,503,1253,658,1173,658" shape="poly"
+                                onclick="handlePlotClick(event, 'D-61')">
+                            <area target="" alt="D-62" title="D-62" href="#"
+                                coords="1113,503,1193,503,1193,658,1113,658" shape="poly"
+                                onclick="handlePlotClick(event, 'D-62')">
+                            <area target="" alt="D-63" title="D-63" href="#"
+                                coords="1050,503,1130,503,1130,658,1050,658" shape="poly"
+                                onclick="handlePlotClick(event, 'D-63')">
+                            <area target="" alt="D-64" title="D-64" href="#" coords="991,503,1071,503,1071,658,991,658"
+                                shape="poly" onclick="handlePlotClick(event, 'D-64')">
+                            <area target="" alt="D-65" title="D-65" href="#" coords="930,503,1010,503,1010,658,930,658"
+                                shape="poly" onclick="handlePlotClick(event, 'D-65')">
+                            <area target="" alt="D-66" title="D-66" href="#" coords="873,503,953,503,953,658,873,658"
+                                shape="poly" onclick="handlePlotClick(event, 'D-66')">
+                            <area target="" alt="D-67" title="D-67" href="#"
+                                coords="1190,338,1270,338,1270,493,1190,493" shape="poly"
+                                onclick="handlePlotClick(event, 'D-67')">
+                            <area target="" alt="D-68" title="D-68" href="#"
+                                coords="1258,339,1338,339,1338,494,1258,494" shape="poly"
+                                onclick="handlePlotClick(event, 'D-68')">
+                            <area target="" alt="D-69" title="D-69" href="#"
+                                coords="1308,341,1388,341,1388,496,1308,496" shape="poly"
+                                onclick="handlePlotClick(event, 'D-69')">
+                            <area target="" alt="COM-1" title="COM-1" href="#"
+                                coords="1399,2655,1669,2655,1669,3015,1399,3015" shape="poly"
+                                onclick="handlePlotClick(event, 'COM-1')">
+                            <area target="" alt="COM-2" title="COM-2" href="#"
+                                coords="1039,2655,1279,2655,1279,3015,1039,3015" shape="poly"
+                                onclick="handlePlotClick(event, 'COM-2')">
+                        </map>
+                    </div>
 
                 </div>
             </div>
@@ -410,7 +996,11 @@
     <div id="plot-modal" class="modal">
         <div class="modal-content glass-effect">
             <button class="close-btn" onclick="closeModal()" aria-label="Close modal">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
             <div id="modal-details" class="modal-body">
                 <!-- Data injected by JS -->
@@ -418,12 +1008,15 @@
         </div>
     </div>
 
-    
+
     <!-- Booking Form Modal -->
     <div id="booking-modal" class="modal">
         <div class="modal-content glass-effect" style="max-height: 90vh; overflow-y: auto;">
             <button class="close-btn" onclick="closeBookingModal()" aria-label="Close modal">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
             <div class="modal-body">
                 <h2 id="booking-plot-title">Book Plot</h2>
@@ -431,27 +1024,27 @@
                     <input type="hidden" id="book-plot-id">
 
                     <div class="form-group">
-                        <label>Applicant Name</label>
-                        <input type="text" id="book-name" required placeholder="Enter full name">
+                        <label for="book-name">Applicant Name</label>
+                        <input id="book-name" required placeholder="Enter full name">
                     </div>
 
                     <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="book-phone" required placeholder="+91">
+                        <label for="book-phone">Phone Number</label>
+                        <input id="book-phone" required placeholder="+91">
                     </div>
 
                     <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" id="book-address" required placeholder="Full residential address">
+                        <label for="book-address">Address</label>
+                        <input id="book-address" required placeholder="Full residential address">
                     </div>
 
                     <div class="form-group">
-                        <label>ID Proof (Aadhar Number)</label>
-                        <input type="text" id="book-aadhar" required placeholder="12-digit Aadhar number">
+                        <label for="book-aadhar">ID Proof (Aadhar Number)</label>
+                        <input id="book-aadhar" required placeholder="12-digit Aadhar number">
                     </div>
 
                     <div class="form-group">
-                        <label>Payment Mode</label>
+                        <label for="book-payment">Payment Mode</label>
                         <select id="book-payment" required>
                             <option value="Cash">Cash</option>
                             <option value="Cheque">Cheque</option>
@@ -460,8 +1053,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Booking Amount (₹)</label>
-                        <input type="number" id="book-amount" required placeholder="Enter advance amount">
+                        <label for="book-amount">Booking Amount (₹)</label>
+                        <input id="book-amount" required placeholder="Enter advance amount">
                     </div>
 
                     <button type="submit" class="btn-primary">Confirm Booking</button>
@@ -470,6 +1063,49 @@
         </div>
     </div>
 
-<script src="app.js"></script>
+    <script type="module" src="app.js"></script>
+
+        <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content glass-effect">
+            <button class="close-btn" onclick="closeLogin()" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <h2>Broker Login</h2>
+                <form id="login-form" class="booking-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="broker@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="Enter password (min 6 chars)">
+                    </div>
+                    
+                    <!-- Email Actions -->
+                    <button type="button" class="btn-primary" style="width: 100%;" onclick="handleEmailLogin()">Log In</button>
+                    <button type="button" class="btn-cancel" style="width: 100%; margin-top: 10px;" onclick="handleEmailRegister()">Register New Broker</button>
+                    
+                    <!-- Divider -->
+                    <div style="text-align: center; margin: 15px 0; border-bottom: 1px solid var(--border-color); line-height: 0.1em;">
+                        <span style="background: var(--bg-color); padding: 0 10px; color: var(--text-secondary); font-size: 0.9rem;">OR</span>
+                    </div>
+                    
+                    <!-- Google Action -->
+                    <button type="button" class="btn-info" style="width: 100%; background-color: #4285F4; border-color: #4285F4;" onclick="handleGoogleLogin()">
+                        Sign in with Google
+                    </button>
+                    
+                    <p id="login-error" style="color: var(--status-sold); margin-top: 10px; font-size: 0.875rem; display: none;"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
