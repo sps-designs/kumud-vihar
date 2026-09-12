@@ -1,7 +1,7 @@
 // --- FIREBASE CLOUD SETUP & IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC2924sYgBCGnqUS8nBuq7JctARz3dcYwM",
@@ -16,17 +16,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 let currentUser = null;
-
-// Process Google Login when the page redirects back
-getRedirectResult(auth).then((result) => {
-    if (result) {
-        console.log("Google Login Successful!");
-        window.closeLogin();
-    }
-}).catch((error) => {
-    console.error("Redirect Error:", error);
-    alert("Google Sign-in Error: " + error.message);
-});
 
 // Listen for login/logout state changes
 onAuthStateChanged(auth, (user) => {
@@ -92,11 +81,18 @@ window.handleEmailRegister = async function () {
     }
 }
 
-// 3. Google Sign-In (Using Redirect to bypass COOP blockers)
-window.handleGoogleLogin = function () {
+// 3. Google Sign-In (Using Popup for Vercel deployment)
+window.handleGoogleLogin = async function () {
     const provider = new GoogleAuthProvider();
-    // This will instantly redirect the current tab to Google
-    signInWithRedirect(auth, provider);
+    try {
+        await signInWithPopup(auth, provider);
+        console.log("Google Login Successful!");
+        window.closeLogin();
+    } catch (err) {
+        console.error("Google Auth Error:", err);
+        document.getElementById('login-error').innerText = err.message;
+        document.getElementById('login-error').style.display = 'block';
+    }
 }
 
 window.handleLogout = function () {
