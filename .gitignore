@@ -1,2 +1,8 @@
 
 scripts_archive/
+# Get Shit Done (GSD) configuration directories
+.agent/
+.agents/
+.gemini/
+.gsd/
+get-shit-done-for-antigravity/

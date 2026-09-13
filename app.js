@@ -1,6 +1,6 @@
 // --- FIREBASE CLOUD SETUP & IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -18,7 +18,19 @@ const auth = getAuth(app);
 let currentUser = null;
 
 // Listen for login/logout state changes
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
+    // FETCH BROKER DATA
+    if (user) {
+        try {
+            const docRef = doc(db, "brokers", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                user.brokerData = docSnap.data();
+            }
+        } catch (e) {
+            console.error("Failed to fetch broker data", e);
+        }
+    }
     currentUser = user;
     const authBtn = document.getElementById('auth-btn');
     const userDisplay = document.getElementById('user-display');
@@ -44,49 +56,168 @@ window.showLogin = function () {
 }
 window.closeLogin = function () {
     document.getElementById('login-modal').classList.remove('show');
-    document.getElementById('login-form').reset();
+    const authForm = document.getElementById('auth-form');
+    if(authForm) authForm.reset();
+    if (window.switchToLoginView) window.switchToLoginView();
 }
 
-// 1. Existing Email Login
-window.handleEmailLogin = async function () {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+let isRegisterMode = false;
+
+// Toggle view to Register New Broker form layout
+window.switchToRegisterView = function () {
+    isRegisterMode = true;
+    document.getElementById('modal-title').innerText = "Register New Broker";
+
+    const container = document.getElementById('form-container');
+    container.innerHTML = `
+        <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="reg-name" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="reg-phone" placeholder="9876543210" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="auth-email" placeholder="broker@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="auth-password" placeholder="Create password (min 6 chars)" required>
+            </div>
+            
+            <button type="submit" class="btn-primary" style="width: 100%; background-color: #dc3545;">Complete Registration</button>
+            <button type="button" class="btn-cancel" style="width: 100%; margin-top: 10px;" onclick="switchToLoginView()">Back to Login</button>
+        </form>
+    `;
+}
+
+// Toggle back to normal Login view
+window.switchToLoginView = function () {
+    isRegisterMode = false;
+    document.getElementById('modal-title').innerText = "Broker Login";
+
+    const container = document.getElementById('form-container');
+    container.innerHTML = `
+        <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="auth-email" placeholder="broker@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="auth-password" placeholder="Enter password (min 6 chars)" required>
+            </div>
+            
+            <button type="submit" class="btn-primary" id="main-action-btn" style="width: 100%;">Log In</button>
+            <button type="button" class="btn-cancel" style="width: 100%; margin-top: 10px;" onclick="switchToRegisterView()">Register New Broker</button>
+        </form>
+    `;
+}
+
+// Unified Form Handler for Login & Registration
+window.handleAuthSubmit = async function (event) {
+    event.preventDefault();
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const errorBox = document.getElementById('login-error');
+    errorBox.style.display = 'none';
+
     try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.closeLogin();
+        if (isRegisterMode) {
+            const name = document.getElementById('reg-name').value;
+            const phone = document.getElementById('reg-phone').value;
+
+            // 1. Create Firebase Auth account
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // 2. Save structured record in Firestore under 'brokers' collection
+            await setDoc(doc(db, "brokers", user.uid), {
+                uid: user.uid,
+                name: name,
+                phone: phone,
+                email: email,
+                role: "broker",
+                createdAt: new Date().toISOString()
+            });
+
+            // 3. Optional: Sync data to Google Sheets via Google Apps Script Webhook URL
+            const webhookUrl = "https://script.google.com/macros/s/AKfycbzflUu7nHqVJgezbciB6QPOE5oxaUz5-oLEgejWt7FoxKEmmz1VuNrSBQBK_EN8WFJeww/exec";
+            await fetch(webhookUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, phone, email })
+            });
+
+            alert("Registration successful! You are now logged in.");
+            window.closeLogin();
+        } else {
+            // Regular Login
+            await signInWithEmailAndPassword(auth, email, password);
+            window.closeLogin();
+        }
     } catch (err) {
-        document.getElementById('login-error').innerText = "Invalid login credentials.";
-        document.getElementById('login-error').style.display = 'block';
+        console.error("Auth Error:", err);
+        errorBox.innerText = err.message;
+        errorBox.style.display = 'block';
     }
 }
 
-// 2. New Broker Registration
-window.handleEmailRegister = async function () {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    if (password.length < 6) {
-        document.getElementById('login-error').innerText = "Password must be at least 6 characters.";
-        document.getElementById('login-error').style.display = 'block';
-        return;
-    }
-
-    try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert("New broker account created successfully!");
-        window.closeLogin();
-    } catch (err) {
-        document.getElementById('login-error').innerText = err.message.replace("Firebase: ", "");
-        document.getElementById('login-error').style.display = 'block';
-    }
-}
-
-// 3. Google Sign-In (Using Popup for Vercel deployment)
+// 3. Google Sign-In (Using Popup with Registration check)
 window.handleGoogleLogin = async function () {
     const provider = new GoogleAuthProvider();
+    const webhookUrl = "https://script.google.com/macros/s/AKfycbzflUu7nHqVJgezbciB6QPOE5oxaUz5-oLEgejWt7FoxKEmmz1VuNrSBQBK_EN8WFJeww/exec"; // Provided by user
+
     try {
-        await signInWithPopup(auth, provider);
-        console.log("Google Login Successful!");
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Check if this Google user already exists in Firestore
+        const userRef = doc(db, "brokers", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            // First-time login: Prompt for phone number since Google Sign-In doesn't always provide it
+            let phone = user.phoneNumber;
+            while (!phone || !/^[0-9]{10}$/.test(phone)) {
+                phone = prompt("Please enter your 10-digit phone number to complete broker registration:", "");
+                if (phone === null) {
+                    // User cancelled the prompt
+                    alert("Registration cancelled. You must provide a phone number to register.");
+                    return;
+                }
+            }
+
+            const brokerData = {
+                uid: user.uid,
+                name: user.displayName || "Google User",
+                phone: phone,
+                email: user.email,
+                role: "broker",
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to Firestore
+            await setDoc(userRef, brokerData);
+
+            // Send to Google Sheet via Webhook
+            await fetch(webhookUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: brokerData.name,
+                    phone: brokerData.phone,
+                    email: brokerData.email
+                })
+            });
+        }
+
+        console.log("Google Login Successful for:", user.email);
         window.closeLogin();
     } catch (err) {
         console.error("Google Auth Error:", err);
@@ -4982,17 +5113,17 @@ window.openModal = function (plot, rate, amount) {
 
     if (currentUser) { // ONLY SHOW BUTTONS IF LOGGED IN
         if (currentStatus === 'available') {
-            actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.openBookingForm('${plot.plotNo}')">Book Now</button>`;
+            actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.openBookingForm('${plot.plotNo}')">Book Now</button>`;
         } else if (currentStatus === 'booked') {
             actionButtons = `
-                <button class="btn-info" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.completeRegistry('${plot.plotNo}')">Complete Registry</button>
+                <button class="btn-info" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.completeRegistry('${plot.plotNo}')">Complete Registry</button>
                 <button class="btn-cancel" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.cancelBooking('${plot.plotNo}')">Cancel Booking</button>
             `;
         } else if (currentStatus === 'registered') {
-            actionButtons = `<button class="btn-danger" style="width: 100%; margin-top: 1rem;" onclick="event.stopPropagation(); window.sellPlot('${plot.plotNo}')">Finalize as Sold</button>`;
+            actionButtons = `<button class="btn-danger" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.sellPlot('${plot.plotNo}')">Finalize as Sold</button>`;
         } else if (currentStatus === 'sold' && currentUser && currentUser.email === 'admin@kumudvihar.com') {
             // NEW: Admin override button for sold plots
-            actionButtons = `<button class="btn-cancel" style="width: 100%; margin-top: 1rem; border-color: red; color: red;" onclick="event.stopPropagation(); window.revertSoldPlot('${plot.plotNo}')">⚠️ Admin: Revert Sale</button>`;
+            actionButtons = `<button class="btn-cancel" style="width: 100%; margin-top: 0.5rem; border-color: red; color: red;" onclick="event.stopPropagation(); window.revertSoldPlot('${plot.plotNo}')">⚠️ Admin: Revert Sale</button>`;
         }
     } else {
         // IF NOT LOGGED IN, SHOW A MESSAGE INSTEAD
@@ -5003,13 +5134,15 @@ window.openModal = function (plot, rate, amount) {
     let buyerHTML = '';
     if (plot.buyer && currentUser && currentUser.email === 'admin@kumudvihar.com') {
         buyerHTML = `
-            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
-                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--brand-primary);">Buyer Details</h3>
+            <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-color);">
+                <h3 style="font-size: 0.9rem; margin-bottom: 0.3rem; color: var(--brand-primary);">Buyer Details</h3>
                 <div class="detail-row"><span class="detail-label">Name</span><span class="detail-value">${plot.buyer.name}</span></div>
                 <div class="detail-row"><span class="detail-label">Phone</span><span class="detail-value">${plot.buyer.phone}</span></div>
                 <div class="detail-row"><span class="detail-label">Aadhar</span><span class="detail-value">${plot.buyer.aadhar}</span></div>
                 <div class="detail-row"><span class="detail-label">Booked On</span><span class="detail-value">${plot.buyer.bookingDate}</span></div>
                 <div class="detail-row"><span class="detail-label">Advance Paid</span><span class="detail-value price">${formatCurrency(plot.buyer.bookingAmount)}</span></div>
+                ${plot.buyer.brokerName ? `<div class="detail-row"><span class="detail-label">Broker Name</span><span class="detail-value" style="font-weight: 500;">${plot.buyer.brokerName}</span></div>` : ''}
+                ${plot.buyer.brokerPhone ? `<div class="detail-row"><span class="detail-label">Broker Phone</span><span class="detail-value" style="font-weight: 500;">${plot.buyer.brokerPhone}</span></div>` : ''}
                 ${plot.buyer.brokerEmail ? `<div class="detail-row"><span class="detail-label">Broker Email</span><span class="detail-value" style="font-weight: 500;">${plot.buyer.brokerEmail}</span></div>` : ''}
             </div>
         `;
@@ -5017,7 +5150,7 @@ window.openModal = function (plot, rate, amount) {
 
     // --- 3. Render Modal Content ---
     modalDetails.innerHTML = `
-        <h2>Plot ${plot.plotNo}</h2>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; padding-bottom: 0.25rem;">Plot ${plot.plotNo}</h2>
         
         <div class="detail-row">
             <span class="detail-label">Plot Type</span>
@@ -5109,7 +5242,9 @@ window.submitBooking = function (event) {
         paymentMode: document.getElementById('book-payment').value,
         bookingAmount: document.getElementById('book-amount').value,
         bookingDate: new Date().toLocaleDateString('en-IN'),
-        brokerEmail: currentUser ? currentUser.email : 'Unknown Broker'
+        brokerEmail: currentUser ? currentUser.email : 'Unknown Broker',
+        brokerName: (currentUser && currentUser.brokerData) ? currentUser.brokerData.name : (currentUser ? currentUser.displayName || 'Unknown' : 'Unknown'),
+        brokerPhone: (currentUser && currentUser.brokerData) ? currentUser.brokerData.phone : 'Unknown'
     };
 
     const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
