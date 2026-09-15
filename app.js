@@ -1,6 +1,6 @@
 // --- FIREBASE CLOUD SETUP & IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -14,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const ADMIN_EMAIL = "admin@kumudvihar.com";
 const auth = getAuth(app);
 let currentUser = null;
 
@@ -34,17 +35,20 @@ onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     const authBtn = document.getElementById('auth-btn');
     const userDisplay = document.getElementById('user-display');
+    const refBtn = document.getElementById('ref-btn');
 
     if (authBtn && userDisplay) {
         if (user) {
             authBtn.innerText = "Log Out";
-            authBtn.onclick = window.handleLogout;
+            authBtn.onclick = () => { if (window.handleLogout) window.handleLogout(); else console.error("handleLogout missing"); };
             userDisplay.innerText = user.email;
             userDisplay.style.display = "inline";
+            if (refBtn) refBtn.style.display = "inline";
         } else {
             authBtn.innerText = "Broker Login";
             authBtn.onclick = window.showLogin;
             userDisplay.style.display = "none";
+            if (refBtn) refBtn.style.display = "none";
         }
     }
 });
@@ -167,44 +171,52 @@ window.handleAuthSubmit = async function (event) {
     }
 }
 
-// 3. Google Sign-In (Using Popup with Registration check)
+// 3. Google Sign-In with Phone/Name Prompt & Sheet Sync
 window.handleGoogleLogin = async function () {
     const provider = new GoogleAuthProvider();
-    const webhookUrl = "https://script.google.com/macros/s/AKfycbzflUu7nHqVJgezbciB6QPOE5oxaUz5-oLEgejWt7FoxKEmmz1VuNrSBQBK_EN8WFJeww/exec"; // Provided by user
+    const webhookUrl = "https://script.google.com/macros/s/AKfycbzflUu7nHqVJgezbciB6QPOE5oxaUz5-oLEgejWt7FoxKEmmz1VuNrSBQBK_EN8WFJeww/exec";
+    
+    // Check if there is an active referral code in the URL (e.g., ?ref=BROKER_UID)
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref') || "Direct";
 
     try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
 
-        // Check if this Google user already exists in Firestore
         const userRef = doc(db, "brokers", user.uid);
         const userSnap = await getDoc(userRef);
 
         if (!userSnap.exists()) {
-            // First-time login: Prompt for phone number since Google Sign-In doesn't always provide it
-            let phone = user.phoneNumber;
+            // Prompt for Name if missing
+            let name = user.displayName;
+            while (!name || name.trim() === "") {
+                name = prompt("Enter your Full Name for Associate Registration:", "");
+                if (name === null) return alert("Registration cancelled.");
+            }
+
+            // Prompt for 10-digit Phone Number
+            let phone = "";
             while (!phone || !/^[0-9]{10}$/.test(phone)) {
-                phone = prompt("Please enter your 10-digit phone number to complete broker registration:", "");
-                if (phone === null) {
-                    // User cancelled the prompt
-                    alert("Registration cancelled. You must provide a phone number to register.");
-                    return;
-                }
+                phone = prompt("Enter your 10-digit Phone Number:", "");
+                if (phone === null) return alert("Registration cancelled.");
             }
 
             const brokerData = {
                 uid: user.uid,
-                name: user.displayName || "Google User",
+                name: name,
                 phone: phone,
                 email: user.email,
-                role: "broker",
+                referredBy: refCode, // Tracks the associate chain upline
+                totalPlotsSold: 0,
+                role: user.email === ADMIN_EMAIL ? "admin" : "broker",
                 createdAt: new Date().toISOString()
             };
 
             // Save to Firestore
             await setDoc(userRef, brokerData);
 
-            // Send to Google Sheet via Webhook
+            // Sync to Google Sheet via Webhook
             await fetch(webhookUrl, {
                 method: "POST",
                 mode: "no-cors",
@@ -212,25 +224,21 @@ window.handleGoogleLogin = async function () {
                 body: JSON.stringify({
                     name: brokerData.name,
                     phone: brokerData.phone,
-                    email: brokerData.email
+                    email: brokerData.email,
+                    referredBy: brokerData.referredBy
                 })
             });
         }
 
-        console.log("Google Login Successful for:", user.email);
+        console.log("Logged in successfully:", user.email);
         window.closeLogin();
+        window.location.reload();
     } catch (err) {
         console.error("Google Auth Error:", err);
         document.getElementById('login-error').innerText = err.message;
         document.getElementById('login-error').style.display = 'block';
     }
 }
-
-window.handleLogout = function () {
-    signOut(auth);
-    alert("You have been logged out.");
-}
-
 // Rates configuration
 const RATES = {
     "Normal plot": 10000,
@@ -5243,6 +5251,7 @@ window.submitBooking = function (event) {
         bookingAmount: document.getElementById('book-amount').value,
         bookingDate: new Date().toLocaleDateString('en-IN'),
         brokerEmail: currentUser ? currentUser.email : 'Unknown Broker',
+        brokerUid: currentUser ? currentUser.uid : null,
         brokerName: (currentUser && currentUser.brokerData) ? currentUser.brokerData.name : (currentUser ? currentUser.displayName || 'Unknown' : 'Unknown'),
         brokerPhone: (currentUser && currentUser.brokerData) ? currentUser.brokerData.phone : 'Unknown'
     };
@@ -5358,3 +5367,61 @@ window.revertSoldPlot = function (plotNo) {
 
 
 // forcing a git update.
+window.copyReferralLink = function() {
+    if (!currentUser) return;
+    const referralLink = `https://kumud-vihar.vercel.app/?ref=${currentUser.uid}`;
+    navigator.clipboard.writeText(referralLink).then(() => {
+        alert("Referral Link copied to clipboard! Share this with your new recruits.");
+    }).catch(err => {
+        alert("Failed to copy. Here is your link: " + referralLink);
+    });
+}
+
+// 3. MLM Associate Chain Commission Engine (1 -> 2 -> 3 -> 4 -> 5)
+window.processPlotSale = async function (sellerId, chainArray, plotSizeInSqYards) {
+    const totalPoolPerSqYard = 1500;
+    const totalPool = totalPoolPerSqYard * plotSizeInSqYards;
+
+    // Direct seller takes 30% of the pool
+    const directSellerShare = totalPool * 0.30;
+    const remainingPool = totalPool * 0.70;
+
+    console.log(`Direct Seller (${sellerId}) earns: ₹${directSellerShare}`);
+
+    // Fetch lifetime sales weights for upline chain
+    let totalUplineSales = 0;
+    const uplineSalesMap = {};
+
+    for (let associateId of chainArray) {
+        if (associateId === sellerId) continue;
+        
+        const brokerDoc = await getDoc(doc(db, "brokers", associateId));
+        const salesCount = brokerDoc.exists() ? (brokerDoc.data().totalPlotsSold || 1) : 1;
+        
+        uplineSalesMap[associateId] = salesCount;
+        totalUplineSales += salesCount;
+    }
+
+    // Distribute remaining 70% proportionally upward through the chain
+    for (let associateId of chainArray) {
+        if (associateId === sellerId) continue;
+
+        const shareWeight = uplineSalesMap[associateId] / totalUplineSales;
+        const uplineShare = remainingPool * shareWeight;
+        
+        console.log(`Upline Associate (${associateId}) earns proportional share: ₹${uplineShare.toFixed(2)}`);
+    }
+}
+
+
+// 4. Logout Handler
+window.handleLogout = async function () {
+    try {
+        await signOut(auth);
+        alert("You have been logged out.");
+        window.location.reload();
+    } catch (err) {
+        console.error("Logout Error:", err);
+        alert("Failed to log out.");
+    }
+}

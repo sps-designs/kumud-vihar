@@ -635,3 +635,21 @@ body {
     background-color: #dbeafe;
     color: #1e40af;
 }
+
+/* Office Info & Footer */
+.office-info {
+    background: #fdfdfd;
+    border: 1px solid #e2e8f0;
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    margin: 40px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--brand-primary);
+    color: white;
+    margin-top: 20px;
+}

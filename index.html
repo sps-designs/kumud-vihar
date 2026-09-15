@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=4229a9b4">
-    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css?v=fd31f6f4">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
 </head>
 
 <body>
@@ -24,12 +24,14 @@
                 <h1 id="colony-name">Kumud Vihar</h1>
             </div>
 
-            <div class="colony-selector-wrapper" style="display: flex; gap: 1rem; align-items: center;">
+            <div class="colony-selector-wrapper" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+                <a href="about.html" style="text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--brand-primary); margin-right: 0.5rem;">About Us</a>
                 <select id="colony-selector" onchange="renderGrid(this.value)" class="premium-select">
                     <option value="Colony_1">Kumud Vihar</option>
                 </select>
-                <span id="user-display" style="display: none; font-weight: 500; font-size: 0.9rem;"></span>
-                <button id="auth-btn" class="btn-primary" style="padding: 0.5rem 1rem;"
+                <span id="user-display" style="display: none; font-weight: 500; font-size: 0.85rem; max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+                <button id="ref-btn" class="btn-info" style="display: none; padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;" onclick="window.copyReferralLink()">Copy Link</button>
+                <button id="auth-btn" class="btn-primary" style="padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;"
                     onclick="window.showLogin()">Broker Login</button>
             </div>
         </div>
@@ -1063,9 +1065,25 @@
         </div>
     </div>
 
-    <script type="module" src="app.js?v=428b40ab"></script>
+    <script type="module" src="app.js?v=0a2ed600"></script>
 
             <!-- Login Modal -->
+    
+    <!-- Office Info & Footer -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <div class="office-info">
+            <h3 style="font-size: 1.2rem; color: var(--brand-primary); margin-top: 0; margin-bottom: 15px;">Office Location & Contact Information</h3>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Associated Landmark:</strong> Harshit Jeweller</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Location:</strong> Bijainagar, Beawar, Rajasthan, India</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Business Hours:</strong> Monday – Sunday | 10:30 AM to 8:30 PM</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Contact Numbers:</strong> +91 94140 07847, +91 87690 07707, +91 75681 40747</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kumud Vihar. All rights reserved.</p>
+    </footer>
+
     <div id="login-modal" class="modal">
         <div class="modal-content glass-effect">
             <button class="close-btn" onclick="closeLogin()" aria-label="Close modal">
