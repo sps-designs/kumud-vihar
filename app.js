@@ -5425,3 +5425,78 @@ window.handleLogout = async function () {
         alert("Failed to log out.");
     }
 }
+
+
+
+window.sellPlot = function (plotNo) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return alert("Please log in first.");
+
+    const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+    if (plotIndex === -1) return;
+    const plotData = globalPlots[plotIndex];
+
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com'; // ADMIN_EMAIL
+    const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
+
+    if (!isAdmin && !isOwner) {
+        return alert("Access Denied: Only the Administrator or the Broker who booked this plot can finalize it as sold.");
+    }
+
+    if (confirm(`Are you sure you want to mark Plot ${plotNo} as SOLD? This action cannot be easily undone.`)) {
+        globalPlots[plotIndex].status = "Sold";
+        if (window.saveData) window.saveData();
+        closeModal();
+        const currentColony = document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1';
+        renderGrid(currentColony);
+    }
+}
+
+window.cancelBooking = function (plotNo) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return alert("Please log in first.");
+
+    const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+    if (plotIndex === -1) return;
+    const plotData = globalPlots[plotIndex];
+
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com';
+    const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
+
+    if (!isAdmin && !isOwner) {
+        return alert("Access Denied: Only the Administrator or the Broker who booked this plot can cancel it.");
+    }
+
+    if (confirm(`Are you sure you want to cancel the booking for Plot ${plotNo}?`)) {
+        globalPlots[plotIndex].status = "Available";
+        delete globalPlots[plotIndex].buyer;
+        if (window.saveData) window.saveData();
+        closeModal();
+        const currentColony = document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1';
+        renderGrid(currentColony);
+    }
+}
+
+window.completeRegistry = function (plotNo) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return alert("Please log in first.");
+
+    const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+    if (plotIndex === -1) return;
+    const plotData = globalPlots[plotIndex];
+
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com';
+    const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
+
+    if (!isAdmin && !isOwner) {
+        return alert("Access Denied: Only the Administrator or the Broker who booked this plot can complete the registry.");
+    }
+
+    if (confirm(`Has the registry process been completed for Plot ${plotNo}?`)) {
+        globalPlots[plotIndex].status = "Registered";
+        if (window.saveData) window.saveData();
+        closeModal();
+        const currentColony = document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1';
+        renderGrid(currentColony);
+    }
+}
