@@ -653,3 +653,18 @@ footer {
     color: white;
     margin-top: 20px;
 }
+
+.status-pending {
+    background-color: #f59e0b; /* Orange for pending */
+    color: white;
+}
+
+.badge-pending {
+    background-color: #fef08a; /* Soft yellow/orange background */
+    color: #a16207; /* Darker text */
+}
+
+.modal-pending {
+    background-color: #fef08a; /* Soft yellow/orange */
+    color: #a16207;
+}

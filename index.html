@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=fd31f6f4">
+    <link rel="stylesheet" href="style.css?v=a39edb64">
     <link rel="icon" type="image/jpeg" href="logo.jpeg">
 </head>
 
@@ -24,13 +24,22 @@
                 <h1 id="colony-name">Kumud Vihar</h1>
             </div>
 
-            <div class="colony-selector-wrapper" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
-                <a href="about.html" style="text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--brand-primary); margin-right: 0.5rem;">About Us</a>
+            <div class="colony-selector-wrapper"
+                style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+                <a href="about.html"
+                    style="text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--brand-primary); margin-right: 0.5rem;">About
+                    Us</a>
+                <a href="past-developments.html"
+                    style="text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--brand-primary); margin-right: 0.5rem;">Past
+                    Developments</a>
                 <select id="colony-selector" onchange="renderGrid(this.value)" class="premium-select">
                     <option value="Colony_1">Kumud Vihar</option>
                 </select>
-                <span id="user-display" style="display: none; font-weight: 500; font-size: 0.85rem; max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
-                <button id="ref-btn" class="btn-info" style="display: none; padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;" onclick="window.copyReferralLink()">Copy Link</button>
+                <span id="user-display"
+                    style="display: none; font-weight: 500; font-size: 0.85rem; max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+                <button id="ref-btn" class="btn-info"
+                    style="display: none; padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;"
+                    onclick="window.copyReferralLink()">Copy Link</button>
                 <button id="auth-btn" class="btn-primary" style="padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;"
                     onclick="window.showLogin()">Broker Login</button>
             </div>
@@ -1067,16 +1076,21 @@
 
     <script type="module" src="app.js?v=0a2ed600"></script>
 
-            <!-- Login Modal -->
-    
+    <!-- Login Modal -->
+
     <!-- Office Info & Footer -->
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
         <div class="office-info">
-            <h3 style="font-size: 1.2rem; color: var(--brand-primary); margin-top: 0; margin-bottom: 15px;">Office Location & Contact Information</h3>
-            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Associated Landmark:</strong> Harshit Jeweller</p>
-            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Location:</strong> Bijainagar, Beawar, Rajasthan, India</p>
-            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Business Hours:</strong> Monday – Sunday | 10:30 AM to 8:30 PM</p>
-            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Contact Numbers:</strong> +91 94140 07847, +91 87690 07707, +91 75681 40747</p>
+            <h3 style="font-size: 1.2rem; color: var(--brand-primary); margin-top: 0; margin-bottom: 15px;">Office
+                Location & Contact Information</h3>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Associated Landmark:</strong> Harshit
+                Jeweller | Kumud Vihar Bijainagar</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Location:</strong> Bijainagar, Beawar,
+                Rajasthan, India</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Business Hours:</strong> Monday – Sunday |
+                10:30 AM to 8:30 PM</p>
+            <p style="margin: 8px 0; color: var(--text-secondary);"><strong>Contact Numbers:</strong> +91 94140 07847,
+                +91 87690 07707, +91 75681 40747</p>
         </div>
     </div>
 
@@ -1094,8 +1108,9 @@
             </button>
             <div class="modal-body">
                 <h2 id="modal-title">Broker Login</h2>
-                
-                <div id="login-error" class="error-msg" style="display:none; color: var(--status-sold); margin-bottom: 10px; font-size: 0.875rem;"></div>
+
+                <div id="login-error" class="error-msg"
+                    style="display:none; color: var(--status-sold); margin-bottom: 10px; font-size: 0.875rem;"></div>
 
                 <!-- Dynamic Form Container -->
                 <div id="form-container">
@@ -1107,22 +1122,30 @@
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" id="auth-password" placeholder="Enter password (min 6 chars)" required>
+                            <input type="password" id="auth-password" placeholder="Enter password (min 6 chars)"
+                                required>
                         </div>
-                        
-                        <button type="submit" class="btn-primary" id="main-action-btn" style="width: 100%;">Log In</button>
-                        <button type="button" class="btn-cancel" style="width: 100%; margin-top: 10px;" onclick="switchToRegisterView()">Register New Broker</button>
+
+                        <button type="submit" class="btn-primary" id="main-action-btn" style="width: 100%;">Log
+                            In</button>
+                        <button type="button" class="btn-cancel" style="width: 100%; margin-top: 10px;"
+                            onclick="switchToRegisterView()">Register New Broker</button>
                     </form>
                 </div>
 
                 <!-- Divider -->
-                <div style="text-align: center; margin: 15px 0; border-bottom: 1px solid var(--border-color); line-height: 0.1em;">
-                    <span style="background: var(--bg-color); padding: 0 10px; color: var(--text-secondary); font-size: 0.9rem;">OR</span>
+                <div
+                    style="text-align: center; margin: 15px 0; border-bottom: 1px solid var(--border-color); line-height: 0.1em;">
+                    <span
+                        style="background: var(--bg-color); padding: 0 10px; color: var(--text-secondary); font-size: 0.9rem;">OR</span>
                 </div>
-                
+
                 <!-- Google Action -->
-                <button type="button" class="btn-info" style="width: 100%; background-color: #4285F4; border-color: #4285F4;" onclick="handleGoogleLogin()">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" style="vertical-align:middle; margin-right:8px;"> 
+                <button type="button" class="btn-info"
+                    style="width: 100%; background-color: #4285F4; border-color: #4285F4;"
+                    onclick="handleGoogleLogin()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"
+                        style="vertical-align:middle; margin-right:8px;">
                     Sign in with Google
                 </button>
             </div>

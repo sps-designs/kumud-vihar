@@ -5049,7 +5049,8 @@ window.renderGrid = function (colonyId) {
         card.onclick = () => openModal(plot, rate, amount);
 
         // Map status to badge color directly here
-        let badgeColorClass = 'status-available';
+                let badgeColorClass = 'status-available';
+        if (plot.status.toLowerCase() === 'pending approval') badgeColorClass = 'status-pending';
         if (plot.status.toLowerCase() === 'booked') badgeColorClass = 'status-booked';
         if (plot.status.toLowerCase() === 'sold' || plot.status.toLowerCase() === 'sold out') badgeColorClass = 'status-sold';
 
@@ -5068,6 +5069,7 @@ window.renderGrid = function (colonyId) {
 
 function getModalStatusClass(status) {
     const s = status.toLowerCase();
+    if (s === 'pending approval') return 'modal-pending';
     if (s === 'booked') return 'modal-booked';
     if (s === 'sold' || s === 'sold out') return 'modal-sold';
     return 'modal-available';
@@ -5116,12 +5118,26 @@ window.openModal = function (plot, rate, amount) {
     const statusClass = getModalStatusClass(plot.status);
 
     // --- 1. Strict Workflow Logic for Buttons ---
-    let actionButtons = '';
+        let actionButtons = '';
     const currentStatus = plot.status.toLowerCase();
+
+    const isAdmin = currentUser && (currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin'));
 
     if (currentUser) { // ONLY SHOW BUTTONS IF LOGGED IN
         if (currentStatus === 'available') {
             actionButtons = `<button class="btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.openBookingForm('${plot.plotNo}')">Book Now</button>`;
+        } else if (currentStatus === 'pending approval') {
+            if (isAdmin) {
+                actionButtons = `
+                    <button class="btn-primary" style="width: 100%; margin-top: 0.5rem; background-color: #10b981;" onclick="event.stopPropagation(); window.approveBooking('${plot.plotNo}')">Approve Booking</button>
+                    <button class="btn-danger" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.rejectBooking('${plot.plotNo}')">Reject Booking</button>
+                `;
+            } else {
+                actionButtons = `
+                    <button class="btn-cancel" style="width: 100%; margin-top: 0.5rem;" disabled>Request Pending Admin Approval...</button>
+                    <button class="btn-danger" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.cancelBooking('${plot.plotNo}')">Cancel My Request</button>
+                `;
+            }
         } else if (currentStatus === 'booked') {
             actionButtons = `
                 <button class="btn-info" style="width: 100%; margin-top: 0.5rem;" onclick="event.stopPropagation(); window.completeRegistry('${plot.plotNo}')">Complete Registry</button>
@@ -5258,7 +5274,7 @@ window.submitBooking = function (event) {
 
     const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
     if (plotIndex !== -1) {
-        globalPlots[plotIndex].status = "Booked";
+        globalPlots[plotIndex].status = "Pending Approval";
         globalPlots[plotIndex].buyer = buyerDetails; // Attach buyer to plot
         saveData(); // Save to local storage
     }
@@ -5436,7 +5452,7 @@ window.sellPlot = function (plotNo) {
     if (plotIndex === -1) return;
     const plotData = globalPlots[plotIndex];
 
-    const isAdmin = currentUser.email === 'admin@kumudvihar.com'; // ADMIN_EMAIL
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin'); // ADMIN_EMAIL
     const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
 
     if (!isAdmin && !isOwner) {
@@ -5460,7 +5476,7 @@ window.cancelBooking = function (plotNo) {
     if (plotIndex === -1) return;
     const plotData = globalPlots[plotIndex];
 
-    const isAdmin = currentUser.email === 'admin@kumudvihar.com';
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin');
     const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
 
     if (!isAdmin && !isOwner) {
@@ -5485,7 +5501,7 @@ window.completeRegistry = function (plotNo) {
     if (plotIndex === -1) return;
     const plotData = globalPlots[plotIndex];
 
-    const isAdmin = currentUser.email === 'admin@kumudvihar.com';
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin');
     const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
 
     if (!isAdmin && !isOwner) {
@@ -5500,3 +5516,46 @@ window.completeRegistry = function (plotNo) {
         renderGrid(currentColony);
     }
 }
+
+
+window.approveBooking = function (plotNo) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return alert("Please log in first.");
+
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin');
+    if (!isAdmin) return alert("Access Denied: Only Admins can approve bookings.");
+
+    if (confirm(`Approve booking request for Plot ${plotNo}?`)) {
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Booked";
+            if (window.saveData) window.saveData();
+            if (typeof closeModal === 'function') closeModal();
+            const colSel = document.getElementById('colony-selector');
+            const currentColony = colSel ? colSel.value : 'Colony_1';
+            if (typeof renderGrid === 'function') renderGrid(currentColony);
+        }
+    }
+}
+
+window.rejectBooking = function (plotNo) {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return alert("Please log in first.");
+
+    const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin');
+    if (!isAdmin) return alert("Access Denied: Only Admins can reject bookings.");
+
+    if (confirm(`Reject booking request for Plot ${plotNo}?`)) {
+        const plotIndex = globalPlots.findIndex(p => p.plotNo === plotNo);
+        if (plotIndex !== -1) {
+            globalPlots[plotIndex].status = "Available";
+            delete globalPlots[plotIndex].buyer;
+            if (window.saveData) window.saveData();
+            if (typeof closeModal === 'function') closeModal();
+            const colSel = document.getElementById('colony-selector');
+            const currentColony = colSel ? colSel.value : 'Colony_1';
+            if (typeof renderGrid === 'function') renderGrid(currentColony);
+        }
+    }
+}
+
