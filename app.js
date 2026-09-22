@@ -1,6 +1,6 @@
 // --- FIREBASE CLOUD SETUP & IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -44,11 +44,15 @@ onAuthStateChanged(auth, async (user) => {
             userDisplay.innerText = user.email;
             userDisplay.style.display = "inline";
             if (refBtn) refBtn.style.display = "inline";
+            const dashBtn = document.getElementById('dashboard-btn');
+            if (dashBtn) dashBtn.style.display = "inline";
         } else {
             authBtn.innerText = "Broker Login";
             authBtn.onclick = window.showLogin;
             userDisplay.style.display = "none";
             if (refBtn) refBtn.style.display = "none";
+            const dashBtn = document.getElementById('dashboard-btn');
+            if (dashBtn) dashBtn.style.display = "none";
         }
     }
 });
@@ -5403,6 +5407,11 @@ window.processPlotSale = async function (sellerId, chainArray, plotSizeInSqYards
     const remainingPool = totalPool * 0.70;
 
     console.log(`Direct Seller (${sellerId}) earns: ₹${directSellerShare}`);
+    try {
+        await updateDoc(doc(db, "brokers", sellerId), {
+            totalCommissionEarned: increment(directSellerShare)
+        });
+    } catch(e) { console.error("Error updating direct seller commission", e); }
 
     // Fetch lifetime sales weights for upline chain
     let totalUplineSales = 0;
@@ -5426,6 +5435,11 @@ window.processPlotSale = async function (sellerId, chainArray, plotSizeInSqYards
         const uplineShare = remainingPool * shareWeight;
         
         console.log(`Upline Associate (${associateId}) earns proportional share: ₹${uplineShare.toFixed(2)}`);
+        try {
+            await updateDoc(doc(db, "brokers", associateId), {
+                totalCommissionEarned: increment(uplineShare)
+            });
+        } catch(e) { console.error("Error updating upline commission", e); }
     }
 }
 
@@ -5559,3 +5573,45 @@ window.rejectBooking = function (plotNo) {
     }
 }
 
+
+
+// 5. Associate Dashboard
+window.openDashboard = async function() {
+    if (!currentUser) return;
+    document.getElementById('dashboard-modal').classList.add('show');
+    
+    document.getElementById('dash-chain-size').innerText = "...";
+    document.getElementById('dash-plots-sold').innerText = "...";
+    document.getElementById('dash-commission').innerText = "...";
+
+    try {
+        const brokerDoc = await getDoc(doc(db, "brokers", currentUser.uid));
+        if (brokerDoc.exists()) {
+            const data = brokerDoc.data();
+            document.getElementById('dash-plots-sold').innerText = data.totalPlotsSold || 0;
+            const comm = data.totalCommissionEarned || 0;
+            document.getElementById('dash-commission').innerText = "₹" + comm.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+
+        const querySnapshot = await getDocs(collection(db, "brokers"));
+        const allBrokers = [];
+        querySnapshot.forEach(d => allBrokers.push(d.data()));
+
+        let downlineCount = 0;
+        function countDownline(uid) {
+            const directs = allBrokers.filter(b => b.referredBy === uid);
+            downlineCount += directs.length;
+            directs.forEach(d => countDownline(d.uid));
+        }
+        
+        countDownline(currentUser.uid);
+        document.getElementById('dash-chain-size').innerText = downlineCount;
+        
+    } catch (e) {
+        console.error("Dashboard error", e);
+    }
+}
+
+window.closeDashboard = function() {
+    document.getElementById('dashboard-modal').classList.remove('show');
+}

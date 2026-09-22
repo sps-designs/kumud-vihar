@@ -40,6 +40,7 @@
                 <button id="ref-btn" class="btn-info"
                     style="display: none; padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;"
                     onclick="window.copyReferralLink()">Copy Link</button>
+                <button id="dashboard-btn" class="btn-primary" style="display: none; background-color: var(--brand-primary); padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0; margin-right: 0.5rem;" onclick="window.openDashboard()">Dashboard</button>
                 <button id="auth-btn" class="btn-primary" style="padding: 0.4rem 0.6rem; font-size: 0.85rem; margin: 0;"
                     onclick="window.showLogin()">Broker Login</button>
             </div>
@@ -1074,7 +1075,7 @@
         </div>
     </div>
 
-    <script type="module" src="app.js?v=0a2ed600"></script>
+    <script type="module" src="app.js?v=3ed73c2c"></script>
 
     <!-- Login Modal -->
 
@@ -1148,6 +1149,30 @@
                         style="vertical-align:middle; margin-right:8px;">
                     Sign in with Google
                 </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Dashboard Modal -->
+    <div class="modal" id="dashboard-modal" onclick="closeDashboard()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <h2 style="color: var(--brand-primary); margin-top: 0;">Associate Dashboard</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <h3 style="margin: 0; font-size: 2rem; color: var(--brand-primary);" id="dash-chain-size">0</h3>
+                    <p style="margin: 5px 0 0; color: #64748b; font-size: 0.9rem;">Total Downline Chain</p>
+                </div>
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; text-align: center;">
+                    <h3 style="margin: 0; font-size: 2rem; color: var(--brand-primary);" id="dash-plots-sold">0</h3>
+                    <p style="margin: 5px 0 0; color: #64748b; font-size: 0.9rem;">Plots Sold</p>
+                </div>
+                <div style="grid-column: 1/-1; background: #ecfdf5; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #a7f3d0;">
+                    <h3 style="margin: 0; font-size: 2.5rem; color: #059669;" id="dash-commission">₹0</h3>
+                    <p style="margin: 5px 0 0; color: #047857; font-weight: 600;">Total Commission Owed</p>
+                </div>
             </div>
         </div>
     </div>
