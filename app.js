@@ -5695,20 +5695,26 @@ window.openPortal = function(pageId) {
     setTimeout(async () => {
         try {
             if (pageId === 'refer-now') {
-                const refLink = `https://kumud-vihar.vercel.app/?ref=${currentUser.uid}`;
+                const brokerDoc = await getDoc(doc(db, "brokers", currentUser.uid));
+                let refCode = brokerDoc.exists() ? brokerDoc.data().referralCode : null;
+                if (!refCode) {
+                    refCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                    await updateDoc(doc(db, "brokers", currentUser.uid), { referralCode: refCode });
+                }
+                const refLink = `https://kumud-vihar.vercel.app/?ref=${refCode}`;
                 content.innerHTML = `
                     <h2 style="color: var(--brand-primary); margin-top:0;">Refer Now</h2>
                     <p>Share your referral link or referral code to build your team!</p>
                     <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0;">
                         <strong>Your Referral Code:</strong> <br>
-                        <span style="font-size: 1.2rem; color: #d85c34;">${currentUser.uid}</span>
+                        <span style="font-size: 1.2rem; color: #d85c34; font-weight: bold; letter-spacing: 2px;">${refCode}</span>
                     </div>
                     <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0;">
                         <strong>Your Referral Link:</strong> <br>
                         <a href="${refLink}" target="_blank" style="word-break: break-all;">${refLink}</a>
                     </div>
                     <button class="btn-primary" onclick="navigator.clipboard.writeText('${refLink}'); alert('Copied!')">Copy Link</button>
-                    <button class="btn-primary" onclick="navigator.clipboard.writeText('${currentUser.uid}'); alert('Copied!')">Copy Code</button>
+                    <button class="btn-primary" onclick="navigator.clipboard.writeText('${refCode}'); alert('Copied!')">Copy Code</button>
                 `;
             } else if (pageId === 'my-team') {
                 content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">My Team</h2><p>Loading downline...</p>`;
