@@ -1,6 +1,6 @@
 // --- FIREBASE CLOUD SETUP & IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, onSnapshot, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -44,6 +44,8 @@ onAuthStateChanged(auth, async (user) => {
             userDisplay.innerText = user.email;
             userDisplay.style.display = "inline";
             if (refBtn) refBtn.style.display = "inline";
+            const ham = document.getElementById('hamburger-menu');
+            if (ham) ham.style.display = 'block';
             const dashBtn = document.getElementById('dashboard-btn');
             if (dashBtn) dashBtn.style.display = "inline";
         } else {
@@ -51,6 +53,8 @@ onAuthStateChanged(auth, async (user) => {
             authBtn.onclick = window.showLogin;
             userDisplay.style.display = "none";
             if (refBtn) refBtn.style.display = "none";
+            const ham = document.getElementById('hamburger-menu');
+            if (ham) ham.style.display = 'none';
             const dashBtn = document.getElementById('dashboard-btn');
             if (dashBtn) dashBtn.style.display = "none";
         }
@@ -94,6 +98,10 @@ window.switchToRegisterView = function () {
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" id="auth-password" placeholder="Create password (min 6 chars)" required>
+            </div>
+            <div class="form-group">
+                <label>Referral Code (Optional)</label>
+                <input type="text" id="reg-ref-code" placeholder="Enter sponsor code" value="${new URLSearchParams(window.location.search).get('ref') || ''}">
             </div>
             
             <button type="submit" class="btn-primary" style="width: 100%; background-color: #dc3545;">Complete Registration</button>
@@ -5046,6 +5054,11 @@ window.renderGrid = function (colonyId) {
         // Calculate amount dynamically based on type and size
         const rate = RATES[plot.type] || 0;
         const amount = rate * parseFloat(plot.gaj);
+        
+        let displayAmount = `₹${amount.toLocaleString('en-IN')}`;
+        if (plot.status.toLowerCase() === 'sold' || plot.status.toLowerCase() === 'registered') {
+            displayAmount = "SOLD";
+        }
 
         const statusName = plot.status.toLowerCase().replace(' ', '-');
         card.className = `plot-card ${typeClass} ${statusName}`;
@@ -5458,7 +5471,7 @@ window.handleLogout = async function () {
 
 
 
-window.sellPlot = function (plotNo) {
+window.sellPlot = async function (plotNo) {
     const currentUser = auth.currentUser;
     if (!currentUser) return alert("Please log in first.");
 
@@ -5467,6 +5480,12 @@ window.sellPlot = function (plotNo) {
     const plotData = globalPlots[plotIndex];
 
     const isAdmin = currentUser.email === 'admin@kumudvihar.com' || (currentUser.brokerData && currentUser.brokerData.role === 'admin'); // ADMIN_EMAIL
+    
+    let sellerId = currentUser.uid; // default to person clicking
+    if (plotData.buyer && plotData.buyer.brokerUid) {
+        sellerId = plotData.buyer.brokerUid;
+    }
+
     const isOwner = plotData.buyer && plotData.buyer.brokerUid === currentUser.uid;
 
     if (!isAdmin && !isOwner) {
@@ -5476,9 +5495,37 @@ window.sellPlot = function (plotNo) {
     if (confirm(`Are you sure you want to mark Plot ${plotNo} as SOLD? This action cannot be easily undone.`)) {
         globalPlots[plotIndex].status = "Sold";
         if (window.saveData) window.saveData();
-        closeModal();
+
+        try {
+            // Update the broker's totalPlotsSold count
+            await updateDoc(doc(db, "brokers", sellerId), {
+                totalPlotsSold: increment(1)
+            });
+
+            // Trace upline for processPlotSale
+            const querySnapshot = await getDocs(collection(db, "brokers"));
+            const allBrokers = {};
+            querySnapshot.forEach(d => { allBrokers[d.id] = d.data(); });
+            
+            const chainArray = [];
+            let curr = sellerId;
+            while (curr && allBrokers[curr]) {
+                chainArray.push(curr);
+                curr = allBrokers[curr].referredBy;
+                if (curr === 'Direct' || !curr) break; // Reached top
+            }
+
+            const plotSize = parseFloat(plotData.gaj) || 0;
+            if (plotSize > 0 && typeof window.processPlotSale === 'function') {
+                await window.processPlotSale(sellerId, chainArray, plotSize);
+            }
+        } catch (e) {
+            console.error("Error updating commissions/stats:", e);
+        }
+
+        if (typeof closeModal === 'function') closeModal();
         const currentColony = document.getElementById('colony-selector') ? document.getElementById('colony-selector').value : 'Colony_1';
-        renderGrid(currentColony);
+        if (typeof renderGrid === 'function') renderGrid(currentColony);
     }
 }
 
@@ -5614,4 +5661,230 @@ window.openDashboard = async function() {
 
 window.closeDashboard = function() {
     document.getElementById('dashboard-modal').classList.remove('show');
+}
+
+
+// --- SIDEBAR & PORTAL LOGIC ---
+window.toggleSidebar = function() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (sidebar && overlay) {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+}
+
+window.openPortal = function(pageId) {
+    if (!currentUser) return alert("Please log in first.");
+    
+    toggleSidebar();
+    
+    // Hide main app views
+    const mainSection = document.getElementById('main-content') || document.querySelector('main');
+    if (mainSection) mainSection.style.display = 'none';
+    
+    const portal = document.getElementById('portal-section');
+    const content = document.getElementById('portal-content');
+    if (!portal || !content) return;
+    
+    portal.style.display = 'block';
+    
+    // Render specific page
+    content.innerHTML = `<h2>Loading...</h2>`;
+    
+    setTimeout(async () => {
+        try {
+            if (pageId === 'refer-now') {
+                const refLink = `https://kumud-vihar.vercel.app/?ref=${currentUser.uid}`;
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">Refer Now</h2>
+                    <p>Share your referral link or referral code to build your team!</p>
+                    <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Your Referral Code:</strong> <br>
+                        <span style="font-size: 1.2rem; color: #d85c34;">${currentUser.uid}</span>
+                    </div>
+                    <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Your Referral Link:</strong> <br>
+                        <a href="${refLink}" target="_blank" style="word-break: break-all;">${refLink}</a>
+                    </div>
+                    <button class="btn-primary" onclick="navigator.clipboard.writeText('${refLink}'); alert('Copied!')">Copy Link</button>
+                    <button class="btn-primary" onclick="navigator.clipboard.writeText('${currentUser.uid}'); alert('Copied!')">Copy Code</button>
+                `;
+            } else if (pageId === 'my-team') {
+                content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">My Team</h2><p>Loading downline...</p>`;
+                
+                const querySnapshot = await getDocs(collection(db, "brokers"));
+                const allBrokers = [];
+                querySnapshot.forEach(d => allBrokers.push(d.data()));
+
+                let html = '<ul>';
+                function renderTree(uid) {
+                    const directs = allBrokers.filter(b => b.referredBy === uid);
+                    if (directs.length === 0) return '';
+                    let subHtml = '<ul>';
+                    directs.forEach(d => {
+                        subHtml += `<li><strong>${d.name || d.email}</strong> (Code: ${d.uid}) ${renderTree(d.uid)}</li>`;
+                    });
+                    subHtml += '</ul>';
+                    return subHtml;
+                }
+                html += `<li><strong>${currentUser.email} (You)</strong> ${renderTree(currentUser.uid)}</li></ul>`;
+                content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">My Team</h2>` + html;
+            } else if (pageId === 'project') {
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">Project Details</h2>
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px;">
+                        <h3 style="color: #d85c34;">Kumud Vihar</h3>
+                        <p><strong>Location:</strong> Bijainagar</p>
+                        <p><strong>Total Area:</strong> Premium Residential & Commercial Plots</p>
+                        <p><strong>Amenities:</strong> 80ft Main Road, 60ft/30ft Internal Roads, Commercial Spaces</p>
+                        <p>A flagship project offering prime real estate opportunities for living and investment.</p>
+                    </div>
+                `;
+            } else if (pageId === 'transactions' || pageId === 'booking-history') {
+                const isBooking = pageId === 'booking-history';
+                content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">${isBooking ? 'Booking' : 'Transaction'} History</h2><p>Loading...</p>`;
+                
+                const userPlots = globalPlots.filter(p => p.buyer && p.buyer.brokerUid === currentUser.uid);
+                
+                if (userPlots.length === 0) {
+                    content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">${isBooking ? 'Booking' : 'Transaction'} History</h2><p>No records found.</p>`;
+                } else {
+                    let table = `<table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <tr style="background: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+                            <th style="padding: 10px; text-align: left;">Plot No</th>
+                            <th style="padding: 10px; text-align: left;">Client Name</th>
+                            <th style="padding: 10px; text-align: left;">Size</th>
+                            <th style="padding: 10px; text-align: left;">Status</th>
+                        </tr>`;
+                    userPlots.forEach(p => {
+                        table += `<tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px;">${p.plotNo}</td>
+                            <td style="padding: 10px;">${p.buyer.name}</td>
+                            <td style="padding: 10px;">${p.gaj} Sq. Yds.</td>
+                            <td style="padding: 10px; font-weight: bold; color: ${p.status==='Sold'?'green':'orange'};">${p.status}</td>
+                        </tr>`;
+                    });
+                    table += `</table>`;
+                    content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">${isBooking ? 'Booking' : 'Transaction'} History</h2>` + table;
+                }
+            } else if (pageId === 'my-bank') {
+                const brokerDoc = await getDoc(doc(db, "brokers", currentUser.uid));
+                const bankData = brokerDoc.exists() ? (brokerDoc.data().bankDetails || {}) : {};
+                
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">My Bank Details</h2>
+                    <form id="bank-form" onsubmit="window.saveBankDetails(event)">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">Account Holder Name</label>
+                            <input type="text" id="bank-name" value="${bankData.accountName || ''}" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">Account Number</label>
+                            <input type="text" id="bank-acc" value="${bankData.accountNumber || ''}" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">IFSC Code</label>
+                            <input type="text" id="bank-ifsc" value="${bankData.ifscCode || ''}" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;">
+                        </div>
+                        <button type="submit" class="btn-primary">Save Bank Details</button>
+                    </form>
+                `;
+            } else if (pageId === 'withdrawal') {
+                const brokerDoc = await getDoc(doc(db, "brokers", currentUser.uid));
+                const comm = brokerDoc.exists() ? (brokerDoc.data().totalCommissionEarned || 0) : 0;
+                
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">Withdrawal Request</h2>
+                    <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #a7f3d0; margin-bottom: 20px;">
+                        <h3 style="margin: 0; font-size: 2.5rem; color: #059669;">₹${comm.toLocaleString('en-IN', {maximumFractionDigits:0})}</h3>
+                        <p style="margin: 5px 0 0; color: #047857; font-weight: 600;">Available Balance</p>
+                    </div>
+                    <form id="withdraw-form" onsubmit="window.requestWithdrawal(event, ${comm})">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">Amount to Withdraw (₹)</label>
+                            <input type="number" id="withdraw-amt" max="${comm}" min="500" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;">
+                        </div>
+                        <button type="submit" class="btn-primary" ${comm < 500 ? 'disabled' : ''}>${comm < 500 ? 'Minimum balance ₹500 required' : 'Request Payout'}</button>
+                    </form>
+                `;
+            } else if (pageId === 'payout-history' || pageId === 'account-statement') {
+                content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">Payout History</h2><p>Loading...</p>`;
+                
+                const q = query(collection(db, "withdrawals"), where("brokerUid", "==", currentUser.uid));
+                const querySnapshot = await getDocs(q);
+                const payouts = [];
+                querySnapshot.forEach(d => payouts.push(d.data()));
+                
+                if (payouts.length === 0) {
+                    content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">Payout History</h2><p>No payout requests found.</p>`;
+                } else {
+                    let table = `<table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <tr style="background: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+                            <th style="padding: 10px; text-align: left;">Date</th>
+                            <th style="padding: 10px; text-align: left;">Amount</th>
+                            <th style="padding: 10px; text-align: left;">Status</th>
+                        </tr>`;
+                    payouts.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(p => {
+                        table += `<tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px;">${new Date(p.date).toLocaleDateString()}</td>
+                            <td style="padding: 10px;">₹${p.amount.toLocaleString('en-IN')}</td>
+                            <td style="padding: 10px; font-weight: bold; color: ${p.status==='Approved'?'green':(p.status==='Rejected'?'red':'orange')};">${p.status}</td>
+                        </tr>`;
+                    });
+                    table += `</table>`;
+                    content.innerHTML = `<h2 style="color: var(--brand-primary); margin-top:0;">Payout History</h2>` + table;
+                }
+            } else if (pageId === 'feedback' || pageId === 'contact-us') {
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">${pageId==='feedback'?'Feedback':'Contact Us'}</h2>
+                    <form onsubmit="window.submitFeedback(event)">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">Subject</label>
+                            <input type="text" id="fb-subject" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display:block; margin-bottom:5px;">Message</label>
+                            <textarea id="fb-message" rows="5" required style="width:100%; padding:10px; border-radius:5px; border:1px solid #cbd5e1;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                `;
+            } else if (pageId === 'referral-bonus') {
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0;">Referral Bonus Rules</h2>
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px;">
+                        <h3 style="color: #d85c34;">Commission Structure</h3>
+                        <ul>
+                            <li><strong>Direct Sales (30%):</strong> Earn a flat 30% of the total ₹1,500/sq yard pool when you directly sell a plot.</li>
+                            <li><strong>Upline Override (70%):</strong> The remaining 70% is distributed to the upline chain proportionally based on their lifetime sales count. Build your team to maximize your override commissions!</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (pageId === 'privacy' || pageId === 'terms') {
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0; text-transform: capitalize;">${pageId.replace('-', ' ')}</h2>
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px;">
+                        <p>Welcome to Kumud Vihar.</p>
+                        <p>These terms and policies govern your use of the Kumud Vihar broker portal and commission engine. By using this system, you agree to abide by all local real estate regulations and the rules set forth by Kumud Vihar administration.</p>
+                        <p>All payouts are subject to management approval and verification of plot registries.</p>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h2 style="color: var(--brand-primary); margin-top:0; text-transform: capitalize;">${pageId.replace('-', ' ')}</h2>
+                    <p>This page is currently under construction.</p>
+                `;
+            }
+        } catch (e) {
+            content.innerHTML = `<p style="color: red;">Error loading page: ${e.message}</p>`;
+        }
+    }, 100);
+}
+
+window.closePortal = function() {
+    const portal = document.getElementById('portal-section');
+    if (portal) portal.style.display = 'none';
+    const mainSection = document.getElementById('main-content') || document.querySelector('main');
+    if (mainSection) mainSection.style.display = 'block';
 }

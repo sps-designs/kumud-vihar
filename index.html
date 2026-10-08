@@ -19,6 +19,13 @@
     <!-- Premium Header -->
     <header class="app-header">
         <div class="header-container">
+            
+    <!-- Hamburger Menu Icon -->
+    <div id="hamburger-menu" onclick="toggleSidebar()" style="display: none; cursor: pointer; padding: 10px; margin-right: 15px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </div>
+
+    
             <div class="brand">
                 <img id="colony-logo" src="logo.jpeg" alt="Kumud Vihar Logo" class="logo">
                 <h1 id="colony-name">Kumud Vihar</h1>
@@ -1002,6 +1009,15 @@
                 </div>
             </div>
         </main>
+
+    <!-- Broker Portal Section -->
+    <section id="portal-section" style="display: none; padding: 2rem; max-width: 1200px; margin: 0 auto;">
+        <button class="btn-cancel" onclick="closePortal()" style="margin-bottom: 1rem;">&larr; Back to Dashboard</button>
+        <div id="portal-content" style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+            <!-- Content injected via JS -->
+        </div>
+    </section>
+
     </div>
 
     <!-- Plot Details Pop-up (Glassmorphism Modal) -->
@@ -1075,7 +1091,7 @@
         </div>
     </div>
 
-    <script type="module" src="app.js?v=3ed73c2c"></script>
+    <script type="module" src="app.js?v=5b225d84"></script>
 
     <!-- Login Modal -->
 
@@ -1177,6 +1193,35 @@
         </div>
     </div>
 
+
+    <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Menu -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="logo.jpeg" alt="Logo" style="height: 40px; border-radius: 8px;">
+            <span class="close-sidebar" onclick="toggleSidebar()">&times;</span>
+        </div>
+        <div class="sidebar-links">
+            <a href="#" onclick="openPortal('refer-now')"><span>🔗</span> Refer Now</a>
+            <a href="#" onclick="openPortal('project')"><span>🏢</span> Project</a>
+            <a href="#" onclick="openPortal('transactions')"><span>🧾</span> Transaction</a>
+            <a href="#" onclick="openPortal('booking-history')"><span>🕒</span> Booking History</a>
+            <a href="#" onclick="openPortal('withdrawal')"><span>₹</span> Withdrawal</a>
+            <a href="#" onclick="openPortal('payout-history')"><span>💳</span> Payout History</a>
+            <a href="#" onclick="openPortal('my-bank')"><span>🏦</span> My Bank</a>
+            <a href="#" onclick="openPortal('account-statement')"><span>📋</span> Account Statement</a>
+            <a href="#" onclick="openPortal('my-team')"><span>👥</span> My Team</a>
+            <a href="#" onclick="openPortal('referral-bonus')"><span>🎁</span> Referral Bonus</a>
+            <a href="#" onclick="openPortal('feedback')"><span>💬</span> Feedback</a>
+            <a href="about.html"><span>ℹ️</span> About Us</a>
+            <a href="#" onclick="openPortal('contact-us')"><span>📞</span> Contact Us</a>
+            <a href="#" onclick="openPortal('privacy')"><span>🛡️</span> Privacy Policy</a>
+            <a href="#" onclick="openPortal('terms')"><span>📜</span> Terms & Conditions</a>
+            <a href="#" onclick="if(window.handleLogout) window.handleLogout()"><span>🚪</span> Logout</a>
+        </div>
+    </nav>
+<!-- Sidebar Overlay -->
 </body>
 
 </html>
